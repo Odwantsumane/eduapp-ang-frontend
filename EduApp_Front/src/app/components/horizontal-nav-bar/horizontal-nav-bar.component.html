@@ -3,17 +3,32 @@
       <ul class="navbar-nav">
         <li class="nav-item m-3">
           <div style="text-align: center;" class="d-flex flex-column"> 
-            <a class="btn"><i class="bi bi-paperclip fs-4"></i></a>
+            <a class="btn" data-bs-toggle="tooltip" title="Add friends"><i class="bi bi-person-plus fs-4"></i></a>
           </div>
         </li>
         <li class="nav-item m-3">
           <div style="text-align: center;" class="d-flex flex-column"> 
-            <a class="btn"><i class="bi bi-calendar fs-4"></i></a>
+            <!--<a class="btn"><i class="bi bi-calendar fs-4"></i></a>-->
+            <a class="btn" data-bs-toggle="tooltip" title="Calendar" data-bs-toggle="modal" data-bs-target="#myModal">
+              <i class="bi bi-calendar fs-4"></i>
+              <app-calendar></app-calendar>
+            </a> 
           </div>
         </li> 
         <li class="nav-item m-3">
-          <div style="text-align: center;" class="d-flex flex-column"> 
-            <a class="btn"><i class="bi bi-three-dots-vertical fs-4"></i></a>
+          <div style="text-align: center;" class="d-flex flex-column dropdown dropstart"> 
+             
+              <a class="btn" data-bs-toggle="tooltip" title="Profile" data-bs-toggle="dropdown">
+                <i class="bi bi-three-dots-vertical fs-4"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li><h5 class="dropdown-header">Profile</h5></li>
+                <li><a class="dropdown-item" href="#">Link 1</a></li>
+                <li><a class="dropdown-item" href="#">Link 2</a></li>
+                <li><a class="dropdown-item" href="#">Link 3</a></li>
+                <li><h5 class="dropdown-header">For you</h5></li>
+                <li><a class="dropdown-item" href="#">Another link</a></li>
+              </ul> 
           </div>
         </li> 
       </ul>
