@@ -2,38 +2,46 @@
 
 <div class="articles d-flex flex-column">
 <ul class="article-list">
-    <li class="article-list-item bg-light container-fluid p-2 my-2 border">
+    <li class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
     <span class="text-muted float-end">10/02/2024</span>
-    <p class="profile-name fs-4">
-        <i class="bi bi-person-circle fs-4 me-2"></i>
-        <span>Name Surname </span></p> 
-    <p class="article-headline fs-5">Headline </p>
-    <div class="article-text">
-        To use Bootstrap Icons in your project after running npm install bootstrap-icons, 
-        you need to include the ..see more
+    <div class="profile-name d-flex">
+        <div><a href="#"><i class="bi bi-person-circle fs-2 me-1"></i></a></div>
+        <div class="pt-2 pb-2 ps-1 pe-1"><a href="#" style="text-decoration: none;" class="fs-6">John Cena</a></div>
+    </div> 
+    <div class="ms-5">
+        <p class="article-headline fs-5">Bootstrap </p>
+        <p class="article-text text-muted">
+            To use Bootstrap Icons in your project after running npm install bootstrap-icons, 
+            you need to include the ..see more
+        </p>
     </div>
-    </li>
-    <li class="article-list-item bg-light container-fluid p-2 my-2 border">
-    <span class="text-muted float-end">10/02/2024</span>
-    <p class="profile-name fs-4">
-        <i class="bi bi-person-circle me-2"></i>
-        <span>Name Surname </span></p> 
-    <p class="article-headline fs-5">Headline </p>
-    <div class="article-text">
-        To use Bootstrap Icons in your project after running npm install bootstrap-icons, 
-        you need to include the ..see more
+    <div class="likes d-flex justify-content-end">
+        <a class="btn"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
+        <a class="btn"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
+        <a class="btn text-primary">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
     </div>
+    
     </li>
-    <li class="article-list-item bg-light container-fluid p-2 my-2 border">
-    <span class="text-muted float-end">10/02/2024</span>
-    <p class="profile-name fs-4">
-        <i class="bi bi-person-circle me-2"></i>
-        <span>Name Surname </span></p> 
-    <p class="article-headline fs-5">Headline </p>
-    <div class="article-text">
-        To use Bootstrap Icons in your project after running npm install bootstrap-icons, 
-        you need to include the ..see more
-    </div>
-    </li>
+    <li class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
+        <span class="text-muted float-end">31/10/2024</span>
+        <div class="profile-name d-flex">
+            <div><a href="#"><i class="bi bi-person-circle fs-2 me-1"></i></a></div>
+            <div class="pt-2 pb-2 ps-1 pe-1"><a href="#" style="text-decoration: none;" class="fs-6">Odwa Ntsumane</a></div>
+        </div> 
+        <div class="ms-5">
+            <p class="article-headline fs-5">Git </p>
+            <p class="article-text text-muted">
+                Git is a distributed version control system that tracks versions of files. It is often used to control source code by programmers who are developing software collaboratively
+                There are three commands with similar names: git reset, git restore and git revert. git-revert is about making a new commit that reverts the changes made by other commits. git-restore is about restoring files in the working tree from either the index or another commit.
+            </p>
+        </div>
+        <div class="likes d-flex justify-content-end">
+            <a class="btn"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
+            <a class="btn"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
+            <a class="btn text-primary">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
+        </div>
+        
+        </li>
+     
 </ul>
 </div>
