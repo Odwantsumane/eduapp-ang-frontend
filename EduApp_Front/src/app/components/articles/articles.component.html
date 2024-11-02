@@ -19,9 +19,9 @@
         </p>
     </div>
     <div class="likes d-flex justify-content-end">
-        <a class="btn"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
-        <a class="btn"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
-        <a class="btn text-primary">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
+        <a style="cursor: pointer;" class="me-3 text-dark" (click)="like()"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
+        <a style="cursor: pointer;" class="me-3 text-dark" (click)="dislike()"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
+        <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
     </div>
     
     </li>
@@ -42,9 +42,9 @@
             </p>
         </div>
         <div class="likes d-flex justify-content-end">
-            <a class="btn"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
-            <a class="btn"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
-            <a class="btn text-primary">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
+            <a style="cursor: pointer;" class="me-3 text-dark" (click)="like()"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
+            <a style="cursor: pointer;" class="me-3 text-dark" (click)="dislike()"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
+            <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
         </div>
         
         </li>
