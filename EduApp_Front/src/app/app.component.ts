@@ -6,20 +6,15 @@ import { ChatsViewComponent } from './components/chats-view/chats-view.component
 import { ArticlesComponent } from './components/articles/articles.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HomecontentComponent } from './components/homecontent/homecontent.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HorizontalNavBarComponent, VerticalNavBarComponent, 
-    ChatsViewComponent,ArticlesComponent, FormsModule, CommonModule],
+  imports: [RouterOutlet, HorizontalNavBarComponent, VerticalNavBarComponent,FormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'EduApp_Front';
-  hide_chats : boolean = false;
-
-  hideChats(): void {
-    this.hide_chats ? this.hide_chats = false : this.hide_chats = true; 
-  }
 }

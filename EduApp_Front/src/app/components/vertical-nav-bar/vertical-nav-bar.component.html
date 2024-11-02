@@ -4,29 +4,32 @@
         <ul class="nav flex-column">
           <li class="nav-item ms-2 ">
             <div style="text-align: center;" class="d-flex flex-column">
-              <a class="btn fs-1"><i class="bi bi-list"></i></a>
+              <a class="fs-1" style="cursor: pointer;"><i class="bi bi-list text-dark"></i></a>
             </div>
           </li>
           <li class="nav-item ms-2 mt-2">
             <div style="text-align: center;" class="d-flex flex-column">
-              <a class="btn"><i class="bi bi-folder2 fs-4"></i></a>
+              <a style="cursor: pointer;"><i class="bi bi-folder2 fs-4"></i></a>
               <p style="font-size: small;">Repository</p>
             </div>
             
           </li> 
           <li class="nav-item ms-2 mt-2">
             <div style="text-align: center;" class="d-flex flex-column"> 
-              <a class="btn"><i class="bi bi-info-circle fs-4"></i></a>
+              <a style="cursor: pointer;"><i class="bi bi-info-circle fs-4"></i></a>
               <p style="font-size: small;">Help</p>
             </div>
             
           </li>
           <li class="nav-item ms-2 mt-2">
-            <div style="text-align: center;" class="d-flex flex-column">  
-              <a class="btn"><i class="bi bi-box-arrow-in-left fs-4"></i></a>
+            <div *ngIf="false" style="text-align: center;" class="d-flex flex-column">  
+              <a style="cursor: pointer;"><i class="bi bi-box-arrow-in-left fs-4"></i></a>
               <p style="font-size: small;">Log out</p>
             </div>
-            
+            <div *ngIf="true" style="text-align: center;" class="d-flex flex-column">  
+              <a style="cursor: pointer;"><i class="bi bi-box-arrow-in-right fs-4"></i></a>
+              <p style="font-size: small;">Log in</p>
+            </div>
           </li>
           
         </ul>

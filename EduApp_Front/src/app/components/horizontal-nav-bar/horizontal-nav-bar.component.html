@@ -2,16 +2,23 @@
     
     <nav class="navbar navbar-expand-sm bg-light justify-content-end">
       <h2 style="float: start;">LOGO</h2>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav"> 
         <li class="nav-item m-3">
           <div style="text-align: center;" class="d-flex flex-column"> 
-            <a class="btn" data-bs-toggle="tooltip" title="Add friends"><i class="bi bi-person-plus fs-4"></i></a>
+            <a style="cursor: pointer;" data-bs-toggle="tooltip" title="Add friends">
+              <i class="bi bi-bell fs-4"><span class="text-white bg-danger rounded-4 fs-6 p-1">10</span></i></a>
+          </div>
+        </li>
+        <li class="nav-item m-3">
+          <div style="text-align: center;" class="d-flex flex-column"> 
+            <a style="cursor: pointer;" data-bs-toggle="tooltip" title="Add friends">
+              <i class="bi bi-person-plus fs-4"></i></a>
           </div>
         </li>
         <li class="nav-item m-3">
           <div style="text-align: center;" class="d-flex flex-column"> 
             <!--<a class="btn"><i class="bi bi-calendar fs-4"></i></a>-->
-            <a class="btn" data-bs-toggle="tooltip" title="Calendar" data-bs-toggle="modal" data-bs-target="#myModal">
+            <a style="cursor: pointer;" data-bs-toggle="tooltip" title="Calendar" data-bs-toggle="modal" data-bs-target="#myModal">
               <i class="bi bi-calendar fs-4"></i>
               <app-calendar></app-calendar>
             </a> 
@@ -20,13 +27,13 @@
         <li class="nav-item m-3">
           <div style="text-align: center;" class="d-flex flex-column dropdown dropstart"> 
              
-              <a class="btn" data-bs-toggle="tooltip" title="Profile" data-bs-toggle="dropdown">
-                <i class="bi bi-three-dots-vertical fs-4"></i>
+              <a style="cursor: pointer;" data-bs-toggle="tooltip" title="Profile" data-bs-toggle="dropdown">
+                <i class="bi bi-three-dots-vertical fs-4 text-dark"></i>
               </a>
               <ul class="dropdown-menu">
                 <li><h5 class="dropdown-header">Profile</h5></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-person-circle"></i> O Ntsumane</a></li>
-                <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                <li><a class="dropdown-item" href="#" style="text-align: center;"><i class="bi bi-person-circle fs-4"></i></a></li>
+                <li><a class="dropdown-item" href="#" style="text-align: center;"><i class="bi bi-gear fs-4"></i></a></li>
                 <!-- <li><a class="dropdown-item" href="#">Find school mates</a></li> -->
                 <li><h5 class="dropdown-header">Dark mode</h5></li>
                 <li *ngIf="true"><a class="dropdown-item" href="#" style="text-align: center;"><i class="bi bi-toggle-off fs-4"></i></a></li>

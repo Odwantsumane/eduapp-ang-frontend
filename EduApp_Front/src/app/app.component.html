@@ -3,15 +3,7 @@
   <div class="d-flex">
     <app-vertical-nav-bar></app-vertical-nav-bar>
     <div class="content container mt-2">
-      <!-- <h3 class="mt-2">Chats</h3> -->
-      <div class="mb-2">
-        <span class="fs-3 me-4" style="font-weight: 500;">Chats</span><a href="#hidechats" *ngIf="!hide_chats" (click)="hideChats()" data-bs-toggle="tooltip" title="hide chats"><i class="bi bi-chevron-compact-down fs-4 text-dark"></i></a>
-        <a href="#showchats" *ngIf="hide_chats" (click)="hideChats()" data-bs-toggle="tooltip" title="show chats"><i class="bi bi-chevron-compact-up fs-4 text-dark"></i></a>
-      </div>
-      <app-chats-view *ngIf="!hide_chats"></app-chats-view>
-      <app-articles></app-articles>
+      <router-outlet></router-outlet>
     </div>
-  </div>
-  
-
+  </div> 
 </div>
