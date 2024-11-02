@@ -1,27 +1,48 @@
-<!-- Button to Open the Modal -->
-
-  
-  <!-- The Modal -->
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
+ <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
-  
-        <!-- Modal Header -->
+
         <div class="modal-header">
           <h4 class="modal-title">Calendar</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
   
-        <!-- Modal body -->
-        <div class="modal-body"  style="height: 100px;">
-          Modal body..
+        <div class="modal-body" style="height: 400px; width: 100%;">
+            <div class="w-100 d-flex justify-content-between">
+                <div><a class=""><i class="bi bi-chevron-left fs-3"></i></a></div>
+                <div><h3>{{months[this.today.month].month}}</h3></div>
+                <div><a class=""><i class="bi bi-chevron-right fs-3"></i></a></div>
+            </div>
+            <div class="border-top">
+                <div>
+                    <ul class="d-flex justify-content-between p-2" style="list-style: none;">
+                        <li class="fs-4">Sunday</li> 
+                        <li class="fs-4">Monday</li>
+                        <li class="fs-4">Tuesday</li>
+                        <li class="fs-4">Wednesday</li>
+                        <li class="fs-4">Thursday</li>
+                        <li class="fs-4">Friday</li>
+                        <li class="fs-4">Saturday</li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="d-flex justify-content-between flex-wrap p-2" style="list-style: none;">
+                        <li class="fs-4">1</li> 
+                        <li class="fs-4">2</li>
+                        <li class="fs-4">3</li>
+                        <li class="fs-4">4</li>
+                        <li class="fs-4">5</li>
+                        <li class="fs-4">6</li>
+                        <li class="fs-4">7</li>
+                    </ul>
+                </div>
+            </div>
         </div>
   
         <!-- Modal footer -->
         <!--<div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
         </div> -->
-  
       </div>
     </div>
   </div>
