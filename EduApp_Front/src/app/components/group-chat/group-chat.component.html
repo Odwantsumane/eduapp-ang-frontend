@@ -1,10 +1,10 @@
 <a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
 <div class="d-flex w-100 border border rounded-4">
-    <div class="d-flex flex-column chatgroups w-50">
+    <div class="d-flex flex-column chatgroups w-50" style="overflow-y: auto; height: 600px;">
         <div class="bg-light w-100 p-1 border-bottom">
             <p class="fs-4">Chat Groups</p> 
         </div>
-        <div class="bg-light w-100 p-1 border-bottom">
+        <div class="w-100 p-1 border-bottom chat_group">
             <span class="float-end me-1">10 min</span>
             <div class="d-flex">
                 <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-light w-100 p-1 border-bottom">
+        <div class="w-100 p-1 border-bottom chat_group">
             <span class="float-end me-1">10 min</span>
             <div class="d-flex">
                 <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-light w-100 p-1 border-bottom">
+        <div class="w-100 p-1 border-bottom chat_group">
             <span class="float-end me-1">10 min</span>
             <div class="d-flex">
                 <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-light w-100 p-1 border-bottom">
+        <div class="w-100 p-1 border-bottom chat_group">
             <span class="float-end me-1">10 min</span>
             <div class="d-flex">
                 <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
@@ -52,6 +52,31 @@
                 </div>
             </div>
         </div>
+        <div class="w-100 p-1 border-bottom chat_group">
+            <span class="float-end me-1">10 min</span>
+            <div class="d-flex">
+                <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
+                    <img src="favicon.ico" alt="chat profile" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="fs-5 text-dark" style="text-decoration: none;">Computer Science 102</a>
+                    <p class="text-muted">This conversation is very interesting...</p>
+                </div>
+            </div>
+        </div>
+        <div class="w-100 p-1 border-bottom chat_group">
+            <span class="float-end me-1">10 min</span>
+            <div class="d-flex">
+                <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
+                    <img src="favicon.ico" alt="chat profile" style="max-width: 100%; height: auto;">
+                </div>
+                <div class="mt-2">
+                    <a href="#" class="fs-5 text-dark" style="text-decoration: none;">Computer Science 102</a>
+                    <p class="text-muted">This conversation is very interesting...</p>
+                </div>
+            </div>
+        </div>
+        
          
     </div>
 
@@ -68,14 +93,14 @@
             </div>
             <a href="#" class="p-2 text-dark"><i class="bi bi-three-dots-vertical fs-4"></i></a>
         </div>
-        <div class="messages p-1" style="height: 75%;"> 
+        <div class="messages p-4 mb-3" style="height: 75%;"> 
             <div class="bg-light rounded-4" style="text-align: center;">End-to-end encrypted</div>
             <div class="w-100 h-100 d-flex flex-column flex-nowrap" style="overflow-y: auto;">
-                <div class="message w-100 d-flex" style="height: fit-content;">
-                    <div class="external-message w-50 pt-2 ps-2 pe-2">
-                        <p class="bg-light rounded-4 p-1" style="height: fit-content;">
+                <div class="message w-100 d-flex mt-2" style="height: fit-content;">
+                    <div class="external-message w-50 p-2 bg-light rounded-4">
+                        <span class="rounded-4" style="height: fit-content;">
                             Integration is a way of adding slices to find the whole, such as areas, volumes, central points and many useful things.
-                        </p>
+                        </span> 
                     </div>
                     <div class="your-message w-50 p-2">
                         <p class="p-2 bg-white rounded-4"></p>
@@ -85,11 +110,35 @@
                     <div class="external-message w-50 p-2">
                         <p class="p-2 bg-white rounded-4"></p>
                     </div>
-                    <div class="your-message  w-50 pt-2 ps-2 pe-2">
-                        <p class="p-4 bg-primary rounded-4"></p>
+                    <div class="external-message w-50 pt-2 ps-2 pe-2 bg-primary rounded-4">
+                        <span class="rounded-4 text-white" style="height: fit-content;">
+                            Integration is a way of adding slices to find the whole, such as areas.
+                        </span>
+                        <span class="float-end"><i class="bi bi-check fs-4 text-white"></i></span>
                     </div>
                 </div>
-                
+
+                <div class="message w-100 d-flex mt-2" style="height: fit-content;">
+                    <div class="external-message w-50 p-2 bg-light rounded-4">
+                        <span class="rounded-4" style="height: fit-content;">
+                            Integration is a way of adding slices to find the whole, such as areas, volumes, central points and many useful things.
+                        </span> 
+                    </div>
+                    <div class="your-message w-50 p-2">
+                        <p class="p-2 bg-white rounded-4"></p>
+                    </div>
+                </div>
+                <div class="message w-100 d-flex">
+                    <div class="external-message w-50 p-2">
+                        <p class="p-2 bg-white rounded-4"></p>
+                    </div>
+                    <div class="external-message w-50 pt-2 ps-2 pe-2 bg-primary rounded-4">
+                        <span class="rounded-4 text-white" style="height: fit-content;">
+                            Integration is a way of adding slices to find the whole, such as areas.
+                        </span>
+                        <span class="float-end"><i class="bi bi-check fs-4 text-white"></i></span>
+                    </div>
+                </div>  
             </div>
         </div>
         <div class="d-flex" style="height: 15%;">
