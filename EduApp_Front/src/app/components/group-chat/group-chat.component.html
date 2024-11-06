@@ -101,6 +101,12 @@
                     </div>
                 </div>
             </div>
+
+            <!-- some placeholder -->
+            <div class="w-100 p-1 rounded-bottom-4"> 
+                <p style="text-align: center;">Studyo Chat</p>
+                <p style="text-align: center;">t&cs</p>
+            </div>
         </div>
         
     </div>
@@ -124,53 +130,32 @@
                 <div class="message w-100 d-flex mt-2" style="height: fit-content;">
                     <div class="external-message w-50 p-2 bg-light rounded-4">
                         <span class="rounded-4" style="height: fit-content;">
-                            Integration is a way of adding slices to find the whole, such as areas, volumes, central points and many useful things.
+                            I like it like that.
                         </span> 
                     </div>
                     <div class="your-message w-50 p-2">
                         <p class="p-2 bg-white rounded-4"></p>
                     </div>
                 </div>
-                <div class="message w-100 d-flex">
+                <div *ngFor="let message of messages" class="message w-100 d-flex mb-1">
                     <div class="external-message w-50 p-2">
                         <p class="p-2 bg-white rounded-4"></p>
                     </div>
                     <div class="external-message w-50 pt-2 ps-2 pe-2 bg-primary rounded-4">
                         <span class="rounded-4 text-white" style="height: fit-content;">
-                            Integration is a way of adding slices to find the whole, such as areas.
+                            {{message.message}}
                         </span>
                         <span class="float-end"><i class="bi bi-check fs-4 text-white"></i></span>
                     </div>
-                </div>
-
-                <div class="message w-100 d-flex mt-2" style="height: fit-content;">
-                    <div class="external-message w-50 p-2 bg-light rounded-4">
-                        <span class="rounded-4" style="height: fit-content;">
-                            Integration is a way of adding slices to find the whole, such as areas, volumes, central points and many useful things.
-                        </span> 
-                    </div>
-                    <div class="your-message w-50 p-2">
-                        <p class="p-2 bg-white rounded-4"></p>
-                    </div>
-                </div>
-                <div class="message w-100 d-flex">
-                    <div class="external-message w-50 p-2">
-                        <p class="p-2 bg-white rounded-4"></p>
-                    </div>
-                    <div class="external-message w-50 pt-2 ps-2 pe-2 bg-primary rounded-4">
-                        <span class="rounded-4 text-white" style="height: fit-content;">
-                            Integration is a way of adding slices to find the whole, such as areas.
-                        </span>
-                        <span class="float-end"><i class="bi bi-check fs-4 text-white"></i></span>
-                    </div>
-                </div>  
+                </div> 
             </div>
         </div>
         <div class="d-flex" style="height: 15%;">
             <a href="#" class="m-1 h-75 p-2 text-dark"><i class="bi bi-plus-square fs-5"></i></a>
             <a href="#" class="m-1 h-75 p-2 text-dark"><i class="bi bi-emoji-smile fs-5"></i></a>
             <div class="border rounded-4  m-1 text-muted p-2 w-100 d-flex justify-content-between" style="height: fit-content;">
-                <div class="" style="width: 95%;"><input type="text" name="" id="" class="border-light form-control" placeholder="write message.."></div>
+                <div class="" style="width: 95%;"><textarea name="messageFieldValue" id="" class="form-control"  placeholder="write message.." [(ngModel)]="messageFieldValue" (keydown.enter)="MonitorMessageTyping($event)"></textarea></div>
+                <!-- <div class="" style="width: 95%;"><input type="text" name="" id="" class="border-light form-control" placeholder="write message.."></div> -->
                 <a href="#" class="text-dark" style="text-decoration: none;"><i class="bi bi-mic fs-5"></i></a>
             </div>
         </div>
