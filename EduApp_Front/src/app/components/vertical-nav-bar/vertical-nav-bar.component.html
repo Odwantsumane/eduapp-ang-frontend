@@ -9,29 +9,28 @@
           </li>
           <li class="nav-item ms-2 mt-2">
             <div style="text-align: center;" class="d-flex flex-column">
-              <a style="cursor: pointer;"><i class="bi bi-folder2 fs-4"></i></a>
+              <a routerLink="" class="text-dark" style="cursor: pointer;"><i class="bi bi-folder2 fs-4"></i></a>
               <p style="font-size: small;">Repository</p>
             </div>
             
           </li> 
           <li class="nav-item ms-2 mt-2">
             <div style="text-align: center;" class="d-flex flex-column"> 
-              <a style="cursor: pointer;"><i class="bi bi-info-circle fs-4"></i></a>
+              <a routerLink="" class="text-dark" style="cursor: pointer;"><i class="bi bi-info-circle fs-4"></i></a>
               <p style="font-size: small;">Help</p>
             </div>
             
           </li>
           <li class="nav-item ms-2 mt-2">
             <div *ngIf="false" style="text-align: center;" class="d-flex flex-column">  
-              <a style="cursor: pointer;"><i class="bi bi-box-arrow-in-left fs-4"></i></a>
+              <a routerLink="/logout" class="text-dark" style="cursor: pointer;"><i class="bi bi-box-arrow-in-left fs-4"></i></a>
               <p style="font-size: small;">Log out</p>
             </div>
             <div *ngIf="true" style="text-align: center;" class="d-flex flex-column">  
-              <a style="cursor: pointer;"><i class="bi bi-box-arrow-in-right fs-4"></i></a>
+              <a routerLink="/login" class="text-dark" style="cursor: pointer;"><i class="bi bi-box-arrow-in-right fs-4"></i></a>
               <p style="font-size: small;">Log in</p>
             </div>
           </li>
-          
         </ul>
       </div>
     </div>

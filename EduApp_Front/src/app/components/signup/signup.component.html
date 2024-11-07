@@ -1,0 +1,47 @@
+<div>
+    <h2>Sign Up</h2>
+    <form >
+        <div *ngIf="startDetails" class="start_details">
+            <div class="mb-3 mt-3">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" [(ngModel)]="name" value="{{name}}" required>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="surname">Surname:</label>
+                <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" [(ngModel)]="surname" value="{{surname}}" required>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="email" value="{{email}}" required>
+            </div>
+            <div class="mb-3">
+                <label for="pwd">Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" [(ngModel)]="password" value="{{password}}"  required>
+            </div> 
+            <div class="mb-3">
+                <label for="pwd2">Confirm password:</label>
+                <input type="password" class="form-control" id="pwd2" placeholder="Enter password" name="password2" [(ngModel)]="password2" value="{{password2}}"  required>
+            </div> 
+        </div>
+
+        <div *ngIf="moreDetails" class="more_details"> 
+            <label for="institution">Institution:</label>
+            <select class="form-select" id="institutions" name="institutions">
+                <option>None</option>
+                <option>Rhodes University</option>
+                <option>University of Johannesburg</option>
+                <option>University of Pretoria</option>
+                <option>University of Free State</option>
+            </select>  
+        </div>
+        
+        <div class="btn-group mt-3 mb-3">
+            <button class="btn btn-primary" type="button" (click)="handleSignUp()" [disabled]="true">Submit</button>
+            <button *ngIf="startDetails" class="btn btn-primary" type="button" (click)="next()" [disabled]="false">Next</button>
+            <button *ngIf="moreDetails" class="btn btn-primary" type="button" (click)="previous()" [disabled]="false">Previous</button>
+        </div>
+    
+        <p class="mt-2">Already have an account? <a routerLink="/login" style="text-decoration: none;">Log in</a></p>
+    </form>
+    
+</div>
