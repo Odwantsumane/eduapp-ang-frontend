@@ -35,15 +35,62 @@
             </div> 
         </div>
 
-        <div *ngIf="moreDetails" class="more_details"> 
-            <label for="institution">Institution:</label>
-            <select class="form-select" id="institutions" name="institutions">
+        <div *ngIf="moreDetails"  class="more_details"> 
+            <label for="designation" class="">Designation:</label>
+            <select [(ngModel)]="selectedDesignation" class="form-select" id="designation" name="designation" (change)="institutionStatus()">
+                <option>None</option>
+                <option>Grade 12 Learner</option> 
+                <option>Student</option>
+                <option>Tutor</option> 
+            </select>  
+            <label for="country" class="mt-3">Country:</label>
+            <select [(ngModel)]="selectedCountry" class="form-select" id="country" name="country">
+                <option>South Africa</option>  
+            </select> 
+            <label for="institution" class="mt-3">Institution:</label>
+            <select [(ngModel)]="selectedInstitution" class="form-select" id="institutions" name="institutions" [disabled]="!institutionEnabled" (change)="verify()">
                 <option>None</option>
                 <option>Rhodes University</option>
                 <option>University of Johannesburg</option>
                 <option>University of Pretoria</option>
                 <option>University of Free State</option>
-            </select>  
+                <option>Cape Peninsula University of Technology</option>
+                <option>Central University of Technology</option>
+                <option>Durban University of Technology</option> 
+                <option>Mangosuthu University of Technology</option>
+                <option>Nelson Mandela University</option>
+                <option>North-West University</option>
+                <option>University of Cape Town</option>
+                <option>University of Fort Hare</option>
+                <option>University of KwaZulu-Natal</option>
+                <option>University of Limpopo</option>
+                <option>University of Mpumalanga</option>
+                <option>University of the Western Cape</option>
+                <option>University of the Witwatersrand</option>
+                <option>University of Venda</option>
+                <option>University of Zululand</option>
+                <option>Vaal University of Technology</option>
+                <option>Walter Sisulu University</option>
+                <option>Tshwane University of Technology</option>
+                <option>Sol Plaatje University</option>
+                <option>Sefako Makgatho Health Sciences University</option>
+            </select> 
+            
+            <label for="subject" class="mt-3">Specializing Topic:</label>
+            <select [(ngModel)]="selectedSubject" class="form-select" id="subject" name="subject" [disabled]="!subjectEnabled" (change)="verify()">
+                <option>None</option> 
+                <option>Maths</option> 
+                <option>English</option> 
+                <option>Isixhosa</option>
+                <option>Biology</option>
+                <option>Physical Sciences</option>
+                <option>Chemistry</option>
+                <option>Political Sciences</option>
+                <option>Law</option>
+                <option>Humanities</option>
+                <option>Statistics</option>
+                <option>Computer Sciences</option>
+            </select> 
         </div>
         
         <div class="btn-group mt-3 mb-3">

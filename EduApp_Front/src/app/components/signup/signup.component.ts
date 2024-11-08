@@ -27,6 +27,12 @@ export class SignupComponent {
   submitted : boolean = false;
   emailValid : boolean = false;
   passwordAllowed : boolean = false;
+  institutionEnabled : boolean = false;
+  subjectEnabled : boolean = false;
+  selectedSubject : string = "None";
+  selectedDesignation : string =  "None";
+  selectedInstitution : string =  "None";
+  selectedCountry : string = "South Africa";
 
   handleSignUp(): void {
     this.submitted = true;
@@ -60,13 +66,49 @@ export class SignupComponent {
   }
 
   verify(): void { 
-    this.submit_disabled = !(this.name !== "" && this.surname !== "" && this.email !== "" && this.password !== "" && this.password2 !== "");
+
+    var verify = false;
+
+    if (this.selectedDesignation === "Grade 12 Learner") {
+      verify = true;
+    } else if (this.selectedDesignation === "Tutor" && this.selectedSubject !== "None") {
+      verify = true;
+    } else if (this.selectedDesignation === "Student" && this.selectedInstitution !== "None") {
+      verify = true
+    }
+
+    this.submit_disabled = !(this.name !== "" && this.surname !== "" && this.email !== "" && this.password !== "" 
+      && this.password2 !== "" && verify);   
   }
 
   isValidEmail(email: string): boolean {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     return emailRegex.test(email);
+  }
+
+  institutionStatus() : void {
+    if(this.selectedDesignation === "Student") {
+      this.institutionEnabled = true;
+    }
+    else {
+      this.institutionEnabled = false;
+      this.selectedInstitution = "None";
+    }
+
+    // access specialized status
+    this.specilizeStatus()
+    this.verify()
+  }
+
+  specilizeStatus() : void {
+    if(this.selectedDesignation === "Tutor") {
+      this.subjectEnabled = true;
+    }
+    else {
+      this.subjectEnabled = false;
+      this.selectedSubject = "None";
+    }
   }
 
   isPasswordAllowed(password: string): boolean {
