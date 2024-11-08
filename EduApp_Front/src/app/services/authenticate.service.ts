@@ -30,9 +30,16 @@ export class AuthenticateService {
   }
 
   isUserLoggedIn() : boolean {
-    let user = sessionStorage.getItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn");
+    try {
+      let user = sessionStorage.getItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn");
+      return !(user === null);
+    } catch (e) {
+      console.log("sessionStorage is not defined")
+      return false;
+    }
+    
 
-    return !(user === null);
+    
   }
 
   loggout() : void {

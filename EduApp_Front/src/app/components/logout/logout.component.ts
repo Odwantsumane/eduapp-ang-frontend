@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from '../../services/authenticate.service';
+import { RefreshService } from '../../services/refresh.service';
 
 @Component({
   selector: 'app-logout',
@@ -10,10 +11,11 @@ import { AuthenticateService } from '../../services/authenticate.service';
 })
 export class LogoutComponent implements OnInit{
 
-  constructor(private authenticator: AuthenticateService){};
+  constructor(private authenticator: AuthenticateService, private refreshService: RefreshService){};
 
   ngOnInit(): void { 
-    this.authenticator.loggout(); 
+    this.authenticator.loggout();  
+    this.refreshService.triggerRefresh();
   }
 
 }

@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router'; 
 import { AuthenticateService } from '../../services/authenticate.service';
+import { VerticalNavBarComponent } from '../vertical-nav-bar/vertical-nav-bar.component';
+import { RefreshService } from '../../services/refresh.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
+  providers: [RefreshService]
 })
 export class LoginComponent {
 
@@ -21,7 +24,7 @@ export class LoginComponent {
   submitted: boolean = false;
   isUserLoggedIn : boolean = false;
 
-  constructor(private authenticator: AuthenticateService){}
+  constructor(private authenticator: AuthenticateService, private refreshService: RefreshService){} //private verticalComponentRefresh: VerticalNavBarComponent
 
   async handleLogin() { 
 
@@ -34,6 +37,8 @@ export class LoginComponent {
     } else {
       // display failed message
     } 
+
+    if(this.isAuthenticated) this.refreshService.triggerRefresh();
   }
 
   verify(): void { 
