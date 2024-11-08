@@ -22,11 +22,11 @@
             
           </li>
           <li class="nav-item ms-2 mt-2">
-            <div *ngIf="false" style="text-align: center;" class="d-flex flex-column">  
+            <div *ngIf="isLoggedIn" style="text-align: center;" class="d-flex flex-column">  
               <a routerLink="/logout" class="text-dark" style="cursor: pointer;"><i class="bi bi-box-arrow-in-left fs-4"></i></a>
               <p style="font-size: small;">Log out</p>
             </div>
-            <div *ngIf="true" style="text-align: center;" class="d-flex flex-column">  
+            <div *ngIf="!isLoggedIn" style="text-align: center;" class="d-flex flex-column">  
               <a routerLink="/login" class="text-dark" style="cursor: pointer;"><i class="bi bi-box-arrow-in-right fs-4"></i></a>
               <p style="font-size: small;">Log in</p>
             </div>
