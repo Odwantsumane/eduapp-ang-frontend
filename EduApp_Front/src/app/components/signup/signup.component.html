@@ -3,24 +3,35 @@
     <form >
         <div *ngIf="startDetails" class="start_details">
             <div class="mb-3 mt-3">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" [(ngModel)]="name" value="{{name}}" required>
+                <label for="name">*Name:</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" [(ngModel)]="name" value="{{name}}" (input)="verify()" required>
             </div>
             <div class="mb-3 mt-3">
-                <label for="surname">Surname:</label>
-                <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" [(ngModel)]="surname" value="{{surname}}" required>
+                <label for="surname">*Surname:</label>
+                <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" [(ngModel)]="surname" value="{{surname}}" (input)="verify()" required>
             </div>
             <div class="mb-3 mt-3">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="email" value="{{email}}" required>
+                <label for="email">*Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="email" value="{{email}}" (input)="verify()" required>
+                <span *ngIf="!emailValid && submitted" class="text-danger fs-6">Invalid email address</span>
             </div>
-            <div class="mb-3">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" [(ngModel)]="password" value="{{password}}"  required>
+            <div class="mb-3 password">
+                <label for="pwd">*Password:</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" [(ngModel)]="password" value="{{password}}" (input)="verify()"  required>
+                <span *ngIf="!passwordAllowed && submitted" class="text-danger fs-6">Your password does not meet requirements</span>
+                <span class="text-muted password-constraints"> 
+                    <ol>
+                        <li>password must have atleast one number</li>
+                        <li>password must have atleast one upper and lower case letters</li>
+                        <li>password must have atleast one special character</li>
+                        <li>password must be atleast 8 characters in length</li>
+                    </ol>
+                </span>
             </div> 
             <div class="mb-3">
-                <label for="pwd2">Confirm password:</label>
-                <input type="password" class="form-control" id="pwd2" placeholder="Enter password" name="password2" [(ngModel)]="password2" value="{{password2}}"  required>
+                <label for="pwd2">*Confirm password:</label>
+                <input type="password" class="form-control" id="pwd2" placeholder="Enter password" name="password2" [(ngModel)]="password2" value="{{password2}}" (input)="verify()"  required>
+                <span *ngIf="!passwordMatch && submitted" class="text-danger fs-6">passwords do not match</span>
             </div> 
         </div>
 
@@ -36,7 +47,7 @@
         </div>
         
         <div class="btn-group mt-3 mb-3">
-            <button class="btn btn-primary" type="button" (click)="handleSignUp()" [disabled]="true">Submit</button>
+            <button class="btn btn-primary" type="button" (click)="handleSignUp()" [disabled]="submit_disabled">Submit</button>
             <button *ngIf="startDetails" class="btn btn-primary" type="button" (click)="next()" [disabled]="false">Next</button>
             <button *ngIf="moreDetails" class="btn btn-primary" type="button" (click)="previous()" [disabled]="false">Previous</button>
         </div>

@@ -1,0 +1,7 @@
+.password:hover .password-constraints {
+    display: block;
+}
+
+.password-constraints {
+    display: none;
+} 
