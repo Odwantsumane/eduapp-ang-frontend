@@ -15,16 +15,13 @@ import { Subscription } from 'rxjs';
   styleUrl: './vertical-nav-bar.component.css'
 })
 export class VerticalNavBarComponent implements OnInit { 
-  isLoggedIn : boolean = false;
+  isLoggedIn : boolean = false;//Promise<boolean>;
 
   constructor(private authenticator: AuthenticateService) { 
+    //this.isLoggedIn = new Promise((resolve, reject) => {});
   }
 
-  ngOnInit(): void {
-    this.isLoggedIn = this.authenticator.isUserLoggedIn();
-  } 
-
-  refresh(): void {
-    this.isLoggedIn = this.authenticator.isUserLoggedIn();
-  } 
+  ngOnInit() {
+    this.isLoggedIn = this.authenticator.isLoggedIn2();//this.authenticator.isUserLoggedIn(); 
+  }  
 }

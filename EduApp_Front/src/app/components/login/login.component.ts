@@ -41,7 +41,7 @@ export class LoginComponent {
     if(this.isAuthenticated) this.refreshService.triggerRefresh();
   }
 
-  verify(): void { 
+  verify(): void {  
     this.submit_disabled = !(this.email !== "" && this.password !== "");
   }
 

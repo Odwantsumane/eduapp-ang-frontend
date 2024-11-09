@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core'; 
-import { User, UserrequestService } from './userrequest.service';
+import { UserrequestService, LoginResponse, Logout } from './userrequest.service';
+import * as jwt from 'jsonwebtoken';
+import { CookieLocalService } from './cookie-local.service';
 
 class LoginReq {
   constructor(public username:string, public password1:string){};
+}
+
+class isLoggedIn {
+  constructor(public loggedIn: boolean){};
 }
 
 @Injectable({
@@ -14,7 +20,7 @@ export class AuthenticateService {
   password: string = "";
   loginReq: LoginReq = {username: "", password1: ""};
 
-  constructor(private userservice: UserrequestService) { }
+  constructor(private userservice: UserrequestService, private cookieservice: CookieLocalService) { }
 
   LoginAuth(username : string, password : string) : Promise<boolean>{  
     this.loginReq.password1 = password;
@@ -29,31 +35,67 @@ export class AuthenticateService {
     })});
   }
 
-  isUserLoggedIn() : boolean {
-    try {
-      let user = sessionStorage.getItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn");
-      return !(user === null);
-    } catch (e) {
-      console.log("sessionStorage is not defined")
-      return false;
-    }
-    
+  isUserLoggedIn() : Promise<boolean> {
 
-    
+    console.log(this.cookieservice.getCookie());
+    // try {
+      // let user = sessionStorage.getItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn");
+      return new Promise((resolve, reject) => {this.userservice.isloggedIn().subscribe(response => {
+        resolve(this.handleIsloggedIn(response));
+      },error => {
+        this.handleError(error);
+        reject(false);
+      })});
+
+      // let user = true;
+      // return !(user === null);
+    // } catch (e) {
+    //   console.log("sessionStorage is not defined")
+    //   // return false;
+    // }
   }
 
-  loggout() : void {
-    sessionStorage.removeItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn");
+  loggout() : Promise<boolean> {
+    // sessionStorage.removeItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn");
+
+    return new Promise((resolve, reject) => {this.userservice.logout().subscribe(response => {
+      resolve(this.handleLogout(response));
+    },error => {
+      this.handleError(error);
+      reject(false);
+    })});
   }
 
-  handleSuccess(response: User): boolean {    
+  handleSuccess(response: LoginResponse): boolean {    
     // will need to decrypt password
-    if(this.loginReq.username === response.username) {sessionStorage.setItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn", response.username); return true;}
+    if(this.loginReq.username === response.user.username) {
+      // sessionStorage.setItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn", response.username);
+
+      if(response.token !== null) this.cookieservice.setCookie(response.token);
+
+      return true;}
     return false;
   }
 
   handleError(error: any) { 
 
     console.log("Error: " + error);
+  }
+
+  handleLogout(response: Logout) { 
+    // delete a token 
+    this.cookieservice.deleteCookie();
+
+    return response.loggedOut;
+  }
+
+  handleIsloggedIn(response: isLoggedIn): boolean {
+    //console.log(response);
+    if(response.loggedIn) {return true};
+    return false;
+  }
+
+  isLoggedIn2() : boolean {  
+    return (this.cookieservice.getCookie() !== "" && this.cookieservice.getCookie() !== null);
   }
 }

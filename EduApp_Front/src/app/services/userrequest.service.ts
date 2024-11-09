@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+// import * as jwt from 'jsonwebtoken';
 
 export class unreadMsgs {
   constructor (
@@ -8,9 +9,9 @@ export class unreadMsgs {
   ){};
 }
 
-export class User {
+class User {
   constructor(
-    public _id:number,
+    public _id:string,
     public name:string,
     public surname:string,
     public username:string,
@@ -22,8 +23,20 @@ export class User {
     public occupation:string){};
 }
 
+export class LoginResponse {
+  constructor(public user: User, public code: number, public message: string, public token: string) {}
+}
+
 class LoginReq {
   constructor(public username:string, public password1:string){};
+}
+
+export class Logout {
+  constructor(public loggedOut:boolean){};
+}
+
+class isLoggedIn {
+  constructor(public loggedIn: boolean){};
 }
 
 @Injectable({
@@ -31,7 +44,10 @@ class LoginReq {
 })
 export class UserrequestService {
 
-  Headers: HttpHeaders = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
+  maxAge = 3 * 24 * 60 * 60;
+  
+
+  Headers: HttpHeaders = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()}); //, Cookie: `jwt=${this.createToken("myid")}`
   url : string = "http://localhost:4001";
 
   constructor(private http: HttpClient) { }
@@ -51,10 +67,18 @@ export class UserrequestService {
   }
 
   login (loginReq: LoginReq) {  
-    return this.http.post<User>(`${this.url}/user/login`, loginReq, {headers: this.Headers});
+    return this.http.post<LoginResponse>(`${this.url}/user/login`, loginReq, {headers: this.Headers});
   }
 
-  createBasicAuthHeaders() {
+  logout () {  
+    return this.http.get<Logout>(`${this.url}/user/logout`, {headers: this.Headers});
+  }
+
+  isloggedIn() {
+    return this.http.get<isLoggedIn>(`${this.url}/user/isloggedIn`, {headers: this.Headers});
+  }
+
+  createBasicAuthHeaders() { ;
     let username = "user";
     let password = "password"; 
     let BasicAuthHeader = "";
@@ -66,4 +90,10 @@ export class UserrequestService {
     } 
     return BasicAuthHeader;
   }
+
+  // createToken (id: string) : string {
+  //   return jwt.sign({ id }, 'bmV0IG5pbmphIHNlY3JldA', {
+  //       expiresIn: this.maxAge 
+  //   })
+  // }
 }
