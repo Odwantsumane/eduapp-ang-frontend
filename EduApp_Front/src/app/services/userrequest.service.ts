@@ -74,8 +74,8 @@ export class UserrequestService {
     return this.http.get<Logout>(`${this.url}/user/logout`, {headers: this.Headers});
   }
 
-  isloggedIn() {
-    return this.http.get<isLoggedIn>(`${this.url}/user/isloggedIn`, {headers: this.Headers});
+  isloggedIn(token: string) { 
+    return this.http.get<isLoggedIn>(`${this.url}/user/isloggedIn/${token}`, {headers: this.Headers});
   }
 
   createBasicAuthHeaders() { ;

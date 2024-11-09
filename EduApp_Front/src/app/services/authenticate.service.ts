@@ -18,6 +18,7 @@ export class AuthenticateService {
 
   username: string = ""; 
   password: string = "";
+  isLoggedIn: boolean = false;
   loginReq: LoginReq = {username: "", password1: ""};
 
   constructor(private userservice: UserrequestService, private cookieservice: CookieLocalService) { }
@@ -35,24 +36,15 @@ export class AuthenticateService {
     })});
   }
 
-  isUserLoggedIn() : Promise<boolean> {
-
-    console.log(this.cookieservice.getCookie());
+  isUserLoggedIn(token: string) : Promise<boolean> { 
     // try {
       // let user = sessionStorage.getItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn");
-      return new Promise((resolve, reject) => {this.userservice.isloggedIn().subscribe(response => {
+      return new Promise((resolve, reject) => {this.userservice.isloggedIn(token).subscribe(response => {
         resolve(this.handleIsloggedIn(response));
       },error => {
         this.handleError(error);
         reject(false);
-      })});
-
-      // let user = true;
-      // return !(user === null);
-    // } catch (e) {
-    //   console.log("sessionStorage is not defined")
-    //   // return false;
-    // }
+      })}); 
   }
 
   loggout() : Promise<boolean> {
@@ -89,13 +81,25 @@ export class AuthenticateService {
     return response.loggedOut;
   }
 
-  handleIsloggedIn(response: isLoggedIn): boolean {
-    //console.log(response);
-    if(response.loggedIn) {return true};
+  handleIsloggedIn(response: isLoggedIn): boolean { 
+
+    if(response.loggedIn) {this.isLoggedIn=response.loggedIn; return true};
+    this.isLoggedIn=response.loggedIn;
     return false;
   }
 
-  isLoggedIn2() : boolean {  
-    return (this.cookieservice.getCookie() !== "" && this.cookieservice.getCookie() !== null);
+  async isLoggedIn2() : Promise<boolean> {  
+    const token = this.cookieservice.getCookie() || "notoken";
+    var response = false;;
+ 
+    if(token !== "notoken") 
+      {
+        response = await this.isUserLoggedIn(token);
+        return response;
+      };
+
+      return response;
+     
+    //return (this.cookieservice.getCookie() !== "" && this.cookieservice.getCookie() !== null);
   }
 }

@@ -21,7 +21,7 @@ export class VerticalNavBarComponent implements OnInit {
     //this.isLoggedIn = new Promise((resolve, reject) => {});
   }
 
-  ngOnInit() {
-    this.isLoggedIn = this.authenticator.isLoggedIn2();//this.authenticator.isUserLoggedIn(); 
+  async ngOnInit() {
+    this.isLoggedIn = await this.authenticator.isLoggedIn2();//this.authenticator.isUserLoggedIn(); 
   }  
 }

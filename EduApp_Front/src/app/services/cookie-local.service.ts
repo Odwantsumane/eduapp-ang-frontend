@@ -23,6 +23,6 @@ export class CookieLocalService {
 
   // Delete a cookie
   deleteCookie(): void {
-    this.cookieService.delete('jwt', '/');
+    this.cookieService.delete('jwt');
   }
 }
