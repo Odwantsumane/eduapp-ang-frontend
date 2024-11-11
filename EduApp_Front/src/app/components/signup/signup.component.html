@@ -77,7 +77,7 @@
             </select> 
             
             <label for="subject" class="mt-3">Specializing Topic:</label>
-            <select [(ngModel)]="selectedSubject" class="form-select" id="subject" name="subject" [disabled]="!subjectEnabled" (change)="verify()">
+            <select [(ngModel)]="selectedSubject" multiple class="form-select" id="subject" name="subject" [disabled]="!subjectEnabled" (change)="verify()">
                 <option>None</option> 
                 <option>Maths</option> 
                 <option>English</option> 
