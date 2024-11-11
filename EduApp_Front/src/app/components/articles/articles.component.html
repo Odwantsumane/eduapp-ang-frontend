@@ -1,44 +1,19 @@
 <h3 class="mt-2">Articles</h3>
 
 <div class="articles d-flex flex-column">
-<ul class="article-list">
-    <li class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
-    <span class="text-muted float-end">10/02/2024</span>
-    <div class="profile-name d-flex">
-        <div><a href="#"><i class="bi bi-person-circle fs-2 me-1 text-dark"></i></a></div>
-        <div class="ps-1 pe-1">
-            <a href="#" style="text-decoration: none;" class="fs-6">John Cena</a>
-            <p class="fs-6 text-muted">Student at Rhodes University</p>
-        </div>
-    </div> 
-    <div class="ms-5">
-        <p class="article-headline fs-5">Bootstrap </p>
-        <p class="article-text text-muted">
-            To use Bootstrap Icons in your project after running npm install bootstrap-icons, 
-            you need to include the ..see more
-        </p>
-    </div>
-    <div class="likes d-flex justify-content-end">
-        <a style="cursor: pointer;" class="me-3 text-dark" (click)="like()"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
-        <a style="cursor: pointer;" class="me-3 text-dark" (click)="dislike()"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
-        <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
-    </div>
-    
-    </li>
-    <li class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
-        <span class="text-muted float-end">31/10/2024</span>
+<ul *ngFor="let article of Articles" class="article-list">
+    <li  class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
+        <span class="text-muted float-end">{{article.createdAt | date: 'dd/MM/yyyy'}}</span>
         <div class="profile-name d-flex">
             <div><a href="#"><i class="bi bi-person-circle fs-2 me-1 text-dark"></i></a></div>
             <div class="ps-1 pe-1">
-                <a href="#" style="text-decoration: none;" class="fs-6">Odwa Ntsumane</a>
-                <p class="fs-6 text-muted">Maths tutor</p>
+                <a href="#" style="text-decoration: none;" class="fs-6">{{article.createdBy}}</a>
+                <p class="fs-6 text-muted">Student at Rhodes University</p>
             </div>
         </div> 
         <div class="ms-5">
-            <p class="article-headline fs-5">Git </p>
-            <p class="article-text text-muted">
-                Git is a distributed version control system that tracks versions of files. It is often used to control source code by programmers who are developing software collaboratively
-                There are three commands with similar names: git reset, git restore and git revert. git-revert is about making a new commit that reverts the changes made by other commits. git-restore is about restoring files in the working tree from either the index or another commit.
+            <p class="article-headline fs-5">{{article.title}}</p>
+            <p class="article-text text-muted">{{article.markdown}}
             </p>
         </div>
         <div class="likes d-flex justify-content-end">
@@ -46,8 +21,7 @@
             <a style="cursor: pointer;" class="me-3 text-dark" (click)="dislike()"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
             <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
         </div>
-        
-        </li>
-     
+    
+    </li> 
 </ul>
 </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserrequestService, LoginResponse, Logout } from './userrequest.service';
 import * as jwt from 'jsonwebtoken';
 import { CookieLocalService } from './cookie-local.service';
+import { Article, ArticlesService } from './articles.service';
 
 class LoginReq {
   constructor(public username:string, public password1:string){};
@@ -18,10 +19,12 @@ export class AuthenticateService {
 
   username: string = ""; 
   password: string = "";
+  token:string = "";
+  PlaceHolderArray: Article[] = [];
   isLoggedIn: boolean = false;
   loginReq: LoginReq = {username: "", password1: ""};
 
-  constructor(private userservice: UserrequestService, private cookieservice: CookieLocalService) { }
+  constructor(private userservice: UserrequestService, private cookieservice: CookieLocalService, private articleservice: ArticlesService) { }
 
   LoginAuth(username : string, password : string) : Promise<boolean>{  
     this.loginReq.password1 = password;
@@ -89,17 +92,60 @@ export class AuthenticateService {
   }
 
   async isLoggedIn2() : Promise<boolean> {  
-    const token = this.cookieservice.getCookie() || "notoken";
+    this.token = this.cookieservice.getCookie() || "notoken";
     var response = false;;
  
-    if(token !== "notoken") 
+    if(this.token !== "notoken") 
       {
-        response = await this.isUserLoggedIn(token);
+        response = await this.isUserLoggedIn(this.token);
         return response;
       };
 
       return response;
      
     //return (this.cookieservice.getCookie() !== "" && this.cookieservice.getCookie() !== null);
+  }
+
+  // async GetArticles() : Promise<Array<Article>>{ 
+     
+    
+  //   if (!await this.isLoggedIn2()) return this.handleArticles(this.PlaceHolderArray);
+  //   if (this.token === "notoken") return this.handleArticles(this.PlaceHolderArray);
+
+  //   return new Promise((resolve, reject) => {this.articleservice.getAllArticles(this.cookieservice.getCookie() || "notoken").subscribe(response => {
+  //     resolve(this.handleArticles(response));
+  //   },error => {
+  //     this.handleError(error);
+  //     // reject(false);
+  //   })});
+  // }
+
+
+  async GetArticles(): Promise<Array<Article>> {
+    // Check if user is logged in
+    if (!(await this.isLoggedIn2())) {
+      return this.handleArticles(this.PlaceHolderArray);
+    }
+  
+    if (this.token === "notoken") {
+      return this.handleArticles(this.PlaceHolderArray);
+    }
+  
+    try {
+      const response = await this.articleservice
+        .getAllArticles(this.cookieservice.getCookie() || "notoken")
+        .toPromise();
+      return this.handleArticles(response);
+    } catch (error) {
+      this.handleError(error);
+      return this.PlaceHolderArray; // Return a placeholder array on error
+    }
+  }
+
+  handleArticles(response: Array<Article> | undefined): Array<Article> {   
+
+    if(response === undefined) return this.PlaceHolderArray;
+    
+    return response;
   }
 }
