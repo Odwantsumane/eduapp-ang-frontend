@@ -25,7 +25,7 @@ export class ArticlesComponent implements OnInit{
   async getArticles() {
     this.Articles = await this.articlesserviceauth.GetArticles();
 
-    console.log(this.Articles);
+    // console.log(this.Articles);
 
   }
 

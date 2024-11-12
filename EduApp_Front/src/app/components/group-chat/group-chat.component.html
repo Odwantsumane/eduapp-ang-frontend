@@ -5,19 +5,19 @@
             <p class="fs-4">Chat Groups</p> 
         </div>
         <div class="d-flex flex-column" style="overflow-y: auto; height: 545px;">
-            <div class="w-100 p-1 border-bottom chat_group">
+            <div *ngFor="let chat of groupChats" class="w-100 p-1 border-bottom chat_group">
                 <span class="float-end me-1">10 min</span>
                 <div class="d-flex">
                     <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
                         <img src="favicon.ico" alt="chat profile" style="max-width: 100%; height: auto;">
                     </div>
                     <div class="mt-2">
-                        <a href="#" class="fs-5 text-dark" style="text-decoration: none;">Chemistry 101</a>
-                        <p class="text-muted">This conversation is very interesting...</p>
+                        <a href="#" class="fs-5 text-dark" style="text-decoration: none;">{{chat.title}}</a>
+                        <p class="text-muted">{{chat.description}}</p>
                     </div>
                 </div>
             </div>
-            <div class="w-100 p-1 border-bottom chat_group">
+            <!-- <div class="w-100 p-1 border-bottom chat_group">
                 <span class="float-end me-1">10 min</span>
                 <div class="d-flex">
                     <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
@@ -100,7 +100,7 @@
                         <p class="text-muted">This conversation is very interesting...</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- some placeholder -->
             <div class="w-100 p-1 rounded-bottom-4"> 

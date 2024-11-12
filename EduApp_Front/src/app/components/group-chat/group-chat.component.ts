@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { Group } from '../../services/group-chats.service';
+import { MiddlemanService } from '../../services/middleman.service';
 //import { SocketIoService } from '../../services/socket-io.service';
 // import * as Connection from '../../../common/connection';
 
@@ -26,16 +28,21 @@ export class GroupChatComponent implements OnInit {
 
   messages: Array<message> = [];
   users: Array<user> = [];
+  groupChats: Array<Group> = [];
 
-  constructor () //private socketIoService: SocketIoService
+  constructor (private groupchatreqservice: MiddlemanService) //private socketIoService: SocketIoService
   {
     // this.socketIoService.listenIoServer(Connection.change).subscribe((change) => {this.onChange(change)});
 
     // this.socketService.listenToServer(Connection.create).subscribe((user) => {this.onCreate(user)})
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getAllGroupChats();
+  }
 
+  async getAllGroupChats() {
+    this.groupChats = await this.groupchatreqservice.getAllChatGroups(); 
   }
 
   MonitorMessageTyping(event:Event): void { 
