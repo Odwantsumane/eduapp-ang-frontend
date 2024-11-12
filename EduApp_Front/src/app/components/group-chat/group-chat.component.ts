@@ -45,6 +45,10 @@ export class GroupChatComponent implements OnInit {
     this.groupChats = await this.groupchatreqservice.getAllChatGroups(); 
   }
 
+  getMessages() {
+    
+  }
+
   MonitorMessageTyping(event:Event): void { 
     
     if (this.messageFieldValue !== "") {
