@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Group } from '../../services/group-chats.service';
+import { Group, Message } from '../../services/group-chats.service';
 import { MiddlemanService } from '../../services/middleman.service';
 //import { SocketIoService } from '../../services/socket-io.service';
 // import * as Connection from '../../../common/connection';
@@ -29,6 +29,7 @@ export class GroupChatComponent implements OnInit {
   messages: Array<message> = [];
   users: Array<user> = [];
   groupChats: Array<Group> = [];
+  filteredMessages: Array<Message> = [];
 
   constructor (private groupchatreqservice: MiddlemanService) //private socketIoService: SocketIoService
   {
@@ -45,8 +46,10 @@ export class GroupChatComponent implements OnInit {
     this.groupChats = await this.groupchatreqservice.getAllChatGroups(); 
   }
 
-  getMessages() {
-    
+  async getMessages(id:string) {
+    // console.log(id);
+    // get and filter messages
+    this.filteredMessages = await this.groupchatreqservice.getAllChatMessages(id); 
   }
 
   MonitorMessageTyping(event:Event): void { 
