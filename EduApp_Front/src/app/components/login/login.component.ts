@@ -29,7 +29,7 @@ export class LoginComponent {
   async handleLogin() { 
 
     if(this.email !== "" && this.isValidEmail(this.email)  && this.password !== "") {
-      this.isAuthenticated = await this.authenticator.LoginAuth(this.email, "1234"); //this.password
+      this.isAuthenticated = await this.authenticator.LoginAuth(this.email, this.password); //
 
       // clear fields
       this.email = ""; this.password = "";

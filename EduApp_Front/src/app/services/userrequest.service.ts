@@ -9,7 +9,7 @@ export class unreadMsgs {
   ){};
 }
 
-class User {
+export class User {
   constructor(
     public _id:string,
     public name:string,
@@ -19,8 +19,24 @@ class User {
     public createdAt:string,
     public __v:string,
     public unreadMsgs:Array<unreadMsgs>,
-    public institution:string,
-    public occupation:string){};
+    public selectedInstitution:string,
+    public selectedDesignation:string,
+    public selectedCountry:string,
+    public selectedSubject: Array<string>){};
+}
+
+export class SignInUser {
+  constructor(
+    public name: string,
+    public surname: string,
+    public username: string,
+    public password1: string, 
+    public password2: string,  
+    public selectedSubject: Array<string>,
+    public selectedDesignation: string,
+    public selectedInstitution: string,
+    public selectedCountry: string,){}
+
 }
 
 export class LoginResponse {
@@ -48,7 +64,7 @@ export class UserrequestService {
   
 
   Headers: HttpHeaders = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()}); //, Cookie: `jwt=${this.createToken("myid")}`
-  url : string = "http://localhost:4001";
+  url : string = "http://localhost:4001/user";
 
   constructor(private http: HttpClient) { }
 
@@ -62,20 +78,20 @@ export class UserrequestService {
     return this.http.get<User>(`${this.url}/getUser/${id}`,  {headers: this.Headers});
   }
 
-  addUser(user: User) {  
-    return this.http.post<User>(`${this.url}/addUser`, user, {headers: this.Headers});
+  addUser(user: SignInUser) {  
+    return this.http.post<LoginResponse>(`${this.url}/signin`, user, {headers: this.Headers});
   }
 
   login (loginReq: LoginReq) {  
-    return this.http.post<LoginResponse>(`${this.url}/user/login`, loginReq, {headers: this.Headers});
+    return this.http.post<LoginResponse>(`${this.url}/login`, loginReq, {headers: this.Headers});
   }
 
   logout () {  
-    return this.http.get<Logout>(`${this.url}/user/logout`, {headers: this.Headers});
+    return this.http.get<Logout>(`${this.url}/logout`, {headers: this.Headers});
   }
 
   isloggedIn(token: string) { 
-    return this.http.get<isLoggedIn>(`${this.url}/user/isloggedIn/${token}`, {headers: this.Headers});
+    return this.http.get<isLoggedIn>(`${this.url}/isloggedIn/${token}`, {headers: this.Headers});
   }
 
   createBasicAuthHeaders() { ;

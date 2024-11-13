@@ -4,20 +4,20 @@
         <div *ngIf="startDetails" class="start_details">
             <div class="mb-3 mt-3">
                 <label for="name">*Name:</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" [(ngModel)]="name" value="{{name}}" (input)="verify()" required>
+                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" [(ngModel)]="signInDetails.name" value="{{signInDetails.name}}" (input)="verify()" required>
             </div>
             <div class="mb-3 mt-3">
                 <label for="surname">*Surname:</label>
-                <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" [(ngModel)]="surname" value="{{surname}}" (input)="verify()" required>
+                <input type="text" class="form-control" id="surname" placeholder="Enter surname" name="surname" [(ngModel)]="signInDetails.surname" value="{{signInDetails.surname}}" (input)="verify()" required>
             </div>
             <div class="mb-3 mt-3">
                 <label for="email">*Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="email" value="{{email}}" (input)="verify()" required>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="signInDetails.username" value="{{signInDetails.username}}" (input)="verify()" required>
                 <span *ngIf="!emailValid && submitted" class="text-danger fs-6">Invalid email address</span>
             </div>
             <div class="mb-3 password">
                 <label for="pwd">*Password:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" [(ngModel)]="password" value="{{password}}" (input)="verify()"  required>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" [(ngModel)]="signInDetails.password1" value="{{signInDetails.password1}}" (input)="verify()"  required>
                 <span *ngIf="!passwordAllowed && submitted" class="text-danger fs-6">Your password does not meet requirements</span>
                 <span class="text-muted password-constraints"> 
                     <ol>
@@ -30,25 +30,25 @@
             </div> 
             <div class="mb-3">
                 <label for="pwd2">*Confirm password:</label>
-                <input type="password" class="form-control" id="pwd2" placeholder="Enter password" name="password2" [(ngModel)]="password2" value="{{password2}}" (input)="verify()"  required>
+                <input type="password" class="form-control" id="pwd2" placeholder="Enter password" name="password2" [(ngModel)]="signInDetails.password2" value="{{signInDetails.password2}}" (input)="verify()"  required>
                 <span *ngIf="!passwordMatch && submitted" class="text-danger fs-6">passwords do not match</span>
             </div> 
         </div>
 
         <div *ngIf="moreDetails"  class="more_details"> 
             <label for="designation" class="">Designation:</label>
-            <select [(ngModel)]="selectedDesignation" class="form-select" id="designation" name="designation" (change)="institutionStatus()">
+            <select [(ngModel)]="signInDetails.selectedDesignation" class="form-select" id="designation" name="designation" (change)="institutionStatus()">
                 <option>None</option>
                 <option>Grade 12 Learner</option> 
                 <option>Student</option>
                 <option>Tutor</option> 
             </select>  
             <label for="country" class="mt-3">Country:</label>
-            <select [(ngModel)]="selectedCountry" class="form-select" id="country" name="country">
+            <select [(ngModel)]="signInDetails.selectedCountry" class="form-select" id="country" name="country">
                 <option>South Africa</option>  
             </select> 
             <label for="institution" class="mt-3">Institution:</label>
-            <select [(ngModel)]="selectedInstitution" class="form-select" id="institutions" name="institutions" [disabled]="!institutionEnabled" (change)="verify()">
+            <select [(ngModel)]="signInDetails.selectedInstitution" class="form-select" id="institutions" name="institutions" [disabled]="!institutionEnabled" (change)="verify()">
                 <option>None</option>
                 <option>Rhodes University</option>
                 <option>University of Johannesburg</option>
@@ -77,7 +77,7 @@
             </select> 
             
             <label for="subject" class="mt-3">Specializing Topic:</label>
-            <select [(ngModel)]="selectedSubject" multiple class="form-select" id="subject" name="subject" [disabled]="!subjectEnabled" (change)="verify()">
+            <select [(ngModel)]="signInDetails.selectedSubject" multiple class="form-select" id="subject" name="subject" [disabled]="!subjectEnabled" (change)="verify()">
                 <option>None</option> 
                 <option>Maths</option> 
                 <option>English</option> 

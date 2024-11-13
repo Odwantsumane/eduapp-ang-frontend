@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'; 
-import { UserrequestService, LoginResponse, Logout } from './userrequest.service';
+import { UserrequestService, LoginResponse, Logout, SignInUser, User } from './userrequest.service';
 import * as jwt from 'jsonwebtoken';
 import { CookieLocalService } from './cookie-local.service';
 import { Article, ArticlesService } from './articles.service';
@@ -11,6 +11,8 @@ class LoginReq {
 class isLoggedIn {
   constructor(public loggedIn: boolean){};
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,19 @@ export class AuthenticateService {
     })});
   }
 
+  SignUpAuth(SignInBody: SignInUser): Promise<boolean> {
+
+    this.loginReq.password1 = SignInBody.password1;
+    this.loginReq.username = SignInBody.username;
+
+    return new Promise((resolve, reject) => {this.userservice.addUser(SignInBody).subscribe(response => {
+      resolve(this.handleSignIn(response));
+    },error => {
+      this.handleError(error);
+      reject(false);
+    })});
+  }
+
   isUserLoggedIn(token: string) : Promise<boolean> { 
     // try {
       // let user = sessionStorage.getItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn");
@@ -59,6 +74,10 @@ export class AuthenticateService {
       this.handleError(error);
       reject(false);
     })});
+  }
+
+  handleSignIn(response: LoginResponse): boolean {  
+    return this.handleSuccess(response);
   }
 
   handleSuccess(response: LoginResponse): boolean {    

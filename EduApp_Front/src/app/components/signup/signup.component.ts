@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { AuthenticateService } from '../../services/authenticate.service';
+import { RefreshService } from '../../services/refresh.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,17 +12,9 @@ import { RouterLink } from '@angular/router';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
-export class SignupComponent {
-  email : string = "";
-  password : string = "";
-  password2 : string = "";
-  name : string = "";
-  surname : string = "";
-  institution : string = "";
-
+export class SignupComponent { 
   startDetails : boolean = true;
   moreDetails : boolean = false;
-
   remember_me : boolean = false;
   submit_disabled : boolean = true;
   passwordMatch : boolean = false;
@@ -28,29 +22,47 @@ export class SignupComponent {
   emailValid : boolean = false;
   passwordAllowed : boolean = false;
   institutionEnabled : boolean = false;
-  subjectEnabled : boolean = false;
-  selectedSubject : string = "None";
-  selectedDesignation : string =  "None";
-  selectedInstitution : string =  "None";
-  selectedCountry : string = "South Africa";
+  subjectEnabled : boolean = false; 
+  isAuthenticated : boolean = false;
 
-  handleSignUp(): void {
+  signInDetails = {
+    name: "",
+    surname: "",
+    username: "", 
+    password1: "",
+    password2: "", 
+    selectedSubject: new Array<string>,
+    selectedDesignation: "None",
+    selectedInstitution: "None",
+    selectedCountry: "South Africa",
+
+  }
+
+  constructor(private authMiddleware: AuthenticateService, private refreshService: RefreshService){}
+
+  async handleSignUp() {
     this.submitted = true;
 
     // check if password match
-    this.passwordMatch = this.password === this.password2;
-    this.emailValid = this.isValidEmail(this.email);
-    this.passwordAllowed = this.isPasswordAllowed(this.password);
+    this.passwordMatch = this.signInDetails.password1 === this.signInDetails.password2;
+    this.emailValid = this.isValidEmail(this.signInDetails.username);
+    this.passwordAllowed = this.isPasswordAllowed(this.signInDetails.password1);
 
     if(this.passwordMatch && this.emailValid && this.passwordAllowed) {
-      // clear the fields and verify
-      this.name = ""; this.surname = ""; this.email = ""; this.password = ""; this.password2 = "";
+      // signup
+      // this.SignUpAuth
+      this.isAuthenticated = await this.authMiddleware.SignUpAuth(this.signInDetails);
 
-      this.verify();
-      this.passwordMatch = false;
-      this.submitted = false;
-      this.emailValid = false;
-      this.passwordAllowed = false;
+      // clear the fields and verify
+      if (this.isAuthenticated) this.refreshService.triggerRefresh();
+
+      // this.signInDetails.name = ""; this.signInDetails.surname = ""; this.signInDetails.username = ""; this.signInDetails.password1 = ""; this.signInDetails.password2 = "";
+
+      // this.verify();
+      // this.passwordMatch = false;
+      // this.submitted = false;
+      // this.emailValid = false;
+      // this.passwordAllowed = false;
     }
     
   }
@@ -65,20 +77,20 @@ export class SignupComponent {
     this.moreDetails = false;
   }
 
-  verify(): void { 
-
+  verify(): void {  
+ 
     var verify = false;
 
-    if (this.selectedDesignation === "Grade 12 Learner") {
+    if (this.signInDetails.selectedDesignation === "Grade 12 Learner") {
       verify = true;
-    } else if (this.selectedDesignation === "Tutor" && this.selectedSubject !== "None") {
+    } else if (this.signInDetails.selectedDesignation === "Tutor" && this.signInDetails.selectedSubject.findIndex(value => value === "None") === -1 && this.signInDetails.selectedSubject.length > 0) {
       verify = true;
-    } else if (this.selectedDesignation === "Student" && this.selectedInstitution !== "None") {
+    } else if (this.signInDetails.selectedDesignation === "Student" && this.signInDetails.selectedInstitution !== "None") {
       verify = true
     }
 
-    this.submit_disabled = !(this.name !== "" && this.surname !== "" && this.email !== "" && this.password !== "" 
-      && this.password2 !== "" && verify);   
+    this.submit_disabled = !(this.signInDetails.name !== "" && this.signInDetails.surname !== "" && this.signInDetails.username !== "" && this.signInDetails.password1 !== "" 
+      && this.signInDetails.password2 !== "" && verify);   
   }
 
   isValidEmail(email: string): boolean {
@@ -88,12 +100,12 @@ export class SignupComponent {
   }
 
   institutionStatus() : void {
-    if(this.selectedDesignation === "Student") {
+    if(this.signInDetails.selectedDesignation === "Student") {
       this.institutionEnabled = true;
     }
     else {
       this.institutionEnabled = false;
-      this.selectedInstitution = "None";
+      this.signInDetails.selectedInstitution = "None";
     }
 
     // access specialized status
@@ -102,12 +114,12 @@ export class SignupComponent {
   }
 
   specilizeStatus() : void {
-    if(this.selectedDesignation === "Tutor") {
+    if(this.signInDetails.selectedDesignation === "Tutor") {
       this.subjectEnabled = true;
     }
     else {
       this.subjectEnabled = false;
-      this.selectedSubject = "None";
+      this.signInDetails.selectedSubject = [];
     }
   }
 
