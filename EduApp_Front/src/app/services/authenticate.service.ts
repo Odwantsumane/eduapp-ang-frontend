@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'; 
-import { UserrequestService, LoginResponse, Logout, SignInUser, User } from './userrequest.service';
+import { UserrequestService, LoginResponse, Logout, SignInUser, User, isLoggedIn } from './userrequest.service';
 import * as jwt from 'jsonwebtoken';
 import { CookieLocalService } from './cookie-local.service';
 import { Article, ArticlesService } from './articles.service';
@@ -8,9 +8,7 @@ class LoginReq {
   constructor(public username:string, public password1:string){};
 }
 
-class isLoggedIn {
-  constructor(public loggedIn: boolean){};
-}
+ 
 
 
 
@@ -23,6 +21,7 @@ export class AuthenticateService {
   password: string = "";
   token:string = "";
   PlaceHolderArray: Article[] = [];
+  PlaceholderIsLoggedIn: isLoggedIn[] = [];
   isLoggedIn: boolean = false;
   loginReq: LoginReq = {username: "", password1: ""};
 
@@ -123,6 +122,27 @@ export class AuthenticateService {
       return response;
      
     //return (this.cookieservice.getCookie() !== "" && this.cookieservice.getCookie() !== null);
+  }
+
+  async isLoggedInGetUser() : Promise<User> {  
+    this.token = this.cookieservice.getCookie() || "notoken";
+    var response = this.PlaceholderIsLoggedIn;
+ 
+    if(this.token !== "notoken") 
+      {
+        return new Promise((resolve, reject) => {this.userservice.isloggedIn(this.token).subscribe(response => {
+          resolve(this.handleIsloggedInGetUser(response));
+        },error => {
+          this.handleError(error);
+          reject(error);
+        })}); 
+      };
+
+      return response[0].user; 
+  }
+
+  handleIsloggedInGetUser(response: isLoggedIn): User { 
+    return response.user;
   }
 
   // async GetArticles() : Promise<Array<Article>>{ 

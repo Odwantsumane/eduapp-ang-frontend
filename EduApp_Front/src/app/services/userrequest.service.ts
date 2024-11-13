@@ -51,8 +51,8 @@ export class Logout {
   constructor(public loggedOut:boolean){};
 }
 
-class isLoggedIn {
-  constructor(public loggedIn: boolean){};
+export class isLoggedIn {
+  constructor(public loggedIn: boolean, public user:User){};
 }
 
 @Injectable({

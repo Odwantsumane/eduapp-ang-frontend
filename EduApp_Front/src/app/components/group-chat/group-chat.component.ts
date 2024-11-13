@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Group, Message } from '../../services/group-chats.service';
 import { MiddlemanService } from '../../services/middleman.service';
+import { AuthenticateService } from '../../services/authenticate.service';
+import { User } from '../../services/userrequest.service';
 //import { SocketIoService } from '../../services/socket-io.service';
 // import * as Connection from '../../../common/connection';
 
@@ -27,11 +29,11 @@ export class GroupChatComponent implements OnInit {
   messageFieldValue: string = "";
 
   messages: Array<message> = [];
-  users: Array<user> = [];
+  user: Array<User> = [];
   groupChats: Array<Group> = [];
   filteredMessages: Array<Message> = [];
 
-  constructor (private groupchatreqservice: MiddlemanService) //private socketIoService: SocketIoService
+  constructor (private groupchatreqservice: MiddlemanService, private authservice: AuthenticateService) //private socketIoService: SocketIoService
   {
     // this.socketIoService.listenIoServer(Connection.change).subscribe((change) => {this.onChange(change)});
 
@@ -43,7 +45,9 @@ export class GroupChatComponent implements OnInit {
   }
 
   async getAllGroupChats() {
+    this.user.push(await this.authservice.isLoggedInGetUser());
     this.groupChats = await this.groupchatreqservice.getAllChatGroups(); 
+ 
   }
 
   async getMessages(id:string) {
