@@ -20,7 +20,7 @@ export class ArticlesService {
 
   getAllArticles(token: string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.get<Array<Article>>(`${this.url}/all/articles`,  {headers: this.Headers});
+    return this.http.get<Array<Article>>(`${this.url}/all/articles`,  {headers: this.Headers, withCredentials: true});
   }
 
   createBasicAuthHeaders() { ;

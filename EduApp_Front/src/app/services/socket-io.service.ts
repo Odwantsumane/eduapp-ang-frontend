@@ -13,7 +13,16 @@ export class SocketIoService {
   private clientSocket: socketIo.Socket;
 
   constructor() {
-    this.clientSocket = socketIo.connect(backendURL);
+    this.clientSocket = socketIo.io(backendURL);
+    //, {
+      //transports: ['websocket', 'polling'], // Explicitly allow these transports
+      //withCredentials: true
+    //}
+  }
+
+  // Emit an event
+  emitEvent(event: string, data: any): void {
+    this.clientSocket.emit(event, data);
   }
 
   listenIoServer(connection: any): Observable<any> {
@@ -24,7 +33,21 @@ export class SocketIoService {
     });
   }
 
+  // Listen for an event
+  onEvent<T>(event: string): Observable<T> {
+    return new Observable<T>(observer => {
+      this.clientSocket.on(event, (data: T) => observer.next(data));
+    });
+  }
+
   emitToServer(connection: any, data: string): void {
     this.clientSocket.emit(connection, data);
+  }
+
+  // Close socket connection
+  disconnect(): void {
+    if (this.clientSocket) {
+      this.clientSocket.disconnect();
+    }
   }
 }

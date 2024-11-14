@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Group, Message } from '../../services/group-chats.service';
 import { MiddlemanService } from '../../services/middleman.service';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { User } from '../../services/userrequest.service';
-//import { SocketIoService } from '../../services/socket-io.service';
+import { SocketIoService } from '../../services/socket-io.service';
 // import * as Connection from '../../../common/connection';
 
 class user {
@@ -24,7 +24,7 @@ class message {
   templateUrl: './group-chat.component.html',
   styleUrl: './group-chat.component.css'
 })
-export class GroupChatComponent implements OnInit {
+export class GroupChatComponent implements OnInit, OnDestroy {
 
   messageFieldValue: string = "";
 
@@ -33,7 +33,9 @@ export class GroupChatComponent implements OnInit {
   groupChats: Array<Group> = [];
   filteredMessages: Array<Message> = [];
 
-  constructor (private groupchatreqservice: MiddlemanService, private authservice: AuthenticateService) //private socketIoService: SocketIoService
+  messagesTest: string[] = [];
+
+  constructor (private groupchatreqservice: MiddlemanService, private authservice: AuthenticateService, private socketservice: SocketIoService) //private socketIoService: SocketIoService
   {
     // this.socketIoService.listenIoServer(Connection.change).subscribe((change) => {this.onChange(change)});
 
@@ -42,6 +44,19 @@ export class GroupChatComponent implements OnInit {
 
   ngOnInit() {
     this.getAllGroupChats();
+    this.manageSocketActivity();
+  }
+
+  manageSocketActivity(): void {
+    // Listen to a specific event
+    this.socketservice.onEvent<string>('message').subscribe((data) => {
+      this.messagesTest.push(data);
+    }); 
+  }
+
+  emitEventTest() {
+    // Emit an event
+    this.socketservice.emitEvent('joinRoom', { room: 'room1' });
   }
 
   async getAllGroupChats() {
@@ -54,6 +69,9 @@ export class GroupChatComponent implements OnInit {
     // console.log(id);
     // get and filter messages
     this.filteredMessages = await this.groupchatreqservice.getAllChatMessages(id); 
+
+    console.log("sending test message to the backend");
+    this.emitEventTest();
   }
 
   MonitorMessageTyping(event:Event): void { 
@@ -87,5 +105,8 @@ export class GroupChatComponent implements OnInit {
 
   // }
 
+  ngOnDestroy(): void {
+    this.socketservice.disconnect();
+  }
 
 }

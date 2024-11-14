@@ -24,12 +24,12 @@ export class GroupChatsService {
 
   getAllChatGroups(token: string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.get<Array<Group>>(`${this.url}/allChatRooms`,  {headers: this.Headers});
+    return this.http.get<Array<Group>>(`${this.url}/allChatRooms`,  {headers: this.Headers, withCredentials: true});
   }
 
   getAllChatMessages(token: string, id:string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.get<Array<Message>>(`${this.url}/room/${id}`,  {headers: this.Headers});
+    return this.http.get<Array<Message>>(`${this.url}/room/${id}`,  {headers: this.Headers, withCredentials: true});
   }
 
   createBasicAuthHeaders() { ;
