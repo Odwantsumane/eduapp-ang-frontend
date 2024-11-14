@@ -32,15 +32,18 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   user: Array<User> = [];
   groupChats: Array<Group> = [];
   filteredMessages: Array<Message> = [];
+  message : string = "";
+
+  name: string = "";
+  roomId: string = "";
+  userId: string = "";
 
   messagesTest: string[] = [];
 
-  constructor (private groupchatreqservice: MiddlemanService, private authservice: AuthenticateService, private socketservice: SocketIoService) //private socketIoService: SocketIoService
-  {
-    // this.socketIoService.listenIoServer(Connection.change).subscribe((change) => {this.onChange(change)});
-
-    // this.socketService.listenToServer(Connection.create).subscribe((user) => {this.onCreate(user)})
-  }
+  constructor (private groupchatreqservice: MiddlemanService, 
+    private authservice: AuthenticateService, 
+    private socketservice: SocketIoService)
+  {}
 
   ngOnInit() {
     this.getAllGroupChats();
@@ -55,8 +58,21 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   }
 
   emitEventTest() {
-    // Emit an event
+    // Emit an event test
     this.socketservice.emitEvent('joinRoom', { room: 'room1' });
+  }
+
+  enterUserInRoom() {
+    // send user details
+    this.socketservice.emitEvent("name", { name: this.user[0].name + " " + this.user[0].surname, userId: this.user[0]._id, roomId: this.roomId}); 
+  }
+
+  sendMessage() {
+    this.socketservice.emitEvent('chat message', {input:this.message});
+  }
+
+  notifyWhenTyping() {
+    this.socketservice.emitEvent('user is typing', {name:this.user[0].name + " " + this.user[0].surname, id: this.user[0]._id});
   }
 
   async getAllGroupChats() {
@@ -67,11 +83,13 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
   async getMessages(id:string) {
     // console.log(id);
+
+    this.roomId = id;
     // get and filter messages
     this.filteredMessages = await this.groupchatreqservice.getAllChatMessages(id); 
 
     console.log("sending test message to the backend");
-    this.emitEventTest();
+    // this.emitEventTest();
   }
 
   MonitorMessageTyping(event:Event): void { 
