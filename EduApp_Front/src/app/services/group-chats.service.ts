@@ -8,7 +8,7 @@ export class Group {
 
 export class Message {
   constructor(public _id:string, public username:string, public message:string, public room_id:string[], 
-  public createdAt:string, public __v: number){}
+  public createdAt:Date, public __v: number){}
 }
 
 @Injectable({

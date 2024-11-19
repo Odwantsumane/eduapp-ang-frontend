@@ -46,12 +46,18 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   typing: boolean = false;
   typingData: userTypingdetails = {name:"", id:"", roomId:""};
 
+  todayDate = new Date();
+  yesterdayDate = new Date(this.todayDate);
+
   constructor (private groupchatreqservice: MiddlemanService, 
     private authservice: AuthenticateService, 
     private socketservice: SocketIoService)
-  {}
+  {
+    this.yesterdayDate.setDate(this.todayDate.getDate() - 1); 
+  }
 
-  ngOnInit() {
+  ngOnInit() { 
+    // console.log(this.todayDate);
     this.getAllGroupChats();
     this.manageSocketActivity();
     this.receivedTypingNotification();
@@ -76,6 +82,20 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
   sendMessage() {
     this.socketservice.emitEvent('chat message', {input:this.message});
+  }
+
+  receiveSenderMessage() { 
+
+    this.socketservice.onEvent<userTypingdetails>('sender chat message').subscribe(data => {
+       // some logic
+    });
+  }
+
+  receiveBroadcastMessage() { 
+
+    this.socketservice.onEvent<userTypingdetails>('chat message').subscribe(data => {
+       // some logic
+    });
   }
 
   notifyWhenTyping() { 
@@ -153,6 +173,13 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   isTextEmpty(): boolean {
     const messageRegex = /^\s*$/;
     return messageRegex.test(this.messageFieldValue);
+  }
+
+  computeDateDisplay() {
+    //| date: 'dd/MM/yyyy'
+    if(true) {
+
+    }
   }
 
 }
