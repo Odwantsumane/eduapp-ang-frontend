@@ -17,6 +17,10 @@ class message {
   constructor(public author: string, public date: Date, public message: string) {}
 }
 
+class userTypingdetails {
+  constructor(public name:string, public id: string){};
+} 
+
 @Component({
   selector: 'app-group-chat',
   standalone: true,
@@ -39,6 +43,8 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   userId: string = "";
 
   messagesTest: string[] = [];
+  typing: boolean = false;
+  typingData: userTypingdetails = {name:"", id:""};
 
   constructor (private groupchatreqservice: MiddlemanService, 
     private authservice: AuthenticateService, 
@@ -48,6 +54,7 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getAllGroupChats();
     this.manageSocketActivity();
+    this.receivedTypingNotification();
   }
 
   manageSocketActivity(): void {
@@ -71,8 +78,22 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     this.socketservice.emitEvent('chat message', {input:this.message});
   }
 
-  notifyWhenTyping() {
-    this.socketservice.emitEvent('user is typing', {name:this.user[0].name + " " + this.user[0].surname, id: this.user[0]._id});
+  notifyWhenTyping() { 
+    if(this.messageFieldValue !== "" && !this.isTextEmpty())
+      this.socketservice.emitEvent('user is typing', {name:this.user[0].name + " " + this.user[0].surname, id: this.user[0]._id});
+    else 
+      this.socketservice.emitEvent('user is typing', {name:null, id: this.user[0]._id});
+  }
+
+  receivedTypingNotification() {
+    // console.log(this.socketservice.onEvent("user typing"));
+
+    this.socketservice.onEvent<userTypingdetails>('user typing').subscribe(data => {
+      // console.log('Typing notification received:', data);
+      data.name ? this.typing = true : this.typing = false;
+      
+      this.typingData = data;
+    });
   }
 
   async getAllGroupChats() {
@@ -88,8 +109,9 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     // get and filter messages
     this.filteredMessages = await this.groupchatreqservice.getAllChatMessages(id); 
 
-    console.log("sending test message to the backend");
+    // console.log("sending test message to the backend");
     // this.emitEventTest();
+    this.enterUserInRoom();
   }
 
   MonitorMessageTyping(event:Event): void { 
@@ -109,6 +131,7 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     // clear field
     console.log("Clearing field value...");
     this.messageFieldValue = "";
+    this.typing = false;
   }
 
   // onChange(change: user) { // argtype=user
@@ -125,6 +148,11 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.socketservice.disconnect();
+  }
+
+  isTextEmpty(): boolean {
+    const messageRegex = /^\s*$/;
+    return messageRegex.test(this.messageFieldValue);
   }
 
 }
