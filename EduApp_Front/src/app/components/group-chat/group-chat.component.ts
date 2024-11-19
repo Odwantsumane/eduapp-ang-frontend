@@ -18,7 +18,7 @@ class message {
 }
 
 class userTypingdetails {
-  constructor(public name:string, public id: string){};
+  constructor(public name:string, public id: string, public roomId: string){};
 } 
 
 @Component({
@@ -44,7 +44,7 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
   messagesTest: string[] = [];
   typing: boolean = false;
-  typingData: userTypingdetails = {name:"", id:""};
+  typingData: userTypingdetails = {name:"", id:"", roomId:""};
 
   constructor (private groupchatreqservice: MiddlemanService, 
     private authservice: AuthenticateService, 
@@ -80,9 +80,9 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
   notifyWhenTyping() { 
     if(this.messageFieldValue !== "" && !this.isTextEmpty())
-      this.socketservice.emitEvent('user is typing', {name:this.user[0].name + " " + this.user[0].surname, id: this.user[0]._id});
+      this.socketservice.emitEvent('user is typing', {name:this.user[0].name + " " + this.user[0].surname, id: this.user[0]._id, roomId: this.roomId});
     else 
-      this.socketservice.emitEvent('user is typing', {name:null, id: this.user[0]._id});
+      this.socketservice.emitEvent('user is typing', {name:null, id: this.user[0]._id, roomId: this.roomId});
   }
 
   receivedTypingNotification() {
@@ -90,7 +90,7 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
     this.socketservice.onEvent<userTypingdetails>('user typing').subscribe(data => {
       // console.log('Typing notification received:', data);
-      data.name ? this.typing = true : this.typing = false;
+      (data.name && data.roomId === this.roomId) ? this.typing = true : this.typing = false;
       
       this.typingData = data;
     });
