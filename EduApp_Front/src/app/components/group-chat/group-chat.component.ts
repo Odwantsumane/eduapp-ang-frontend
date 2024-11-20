@@ -120,6 +120,8 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     this.user.push(await this.authservice.isLoggedInGetUser());
     this.groupChats = await this.groupchatreqservice.getAllChatGroups(); 
  
+
+    // this.getMessages(this.groupChats[0]._id);
   }
 
   async getMessages(id:string) {

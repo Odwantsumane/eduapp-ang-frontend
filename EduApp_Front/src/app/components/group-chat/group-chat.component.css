@@ -1,3 +1,7 @@
 .chat_group:hover {
     background-color: rgb(222, 222, 234);
 }
+
+.emj {
+    text-decoration: none;
+}
