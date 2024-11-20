@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-help',
+  selector: 'app-settings',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './help.component.html',
-  styleUrl: './help.component.css'
+  templateUrl: './settings.component.html',
+  styleUrl: './settings.component.css'
 })
-export class HelpComponent {
+export class SettingsComponent {
 
 }
