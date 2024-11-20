@@ -1,2 +1,235 @@
 <a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
-<p>repository works!</p>
+<h2>Stud-yO Repository</h2>
+
+<div class="labels d-flex flex-nowrap w-50 mt-5">
+    <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('all')">All</a></div>
+    <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('science')">Science</a></div>
+    <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('law')">Law</a></div>
+    <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('it')">IT</a></div>
+    <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('humanities')">Humanities</a></div>
+    <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('other')">Other</a></div>
+</div>
+<hr class="text-primary">
+
+<div class="repo mt-3 d-flex flex-column">
+    <div *ngIf="science" class="science w-100 mt-3">
+        <h4>Science</h4>
+        <div class="w-100 d-flex flex-wrap mt-3">
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!--  -->
+    <div *ngIf="law" class="law w-100 mt-3">
+        <h4>Law</h4>
+        <div class="w-100 d-flex flex-wrap mt-3">
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!--  -->
+
+    <div *ngIf="it" class="it w-100 mt-3">
+        <h4>IT</h4>
+        <div class="w-100 d-flex flex-wrap mt-3">
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!--  -->
+    <div *ngIf="humanities" class="humanities w-100 mt-3">
+        <h4>Humanities</h4>
+        <div class="w-100 d-flex flex-wrap mt-3">
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!--  -->
+
+    <div *ngIf="other" class="other w-100 mt-3">
+        <h4>Other</h4>
+        <div class="w-100 d-flex flex-wrap mt-3">
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+            <div class="m-1 rounded-4" style="width: 24%;">
+                <div class="border rounded-4 p-5 w-100" ></div>
+                <div class="p-2">
+                    <h6>Title</h6>
+                    <p class="text-muted" style="font-size: small;">Updated today</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!--  -->
+</div>
