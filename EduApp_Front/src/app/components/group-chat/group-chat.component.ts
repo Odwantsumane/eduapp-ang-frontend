@@ -230,5 +230,6 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   attachEmoji(value: string) {  
 
     this.messageFieldValue = this.messageFieldValue + value;
+    this.notifyWhenTyping();
   }
 }
