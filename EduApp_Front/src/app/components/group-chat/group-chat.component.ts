@@ -49,6 +49,13 @@ export class GroupChatComponent implements OnInit, OnDestroy {
   todayDate = new Date();
   yesterdayDate = new Date(this.todayDate);
 
+  // audio stuff
+  private mediaRecorder!: MediaRecorder;
+  private audioChunks: Blob[] = [];
+  public audioUrl: string | null = null;
+  public isRecording: boolean = false;
+  public startedRecording : boolean = false;
+
   constructor (private groupchatreqservice: MiddlemanService, 
     private authservice: AuthenticateService, 
     private socketservice: SocketIoService)
@@ -177,11 +184,51 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     return messageRegex.test(this.messageFieldValue);
   }
 
-  computeDateDisplay() {
-    //| date: 'dd/MM/yyyy'
-    if(true) {
+  async startRecording(): Promise<void> {
+    console.log("starting recording")
+    try {
+      
 
+      
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      this.mediaRecorder = new MediaRecorder(stream);
+
+      // Clear previous data
+      this.audioChunks = [];
+
+      // Start recording
+      this.mediaRecorder.start();
+      this.isRecording = true;
+
+      // Collect audio chunks
+      this.mediaRecorder.ondataavailable = (event) => {
+        this.audioChunks.push(event.data);
+      };
+
+      console.log('Recording started...');
+    } catch (error) {
+      console.error('Error accessing the microphone:', error);
     }
   }
 
+  stopRecording(): void {
+    console.log("stopping recording")
+    if (this.mediaRecorder) {
+      // Stop recording
+      this.mediaRecorder.stop();
+      this.isRecording = false;
+
+      // Generate audio URL after stopping
+      this.mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(this.audioChunks, { type: 'audio/webm' });
+        this.audioUrl = URL.createObjectURL(audioBlob);
+        console.log('Recording stopped, audio URL created.');
+      };
+    }
+  }
+
+  attachEmoji(value: string) {  
+
+    this.messageFieldValue = this.messageFieldValue + value;
+  }
 }
