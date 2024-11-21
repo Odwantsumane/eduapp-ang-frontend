@@ -1,1 +1,33 @@
-<p>manager works!</p>
+<a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
+<div class="container mt-3">
+    <h2>Users</h2>
+    <p>List of Stud_Yo Users</p>            
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Designation</th>
+            <th>SignUp Request? </th>
+            <th>Action? </th>  
+        </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.name}}</td>
+                <td>{{user.surname}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.username==='admin@studyo.co.za' ? 'Admin' : user.selectedDesignation}}</td> 
+                <td><div class="btn-group">
+                    <a href="#" class="btn btn-danger">Decline</a>
+                    <a href="#" class="btn btn-success">Accept</a>
+                </div></td>
+                <td><div class="btn-group">
+                    <a href="#" class="btn btn-danger">Remove</a> 
+                    <a href="#" class="btn btn-primary">Accept</a>
+                </div></td>
+            </tr>
+        </tbody>
+</table>
+</div>

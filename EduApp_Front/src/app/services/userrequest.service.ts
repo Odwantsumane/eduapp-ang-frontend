@@ -68,8 +68,7 @@ export class UserrequestService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUsers() {
-
+  getAllUsers() { // will use token later to identify who is requesting
     return this.http.get<Array<User>>(`${this.url}/AllUsers`,  {headers: this.Headers});
   }
 

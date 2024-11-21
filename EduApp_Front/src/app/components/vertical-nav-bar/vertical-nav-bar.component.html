@@ -4,9 +4,15 @@
         <ul class="nav flex-column">
           <!-- <li class="nav-item ms-2 ">
             <div style="text-align: center;" class="d-flex flex-column">
-              <a class="fs-1" style="cursor: pointer;"><i class="bi bi-list text-dark"></i></a>
+              <a routerLink="/manager" class="fs-1" style="cursor: pointer;"><i class="bi bi-list text-dark"></i></a>
             </div>
           </li> -->
+          <li *ngIf="isAdmin" class="nav-item ms-2 ">
+            <div style="text-align: center;" class="d-flex flex-column">
+              <a routerLink="/manager" class="fs-1" style="cursor: pointer;"><i class="bi bi-person-lock"></i></a>
+            </div>
+          </li>
+          
           <li class="nav-item ms-2 mt-2">
             <div style="text-align: center;" class="d-flex flex-column">
               <a routerLink="/newchat" class="text-dark" style="cursor: pointer;"><i class="bi bi-plus-square fs-4"></i></a>

@@ -10,9 +10,6 @@ export class MiddlemanService {
   PlaceHolderArray: Group[] = [];
   PlaceHolderArrayMessages: Message[] = [];
 
-  // constructor(public _id:string, public title:string, public description:string, public messages:string[], 
-  //   public participants:string, public createdAt:string, public __v: number, public groupPic:"favicon.ico"){}
-
   PlaceHolderGroup:Group = {
     _id:"",__v:0, title:"", description:"",messages:[],participants:[],groupPic:"",createdAt:""
   }

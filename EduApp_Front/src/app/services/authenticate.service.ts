@@ -8,10 +8,6 @@ class LoginReq {
   constructor(public username:string, public password1:string){};
 }
 
- 
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +20,10 @@ export class AuthenticateService {
   PlaceholderIsLoggedIn: isLoggedIn[] = [];
   isLoggedIn: boolean = false;
   loginReq: LoginReq = {username: "", password1: ""};
+
+  PlaceHolderUser:User = {
+    _id:"", name:"", surname:"",username:"",password:"", createdAt:"", __v:"", unreadMsgs:[], selectedCountry:"", selectedDesignation:"", selectedInstitution:"",selectedSubject:[]
+  }
 
   constructor(private userservice: UserrequestService, private cookieservice: CookieLocalService, private articleservice: ArticlesService) { }
 
@@ -124,6 +124,21 @@ export class AuthenticateService {
     //return (this.cookieservice.getCookie() !== "" && this.cookieservice.getCookie() !== null);
   }
 
+  async isAdmin() : Promise<boolean> {  
+    this.token = this.cookieservice.getCookie() || "notoken";
+    var response = false;
+
+    const user = await this.isLoggedInGetUser();
+
+    if(user) {
+      if(user.username === "admin@studyo.co.za") return true;
+    }
+
+    return response; 
+  }
+
+
+
   async isLoggedInGetUser() : Promise<User> {  
     this.token = this.cookieservice.getCookie() || "notoken";
     var response = this.PlaceholderIsLoggedIn;
@@ -138,7 +153,7 @@ export class AuthenticateService {
         })}); 
       };
 
-      return response[0].user; 
+      return this.PlaceHolderUser; 
   }
 
   handleIsloggedInGetUser(response: isLoggedIn): User { 

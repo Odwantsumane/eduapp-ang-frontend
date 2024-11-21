@@ -16,4 +16,11 @@ export class RouteGuardServiceService implements CanActivate {
     return false;
   }
 
+  // async isAdmin(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  //   if(await this.authenticate.isAdmin()) return true;
+
+  //   this.router.navigate(['manager']);
+  //   return false;
+  // }
+
 }

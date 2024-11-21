@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class VerticalNavBarComponent implements OnInit { 
   isLoggedIn : boolean = false;//Promise<boolean>;
+  isAdmin:boolean = false;
 
   constructor(private authenticator: AuthenticateService) { 
     //this.isLoggedIn = new Promise((resolve, reject) => {});
@@ -23,5 +24,7 @@ export class VerticalNavBarComponent implements OnInit {
 
   async ngOnInit() {
     this.isLoggedIn = await this.authenticator.isLoggedIn2();//this.authenticator.isUserLoggedIn(); 
+
+    this.isAdmin = await this.authenticator.isAdmin();
   }  
 }
