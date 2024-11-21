@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 export class Group {
   constructor(public _id:string, public title:string, public description:string, public messages:string[], 
-    public participants:string, public createdAt:string, public __v: number, public imageUrl:"favicon.ico"){}
+    public participants:string[], public createdAt:string, public __v: number, public groupPic:string){}
 }
 
 export class Message {
@@ -17,6 +17,7 @@ export class Message {
 export class GroupChatsService {
 
   url : string = "http://localhost:4001/chat";
+  url_ : string = "http://localhost:4001/topic";
   Headers: HttpHeaders = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()}); //, Cookie: `jwt=${this.createToken("myid")}`
 
   constructor(private http: HttpClient) { }
@@ -30,6 +31,11 @@ export class GroupChatsService {
   getAllChatMessages(token: string, id:string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
     return this.http.get<Array<Message>>(`${this.url}/room/${id}`,  {headers: this.Headers, withCredentials: true});
+  }
+
+  createNewChat(token:string, newChat:Group) {
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
+    return this.http.post<Group>(`${this.url_}/add-topic`, newChat, {headers: this.Headers, withCredentials: true});
   }
 
   createBasicAuthHeaders() { ;

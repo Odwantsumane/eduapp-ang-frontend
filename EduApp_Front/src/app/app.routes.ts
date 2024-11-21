@@ -11,11 +11,13 @@ import { RepositoryComponent } from './components/repository/repository.componen
 import { HelpComponent } from './components/help/help.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { NewChatComponent } from './components/new-chat/new-chat.component';
 
 export const routes: Routes = [
     { path: '', component: HomecontentComponent, },
     { path: 'login', component: LoginComponent},
     { path: 'signup', component: SignupComponent},
+    { path: 'newchat', component: NewChatComponent, canActivate: [RouteGuardServiceService]},
     { path: 'allchats', component: AllchatsComponent, canActivate: [RouteGuardServiceService]},
     { path: 'chatgroups', component: GroupChatComponent, canActivate: [RouteGuardServiceService]},
     { path: 'repository', component: RepositoryComponent, canActivate: [RouteGuardServiceService]},

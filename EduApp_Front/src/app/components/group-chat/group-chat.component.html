@@ -88,7 +88,7 @@
         <div style="height: 15%;">
             <div *ngIf="typing" style="text-align: center; font-size: small;" class="text-muted">{{typingData.name}} is typing..</div>
             <audio *ngIf="audioUrl" class="ms-5" [src]="audioUrl" style="width: 50%; height: 20px;" controls></audio> <a href="#" *ngIf="audioUrl" class="ps-2"><i class="bi bi-send fs-4"></i></a>
-            <span *ngIf="isRecording" style="font-size: x-mall;">recording</span>
+            <span *ngIf="isRecording" style="font-size: x-small;">recording..</span>
             <div class="d-flex" style="height: 15%;">
                 <a href="#" class="mt-2 p-1 h-75 text-dark"><i class="bi bi-plus-square fs-5"></i></a>
                 
@@ -97,7 +97,7 @@
                     <a href="#" class="h-75 text-dark" data-bs-toggle="dropdown"><i class="bi bi-emoji-smile fs-5"></i></a>
                      
                     <ul class="dropdown-menu">
-                        <div class="d-flex flex-wrap p-1" style="width: 350px;">
+                        <div class="d-flex flex-wrap p-1" style="width: 280px;">
                             <li><a href="#" class="emj" (click)="attachEmoji('😂')">😂</a></li> <li><a href="#" class="emj" (click)="attachEmoji('👍')">👍</a></li><li><a href="#" class="emj" (click)="attachEmoji('😎')">😎</a></li><li><a href="#" class="emj" (click)="attachEmoji('😁')">😁</a></li><li><a href="#" class="emj" (click)="attachEmoji('😊')">😊</a></li>
                             <li><a href="#" class="emj" (click)="attachEmoji('🤣')">🤣</a></li> <li><a href="#" class="emj" (click)="attachEmoji('❤️')">❤️</a></li><li><a href="#" class="emj" (click)="attachEmoji('😍')">😍</a></li><li><a href="#" class="emj" (click)="attachEmoji('😒')">😒</a></li>
                             <li><a href="#" class="emj" (click)="attachEmoji('👌')">👌</a></li> <li><a href="#" class="emj" (click)="attachEmoji('😘')">😘</a></li><li><a href="#" class="emj" (click)="attachEmoji('💕')">💕</a></li><li><a href="#" class="emj" (click)="attachEmoji('🙌')">🙌</a></li><li><a href="#" class="emj" (click)="attachEmoji('🤦‍♀️')">🤦‍♀️</a></li>

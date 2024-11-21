@@ -1,0 +1,26 @@
+<a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
+<h2>New Chat</h2>
+<form >
+    <div class="mb-3 mt-3">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" [(ngModel)]="title" value="{{title}}" (input)="verify()" required>
+    </div>
+    <div class="mb-3">
+        <label for="des">Description:</label>
+        <textarea class="form-control" name="" id="des" rows="3" placeholder="Enter description" [(ngModel)]="description" value="{{description}}" (input)="verify()" required></textarea> 
+    </div> 
+
+    <div class="mb-3">
+        <label for="part">Select members:</label>
+        <select [(ngModel)]="participants" multiple class="form-select" id="part" name="part" (change)="verify()">
+            <option>None</option> 
+            <option>Odwa Ntsumane</option>
+            <option>Odwa Ntsumane</option>
+            <option>Odwa Ntsumane</option>
+            <option>Odwa Ntsumane</option>
+            <option>Odwa Ntsumane</option>
+            <option>Odwa Ntsumane</option>
+        </select>  
+    </div> 
+    <button class="btn btn-primary" type="button" (click)="handleCreateChat()" [disabled]="!submit_disabled">Create</button>
+</form>
