@@ -12,14 +12,8 @@
 
     <div class="mb-3">
         <label for="part">Select members:</label>
-        <select [(ngModel)]="participants" multiple class="form-select" id="part" name="part" (change)="verify()">
-            <option>None</option> 
-            <option>Odwa Ntsumane</option>
-            <option>Odwa Ntsumane</option>
-            <option>Odwa Ntsumane</option>
-            <option>Odwa Ntsumane</option>
-            <option>Odwa Ntsumane</option>
-            <option>Odwa Ntsumane</option>
+        <select  [(ngModel)]="selectedParticipants" multiple class="form-select" id="part" name="part" (change)="verify()">  
+            <option *ngFor="let part of participants">{{part.username}}</option>  
         </select>  
     </div> 
     <button class="btn btn-primary" type="button" (click)="handleCreateChat()" [disabled]="!submit_disabled">Create</button>
