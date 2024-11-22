@@ -47,9 +47,7 @@ export class ManagerComponent implements OnInit{
         this.user_.surname_ = this.users[index].surname;
         this.user_.username_ = this.users[index].username;
         this.user_.createdAt_ = ''; //this.users[index].createdAt;
-        // this.user.normaluser = this.users[index].name;
-
-        console.log(this.user_);
+        // this.user.normaluser = this.users[index].name; 
       }
       else console.log("user was not found");
     }
