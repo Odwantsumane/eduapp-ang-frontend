@@ -20,12 +20,14 @@
                 <td>{{user.username}}</td>
                 <td>{{user.username==='admin@studyo.co.za' ? 'Admin' : user.selectedDesignation}}</td> 
                 <td><div class="btn-group">
-                    <a href="#" class="btn btn-danger">Decline</a>
+                    <a href="#" class="btn btn-secondary">Decline</a>
                     <a href="#" class="btn btn-success">Accept</a>
                 </div></td>
                 <td><div class="btn-group">
-                    <a href="#" class="btn btn-danger">Remove</a> 
-                    <a href="#" class="btn btn-primary">Accept</a>
+                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#remove">Remove</a>
+                    <app-remove-users-modal ></app-remove-users-modal>  
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update" (click)="getUser(user._id)">Update</a>
+                    <app-update-users-modal [user_]="user_"></app-update-users-modal>
                 </div></td>
             </tr>
         </tbody>
