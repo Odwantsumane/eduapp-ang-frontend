@@ -14,6 +14,8 @@ import { AuthenticateService } from '../../services/authenticate.service';
 export class ArticlesComponent implements OnInit{
 
   Articles: Array<Article> = [];
+  reply:boolean = false;
+  articleId:string = "";
 
   constructor(private articlesserviceauth: AuthenticateService) {}
 
@@ -35,5 +37,12 @@ export class ArticlesComponent implements OnInit{
 
   dislike(): void { //arg = article-id
     console.log("disliked");
+  }
+
+  replyFun(article_id:string) { 
+    this.reply && this.articleId !== article_id ? this.reply = true : this.reply ? this.reply = false : this.reply = true;
+    
+    this.articleId = article_id;
+    
   }
 }

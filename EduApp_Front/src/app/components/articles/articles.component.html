@@ -2,7 +2,7 @@
 
 <div class="articles d-flex flex-column">
 <ul *ngFor="let article of Articles" class="article-list">
-    <li  class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
+    <li id="{{article._id}}"  class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
         <span class="text-muted float-end">{{article.createdAt | date: 'dd/MM/yyyy'}}</span>
         <div class="profile-name d-flex">
             <div><a href="#"><i class="bi bi-person-circle fs-2 me-1 text-dark"></i></a></div>
@@ -13,15 +13,45 @@
         </div> 
         <div class="ms-5">
             <p class="article-headline fs-5">{{article.title}}</p>
-            <p class="article-text text-muted">{{article.markdown}}
-            </p>
+            <p class="article-text text-muted">{{article.markdown}}</p>
         </div>
         <div class="likes d-flex justify-content-end">
             <a style="cursor: pointer;" class="me-3 text-dark" (click)="like()"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
             <a style="cursor: pointer;" class="me-3 text-dark" (click)="dislike()"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
-            <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
+            <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;" (click)="replyFun(article._id)">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
         </div>
     
     </li> 
+    <!-- comments below -->
+     <div *ngIf="reply && (articleId === article._id)" class="ms-5">
+        <textarea class="form-control" name="new-comment" id="new-comment" rows="1" placeholder="Write comment"></textarea>
+        <div class="">
+            <a href="#{{article._id}}" class="m-1 p-2" style="text-decoration: none;">Comment</a>
+            <a href="#" class="m-1 p-2" style="text-decoration: none;"><i class="bi bi-emoji-smile"></i></a>
+        </div>
+     </div>
+     <!-- commnetnsss  -->
+     <div>
+        <div class="comments bg-light ms-5 p-2 mt-1">
+            <div class="profile-name d-flex">
+                <div><a href="#"><i class="bi bi-person-circle fs-2 me-1 text-dark"></i></a></div>
+                <div class="ps-1 pe-1">
+                    <a href="#" style="text-decoration: none;" class="fs-6">Mlungisi Ngema</a>
+                    <p class="fs-6 text-muted">Tutor</p>
+                </div>
+            </div>
+            <div class="ms-5"> 
+                <p class="comment-text text-muted"><a href="#" style="text-decoration: none;">&#64;SleezDawg</a> Use the .spinner-grow class if you want the spinner/loader to grow instead of "spin"</p>
+            </div>
+            <div class="likes d-flex justify-content-end">
+                <a style="cursor: pointer;" class="me-3 text-dark" (click)="like()"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
+                <a style="cursor: pointer;" class="me-3 text-dark" (click)="dislike()"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
+                <!-- <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;">Reply</a>  -->
+            </div> 
+        </div>
+
+        <a href="#" class="text-muted ms-5" style="text-decoration: none;">More comments..</a>
+     </div> 
+    <!-- comments above -->
 </ul>
 </div>
