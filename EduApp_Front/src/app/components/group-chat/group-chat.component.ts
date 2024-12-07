@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { Group, Message } from '../../services/group-chats.service';
@@ -28,7 +28,9 @@ class userTypingdetails {
   templateUrl: './group-chat.component.html',
   styleUrl: './group-chat.component.css'
 })
-export class GroupChatComponent implements OnInit, OnDestroy {
+export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
+  @ViewChild('chatContainer')
+  private chatContainer!: ElementRef;
 
   messageFieldValue: string = "";
 
@@ -95,18 +97,17 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
   receiveSenderMessage() { 
 
-    this.socketservice.onEvent<userTypingdetails>('sender chat message').subscribe(data => {
-       // some logic
-       console.log("Hello again");
-       console.log(data);
+    this.socketservice.onEvent<Message>('sender chat message').subscribe(data => {
+       // some logic 
+       this.filteredMessages.push(data);
     });
   }
 
   receiveBroadcastMessage() { 
 
-    this.socketservice.onEvent<userTypingdetails>('chat message').subscribe(data => {
+    this.socketservice.onEvent<Message>('chat message').subscribe(data => {
        // some logic
-       console.log("Hello again");
+      if (data && data.room_id === this.roomId) this.filteredMessages.push(data);
     });
   }
 
@@ -248,4 +249,17 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     this.messageFieldValue = this.messageFieldValue + value;
     this.notifyWhenTyping();
   }
+
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
+  }
+
+  private scrollToBottom(): void {
+    try {
+      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error("Scroll error:", err);
+    }
+  }
+
 }

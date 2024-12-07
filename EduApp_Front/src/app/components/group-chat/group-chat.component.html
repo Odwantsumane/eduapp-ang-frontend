@@ -42,7 +42,7 @@
         </div>
         <div class="messages ps-4 pe-4 mb-3" style="height: 73%;"> 
             <div class="" style="text-align: center; font-size: small;"><i class="bi bi-lock"></i>end-to-end encrypted</div>
-            <div class="w-100 h-100" style="overflow-y: auto;">
+            <div #chatContainer class="w-100 h-100" style="overflow-y: auto;">
                 <div *ngFor="let message of filteredMessages" class="w-100 d-flex flex-column flex-nowrap" style="height: fit-content;">
                     <div *ngIf="user[0].name +' '+ user[0].surname !== message.username" class="message w-100 d-flex mb-3" style="height: fit-content;">
                         <div class="external-message w-50 bg-white rounded-4">
