@@ -13,6 +13,9 @@ export class MiddlemanService {
   PlaceHolderGroup:Group = {
     _id:"",__v:0, title:"", description:"",messages:[],participants:[],groupPic:"",createdAt:""
   }
+  PlaceHolderMsg:Message = {
+    _id:"",__v:0,createdAt:"", username: "", message: "", room_id: ""
+  }
 
   constructor(private groupchatservice: GroupChatsService, private cookieservice: CookieLocalService) { }
 
@@ -60,6 +63,25 @@ export class MiddlemanService {
       this.handleError(error);
       return this.PlaceHolderGroup; // Return a placeholder array on error
     }
+  }
+
+  async createNewMessage(newMesssage:Message): Promise<Message> {
+  
+    try {
+      const response = await this.groupchatservice
+        .createNewMessage(this.cookieservice.getCookie() || "notoken", newMesssage)
+        .toPromise();
+      return this.handleCreateMsgResp(response);
+    } catch (error) {
+      this.handleError(error);
+      return this.PlaceHolderMsg; // Return a placeholder array on error
+    }
+  }
+
+  handleCreateMsgResp(response: Message | undefined): Message {
+
+    if(response === undefined) return this.PlaceHolderMsg;
+    return response;
   }
 
   handleCreateChatResp(response: Group | undefined): Group {

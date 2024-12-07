@@ -68,6 +68,8 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     this.getAllGroupChats();
     this.manageSocketActivity();
     this.receivedTypingNotification();
+    this.receiveSenderMessage();
+    this.receiveBroadcastMessage();
   }
 
   manageSocketActivity(): void {
@@ -95,6 +97,8 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
     this.socketservice.onEvent<userTypingdetails>('sender chat message').subscribe(data => {
        // some logic
+       console.log("Hello again");
+       console.log(data);
     });
   }
 
@@ -102,6 +106,7 @@ export class GroupChatComponent implements OnInit, OnDestroy {
 
     this.socketservice.onEvent<userTypingdetails>('chat message').subscribe(data => {
        // some logic
+       console.log("Hello again");
     });
   }
 
@@ -143,18 +148,29 @@ export class GroupChatComponent implements OnInit, OnDestroy {
     this.enterUserInRoom();
   }
 
-  MonitorMessageTyping(event:Event): void { 
+  async MonitorMessageTyping(event:Event) { 
     
     if (this.messageFieldValue !== "") {
 
       const messageFieldData = {
-        author: "you",
-        date: new Date(),
-        message: ""
+        _id:"",
+        username: "you",
+        createdAt: "",
+        message: this.messageFieldValue,
+        room_id: this.roomId,
+        __v: 0
       }
+      // _id:"",__v:0,createdAt:"", username: "", message: "", room_id: ""
 
-      messageFieldData.message = this.messageFieldValue;
-      this.messages.push(messageFieldData);
+      //messageFieldData.message = this.messageFieldValue;
+      //this.messages.push(messageFieldData);
+
+      //const messageResp = await this.groupchatreqservice.createNewMessage(messageFieldData); 
+      //if(messageResp) console.log(messageResp);
+
+      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:"", filetype:"", username: this.user[0].name + " " + this.user[0].surname, 
+        roomId: this.roomId, userId: this.user[0]._id
+      });
     } 
  
     // clear field

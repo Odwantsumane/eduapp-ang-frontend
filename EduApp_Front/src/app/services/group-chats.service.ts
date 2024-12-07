@@ -7,8 +7,8 @@ export class Group {
 }
 
 export class Message {
-  constructor(public _id:string, public username:string, public message:string, public room_id:string[], 
-  public createdAt:Date, public __v: number){}
+  constructor(public _id:string, public username:string, public message:string, public room_id:string, 
+  public createdAt:string, public __v: number){}
 }
 
 @Injectable({
@@ -18,6 +18,7 @@ export class GroupChatsService {
 
   url : string = "http://localhost:4001/chat";
   url_ : string = "http://localhost:4001/topic";
+  url__ : string = "http://localhost:4001/message";
   Headers: HttpHeaders = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()}); //, Cookie: `jwt=${this.createToken("myid")}`
 
   constructor(private http: HttpClient) { }
@@ -28,14 +29,19 @@ export class GroupChatsService {
     return this.http.get<Array<Group>>(`${this.url}/allChatRooms`,  {headers: this.Headers, withCredentials: true});
   }
 
-  getAllChatMessages(token: string, id:string) {
+  getAllChatMessages(token: string, room_id:string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.get<Array<Message>>(`${this.url}/room/${id}`,  {headers: this.Headers, withCredentials: true});
+    return this.http.get<Array<Message>>(`${this.url}/room/${room_id}`,  {headers: this.Headers, withCredentials: true});
   }
 
   createNewChat(token:string, newChat:Group) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
     return this.http.post<Group>(`${this.url_}/add-topic`, newChat, {headers: this.Headers, withCredentials: true});
+  }
+
+  createNewMessage(token:string, newMessage:Message) {
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
+    return this.http.post<Message>(`${this.url__}/new-message`, newMessage, {headers: this.Headers, withCredentials: true});
   }
 
   createBasicAuthHeaders() { ;
