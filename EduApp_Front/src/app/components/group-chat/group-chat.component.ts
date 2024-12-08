@@ -58,6 +58,9 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   public isRecording: boolean = false;
   public startedRecording : boolean = false;
 
+  scroll: boolean = true;
+  newMessageInd : boolean = false;
+
   constructor (private groupchatreqservice: MiddlemanService, 
     private authservice: AuthenticateService, 
     private socketservice: SocketIoService)
@@ -100,6 +103,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.socketservice.onEvent<Message>('sender chat message').subscribe(data => {
        // some logic 
        this.filteredMessages.push(data);
+       this.scroll = true;
     });
   }
 
@@ -107,7 +111,11 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
     this.socketservice.onEvent<Message>('chat message').subscribe(data => {
        // some logic
-      if (data && data.room_id === this.roomId) this.filteredMessages.push(data);
+      if (data && data.room_id === this.roomId) {
+        this.filteredMessages.push(data);
+        this.newMessageInd = true;
+      }
+
     });
   }
 
@@ -143,31 +151,14 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.roomId = id;
     // get and filter messages
     this.filteredMessages = await this.groupchatreqservice.getAllChatMessages(id); 
-
-    // console.log("sending test message to the backend");
-    // this.emitEventTest();
+ 
     this.enterUserInRoom();
+    this.scroll = true;
   }
 
   async MonitorMessageTyping(event:Event) { 
     
     if (this.messageFieldValue !== "") {
-
-      const messageFieldData = {
-        _id:"",
-        username: "you",
-        createdAt: "",
-        message: this.messageFieldValue,
-        room_id: this.roomId,
-        __v: 0
-      }
-      // _id:"",__v:0,createdAt:"", username: "", message: "", room_id: ""
-
-      //messageFieldData.message = this.messageFieldValue;
-      //this.messages.push(messageFieldData);
-
-      //const messageResp = await this.groupchatreqservice.createNewMessage(messageFieldData); 
-      //if(messageResp) console.log(messageResp);
 
       this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:"", filetype:"", username: this.user[0].name + " " + this.user[0].surname, 
         roomId: this.roomId, userId: this.user[0]._id
@@ -250,8 +241,13 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.notifyWhenTyping();
   }
 
-  ngAfterViewChecked(): void {
-    this.scrollToBottom();
+  ngAfterViewChecked(): void {  
+    this.scrollSpy();
+
+    if (this.scroll) {
+      this.scrollToBottom();
+      this.scroll = false;
+    }
   }
 
   private scrollToBottom(): void {
@@ -262,4 +258,9 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
   }
 
+  private scrollSpy(): void { 
+    if(this.newMessageInd && this.chatContainer.nativeElement.scrollTop === this.chatContainer.nativeElement.scrollHeight) {
+      this.newMessageInd = false;
+    }
+  }
 }

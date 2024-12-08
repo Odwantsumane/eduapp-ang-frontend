@@ -87,6 +87,8 @@
         </div>
         <div style="height: 15%;">
             <div *ngIf="typing" style="text-align: center; font-size: small;" class="text-muted">{{typingData.name}} is typing..</div>
+            <div *ngIf="!typing" style="text-align: center; font-size: small; visibility: hidden;" class="text-muted">{{typingData.name}} is typing..</div> 
+            <span *ngIf="newMessageInd" class="spinner-grow text-success" style="font-size: x-small;"></span>
             <audio *ngIf="audioUrl" class="ms-5" [src]="audioUrl" style="width: 50%; height: 20px;" controls></audio> <a href="#" *ngIf="audioUrl" class="ps-2"><i class="bi bi-send fs-4"></i></a>
             <span *ngIf="isRecording" style="font-size: x-small;">recording..</span>
             <div class="d-flex" style="height: 15%;">
