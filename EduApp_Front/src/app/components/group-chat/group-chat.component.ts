@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Group, Message } from '../../services/group-chats.service';
+import { Group, Message, readMessage } from '../../services/group-chats.service';
 import { MiddlemanService } from '../../services/middleman.service';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { User } from '../../services/userrequest.service';
@@ -28,7 +28,7 @@ class userTypingdetails {
   templateUrl: './group-chat.component.html',
   styleUrl: './group-chat.component.css'
 })
-export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit {
   @ViewChild('chatContainer')
   private chatContainer!: ElementRef;
 
@@ -60,6 +60,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   scroll: boolean = true;
   newMessageInd : boolean = false;
+  scrollPosition: number = 0;
 
   constructor (private groupchatreqservice: MiddlemanService, 
     private authservice: AuthenticateService, 
@@ -75,6 +76,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.receivedTypingNotification();
     this.receiveSenderMessage();
     this.receiveBroadcastMessage();
+    this.readMessageReceipt();
   }
 
   manageSocketActivity(): void {
@@ -116,6 +118,18 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.newMessageInd = true;
       }
 
+    });
+  }
+
+  readMessageEmit() : void {
+    this.socketservice.emitEvent('read message', {userId: this.user[0]._id, roomId: this.roomId, read: true});
+  }
+
+  readMessageReceipt() { 
+
+    this.socketservice.onEvent<readMessage>('read message').subscribe(data => {
+       // some logic  
+       this.newMessageInd = !data.read;
     });
   }
 
@@ -262,5 +276,22 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked {
     if(this.newMessageInd && this.chatContainer.nativeElement.scrollTop === this.chatContainer.nativeElement.scrollHeight) {
       this.newMessageInd = false;
     }
+  }
+
+  ngAfterViewInit(): void {
+    const div = this.chatContainer.nativeElement;
+    const per = 
+
+    // Listen to scroll event on the specific div
+    div.addEventListener('scroll', () => {
+      this.scrollPosition = div.scrollTop;
+      //console.log('Scroll Position:', this.scrollPosition);
+      // console.log("height: "+ (div.scrollHeight) + " "+ "scrollpos: "+ this.scrollPosition + " okay: "+ (div.scrollHeight - div.clientHeight)); 
+      // Trigger your custom logic
+      if (this.scrollPosition >= ((div.scrollHeight - div.clientHeight)-5)) {
+        this.readMessageEmit();
+        console.log("reading new message..");
+      }
+    });
   }
 }
