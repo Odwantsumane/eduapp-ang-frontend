@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { CreateFolderComponent } from '../create-folder/create-folder.component';
 
 @Component({
   selector: 'app-repository',
   standalone: true,
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [RouterLink, CommonModule, FormsModule, CreateFolderComponent],
   templateUrl: './repository.component.html',
   styleUrl: './repository.component.css'
 })

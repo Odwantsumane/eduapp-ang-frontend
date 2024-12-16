@@ -4,12 +4,12 @@
 <div class="d-flex w-100">
     <!-- <i class="bi bi-table"></i> -->
     <div class="labels d-flex flex-nowrap w-50 mt-5">
-        <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('all')">All</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('science')">Science</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('law')">Law</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('it')">IT</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('humanities')">Humanities</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#" class="btn w-100" (click)="OnFilter('other')">Other</a></div>
+        <div class="rounded-3 border w-25 m-1"><a href="#all" class="btn w-100" (click)="OnFilter('all')">All</a></div>
+        <div class="rounded-3 border w-25 m-1"><a href="#science" class="btn w-100" (click)="OnFilter('science')">Science</a></div>
+        <div class="rounded-3 border w-25 m-1"><a href="#law" class="btn w-100" (click)="OnFilter('law')">Law</a></div>
+        <div class="rounded-3 border w-25 m-1"><a href="#it" class="btn w-100" (click)="OnFilter('it')">IT</a></div>
+        <div class="rounded-3 border w-25 m-1"><a href="#humanities" class="btn w-100" (click)="OnFilter('humanities')">Humanities</a></div>
+        <div class="rounded-3 border w-25 m-1"><a href="#other" class="btn w-100" (click)="OnFilter('other')">Other</a></div>
     </div>
     <div class="w-50 mt-5">
         <div class="rounded-3 border w-25 m-1 float-end"><a href="#" class="btn w-100" (click)="OnFilter('all')"><i class="bi bi-table fs-5"></i></a></div>
@@ -63,7 +63,8 @@
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
             </div>  
-            <div class="ms-5 mt-5" data-bs-toggle="tooltip" title="New Folder"><i class="bi bi-folder-plus fs-1"></i></div> 
+            <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
+            <app-create-folder></app-create-folder>
         </div>
         
     </div>

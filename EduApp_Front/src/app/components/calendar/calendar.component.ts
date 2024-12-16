@@ -22,7 +22,7 @@ class year {
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent implements OnInit {
-  daysNums:Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9,
+  daysNums:Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                             11, 12, 13, 14, 15, 16, 17, 18, 19,
                             20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
   days:Array<string> = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -45,16 +45,42 @@ export class CalendarComponent implements OnInit {
     days: new Array<number>
   }
 
+  week1 : Array<number> = [];
+  week2 : Array<number> = [];
+  week3 : Array<number> = [];
+  week4 : Array<number> = [];
+  week5 : Array<number> = [];
+
 
   constructor() { 
   }
+
   ngOnInit(): void { 
      
     // console.log(this.days[this.today.day - 1]);
     // console.log(this.months[this.today.month]);
     // console.log(this.today.date);
 
-    this.today.days = this.daysNums.splice(0, this.months[this.today.month].numOfdays-1)
+    this.today.days = this.daysNums.splice(0, this.months[this.today.month].numOfdays-1);
+    var j = 0;
+    this.today.days.forEach(day => {
+      if(day  <= 7){
+        this.week1.push(day);
+      }
+      if(day > 7 && day  <= 14){
+        this.week2.push(day);
+      }
+      if(day > 14 && day  <= 21){
+        this.week3.push(day);
+      }
+      if(day > 21 && day <= 28){
+        this.week4.push(day);
+      }
+      if(j > 28){
+        this.week5.push(day);
+      }
+      j++;
+    })
 
     this.months.forEach(month => { 
       var dayNums = [1, 2, 3, 4, 5, 6, 7, 8, 9,

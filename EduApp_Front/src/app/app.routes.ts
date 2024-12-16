@@ -14,6 +14,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { NewChatComponent } from './components/new-chat/new-chat.component';
 import { ManagerComponent } from './components/Administration/manager/manager.component';
 import { AdminRouteGuardService } from './services/Aministration/admin-route-guard.service';
+import { MarketPlaceComponent } from './components/market-place/market-place.component';
 
 export const routes: Routes = [
     { path: '', component: HomecontentComponent, },
@@ -27,6 +28,7 @@ export const routes: Routes = [
     { path: 'settings', component: SettingsComponent, canActivate: [RouteGuardServiceService]},
     { path: 'profile', component: ProfileComponent, canActivate: [RouteGuardServiceService]},
     { path: 'manager', component: ManagerComponent, canActivate: [AdminRouteGuardService]},
+    { path: 'market', component: MarketPlaceComponent, canActivate: [RouteGuardServiceService]},
     { path: 'logout', component: LogoutComponent},
     { path: '**', component: ErrorPageComponent},
 ];

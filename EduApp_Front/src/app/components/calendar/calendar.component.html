@@ -1,4 +1,4 @@
- <div class="modal fade" id="myModal">
+ <div class="modal fade" id="calendar">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
 
@@ -28,42 +28,20 @@
                     </thead>
                     <tbody>
                         <tr>  
-                            <td *ngFor="let item of today.days">{{item}}</td>
-                            <!-- <td>2</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>  -->
+                            <td *ngFor="let item of week1">{{item}}</td>   
                         </tr>
-                        
-                        <!-- <tr> 
-                            <td>1</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
+                         <tr> 
+                            <td *ngFor="let item of week2">{{item}}</td>
                         </tr>
                         <tr> 
-                            <td>1</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
+                            <td *ngFor="let item of week3">{{item}}</td>
                         </tr>
                         <tr> 
-                            <td>1</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                        </tr> -->
+                            <td *ngFor="let item of week4">{{item}}</td>
+                        </tr>
+                        <tr> 
+                            <td *ngFor="let item of week5">{{item}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
