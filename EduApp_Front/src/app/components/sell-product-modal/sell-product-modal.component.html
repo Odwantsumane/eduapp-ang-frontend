@@ -21,8 +21,39 @@
                   </div> 
                 <div class="mb-3 mt-3">
                     <label for="price_" class="form-label">Price:</label>
-                    <input type="number" class="form-control" id="price_" placeholder="Enter price" name="price_">
-                  </div>  
+                    <div class="input-group"> 
+                        <span class="input-group-text">R</span>
+                        <input type="number" class="form-control" id="price_" placeholder="00.00" name="price_">
+                    </div>
+                </div>  
+                <div class="mb-3 mt-3">
+                    <label for="category" class="form-label">Category:</label>
+                    <select class="form-select" id="category" name="category">
+                        <option>Entertainment</option>
+                        <option>Learning</option>
+                        <option>Clothes</option>
+                        <option>Accomodation</option> 
+                        <option>Other</option> 
+                    </select>
+                </div> 
+                <div class="mb-3 mt-3">
+                    <label for="location" class="form-label">Where are you located?</label>
+                    <select class="form-select" id="location" name="location">
+                        <option>Grahamstown</option>
+                        <option>Johannesburg</option>
+                        <option>Limpopo University</option>
+                        <option>Capetown</option> 
+                        <option>Free state</option> 
+                        <option>Rustenburg</option> 
+                        <option>Durban</option> 
+                        <option>Pietermarizburg</option> 
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div *ngIf="false" class="mb-3 mt-3">
+                    <label for="other" class="form-label">Other:</label>
+                    <input type="text" class="form-control" id="other" placeholder="" name="other">
+                </div>  
             </form>
         </div>
   
