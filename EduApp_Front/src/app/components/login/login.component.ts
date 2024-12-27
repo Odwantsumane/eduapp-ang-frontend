@@ -4,11 +4,12 @@ import { RouterLink } from '@angular/router';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { VerticalNavBarComponent } from '../vertical-nav-bar/vertical-nav-bar.component';
 import { RefreshService } from '../../services/refresh.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   providers: [RefreshService]
@@ -23,22 +24,30 @@ export class LoginComponent {
   submit_disabled : boolean = true;
   submitted: boolean = false;
   isUserLoggedIn : boolean = false;
+  emailVerified: boolean = false; 
 
   constructor(private authenticator: AuthenticateService, private refreshService: RefreshService){} //private verticalComponentRefresh: VerticalNavBarComponent
 
-  async handleLogin() { 
+  async handleLogin() {  
 
-    if(this.email !== "" && this.isValidEmail(this.email)  && this.password !== "") {
-      this.isAuthenticated = await this.authenticator.LoginAuth(this.email, this.password); //
-
-      // clear fields
-      this.email = ""; this.password = "";
+    if(this.email !== "" && this.isValidEmail(this.email)  && this.password !== "") { 
+      try {
+        this.isAuthenticated = await this.authenticator.LoginAuth(this.email, this.password);
+      } catch (e) {
+        console.log(e);
+        this.isAuthenticated = false;
+      }
+      
+      // this.emailVerified = this.isValidEmail(this.email);
+      // clear fields 
+      this.password = "";
       this.verify();
     } else {
       // display failed message
+      // this.emailVerified = this.isValidEmail(this.email);
     } 
-
-    if(this.isAuthenticated) this.refreshService.triggerRefresh();
+    this.submitted = true;
+    if(this.isAuthenticated) this.refreshService.triggerRefresh();   
   }
 
   verify(): void {  

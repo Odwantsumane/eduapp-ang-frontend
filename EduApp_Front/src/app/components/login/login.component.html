@@ -1,4 +1,12 @@
 <div>
+    <div *ngIf="!isAuthenticated && submitted" class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        Please try again, your password or email is incorrect
+    </div>
+    <!-- <div *ngIf="!emailVerified && submitted" class="alert alert-warning alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        your email is invalid
+    </div> -->
     <h2>Sign In</h2>
     <form >
         <div class="mb-3 mt-3">
