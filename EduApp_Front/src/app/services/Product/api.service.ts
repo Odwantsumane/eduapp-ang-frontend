@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-class product {
-  constructor(private name:string, private specs:Array<string>, private createdBy:string, 
-    private category:string, private location:string, private price:Number, private imageUrl:string){}
+export class product {
+  constructor(public name:string, public specs:Array<string>, public createdBy:string, 
+    public category:string, public location:string, public price:Number, public imageUrl:string){}
 }
 
 @Injectable({
