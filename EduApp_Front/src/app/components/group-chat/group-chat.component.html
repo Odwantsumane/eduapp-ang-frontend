@@ -54,8 +54,11 @@
                             <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') !== (yesterdayDate | date: 'dd/MM/yyyy') 
                                 && (message.createdAt | date: 'dd/MM/yyyy') !== (todayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">{{message.createdAt | date: 'dd/MM/yyyy'}}</span>
                             <span class="text-muted ms-2 float-start fs-6"><i class="bi bi-emoji-smile"></i></span><br>
-                            <p class="rounded-4 ps-2 pe-2 pb-2 bg-light" style="width: fit-content;">
+                            <p *ngIf="message.message !== '' && (!message.audioBlob)" class="rounded-4 ps-2 pe-2 pb-2 bg-light" style="width: fit-content;">
                                 {{message.message}}
+                            </p> 
+                            <p *ngIf="message.audioBlob" class="rounded-4 ps-2 pe-2 pb-2 bg-light" style="width: fit-content;">
+                                <audio *ngIf="audioUrl" class="ms-5 pt-2" [src]="generateAudioUrl(message.audioBlob)" style="width: 50%; height: 20px;" controls></audio> 
                             </p> 
                         </div>
                         <div class="your-message w-50 p-2">
@@ -75,9 +78,12 @@
                             <span class="text-muted me-2 float-end fs-6"><i class="bi bi-emoji-smile"></i></span><br>
                             <!-- <p class="fs-6 bg-white"><img src="jkspr.jpg" alt="chat profile" style="max-width: 15%; height: 15%;" class="rounded-5"><span><b class="ps-1 fs-6">{{message.username}}</b></span></p> -->
                              <div class=" rounded-4 pt-2 ps-2 pe-2 float-end" style="width: fit-content; background-color: rgb(74, 100, 100);">
-                                <p class="text-white " style="width: fit-content;">
+                                <p *ngIf="message.message !== '' && (!message.audioBlob)" class="text-white " style="width: fit-content;">
                                     {{message.message}}
                                 </p>
+                                <p *ngIf="message.audioBlob" class="rounded-4 ps-2 pe-2 pb-2 bg-light" style="width: fit-content;">
+                                    <audio *ngIf="audioUrl" class="ms-5 pt-2" [src]="generateAudioUrl(message.audioBlob)" style="width: 50%; height: 20px;" controls></audio> 
+                                </p> 
                              </div> 
                              <span class="float-end"><i class="bi bi-check fs-4 text-dark"></i></span>
                         </div>
@@ -89,7 +95,11 @@
             <div *ngIf="typing" style="text-align: center; font-size: small;" class="text-muted">{{typingData.name}} is typing..</div>
             <div *ngIf="!typing" style="text-align: center; font-size: small; visibility: hidden;" class="text-muted">{{typingData.name}} is typing..</div> 
             <span *ngIf="newMessageInd" class="spinner-grow spinner-grow-sm text-success" style="font-size: x-small;"></span>
-            <audio *ngIf="audioUrl" class="ms-5" [src]="audioUrl" style="width: 50%; height: 20px;" controls></audio> <a href="#" *ngIf="audioUrl" class="ps-2"><i class="bi bi-send fs-4"></i></a>
+             
+            <audio *ngIf="audioUrl" class="ms-5 pt-2" [src]="audioUrl" style="width: 50%; height: 20px;" controls></audio> 
+            <a href="#" *ngIf="audioUrl" class="p-3" style="text-decoration: none;" (click)="sendMessage()">Send</a>
+            <!--<i class="bi bi-send fs-6"></i>-->
+            
             <span *ngIf="isRecording" style="font-size: x-small;">recording..</span>
             <div class="d-flex" style="height: 15%;">
                 <a href="#" class="mt-2 p-1 h-75 text-dark"><i class="bi bi-plus-square fs-5"></i></a>
@@ -115,7 +125,7 @@
                   </div>
 
                 <div class="rounded-4  m-1 text-muted p-2 w-100 d-flex justify-content-between" style="height: fit-content;">
-                    <div class="" style="width: 95%;"><textarea name="messageFieldValue" id="message_toSend" rows="1" class="form-control"  placeholder="write message.." [(ngModel)]="messageFieldValue" (keydown.enter)="MonitorMessageTyping($event)" (input)="notifyWhenTyping()"></textarea></div>
+                    <div class="" style="width: 95%;"><textarea name="messageFieldValue" id="message_toSend" rows="1" class="form-control"  placeholder="write message.." [(ngModel)]="messageFieldValue" (keydown.enter)="sendMessage()" (input)="notifyWhenTyping()"></textarea></div>
                     <!-- <div class="" style="width: 95%;"><input type="text" name="" id="" class="border-light form-control" placeholder="write message.."></div> -->
                     <a *ngIf="!isRecording" href="#" class="text-dark" style="text-decoration: none;" (click)="startRecording()"><i class="bi bi-mic fs-5"></i></a>
                     <a *ngIf="isRecording" href="#" class="text-dark" style="text-decoration: none;" (click)="stopRecording()"><i class="bi bi-mic fs-5"></i></a>

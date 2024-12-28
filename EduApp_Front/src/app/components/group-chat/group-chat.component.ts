@@ -54,9 +54,10 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
   // audio stuff
   private mediaRecorder!: MediaRecorder;
   private audioChunks: Blob[] = [];
-  public audioUrl: string | null = null;
+  public audioUrl: string = "";
   public isRecording: boolean = false;
   public startedRecording : boolean = false;
+  audioBlobStore : Blob | null = null;
 
   scroll: boolean = true;
   newMessageInd : boolean = false;
@@ -96,13 +97,13 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.socketservice.emitEvent("name", { name: this.user[0].name + " " + this.user[0].surname, userId: this.user[0]._id, roomId: this.roomId}); 
   }
 
-  sendMessage() {
-    this.socketservice.emitEvent('chat message', {input:this.message});
-  }
+  // sendMessage() {
+  //   this.socketservice.emitEvent('chat message', {input:this.message});
+  // }
 
-  sendAudio() {
-    this.socketservice.emitEvent('audio message', {input:this.audioUrl});
-  }
+  // sendAudio() {
+  //   this.socketservice.emitEvent('chat message', {input:this.audioUrl});
+  // }
 
   receiveSenderMessage() { 
 
@@ -174,12 +175,12 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.scroll = true;
   }
 
-  async MonitorMessageTyping(event:Event) { 
-    
-    if (this.messageFieldValue !== "") {
+  async sendMessage() { 
+    console.log("blob: "+ this.audioBlobStore);
+    if (this.messageFieldValue !== "" || this.audioUrl !== "") {
 
       this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:"", filetype:"", username: this.user[0].name + " " + this.user[0].surname, 
-        roomId: this.roomId, userId: this.user[0]._id
+        roomId: this.roomId, userId: this.user[0]._id, audioBlob:this.audioBlobStore
       });
     } 
  
@@ -187,6 +188,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     console.log("Clearing field value...");
     this.messageFieldValue = "";
     this.typing = false;
+    this.audioUrl = "";
   }
 
   // onChange(change: user) { // argtype=user
@@ -247,10 +249,16 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
       // Generate audio URL after stopping
       this.mediaRecorder.onstop = () => {
         const audioBlob = new Blob(this.audioChunks, { type: 'audio/webm' });
+        this.audioBlobStore = audioBlob;
         this.audioUrl = URL.createObjectURL(audioBlob);
         console.log('Recording stopped, audio URL created.');
       };
     }
+  }
+
+  generateAudioUrl(audioBlob: Blob | null):string {
+    if (!audioBlob) return "";
+    return URL.createObjectURL(audioBlob);
   }
 
   attachEmoji(value: string) {  
@@ -293,8 +301,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
       // console.log("height: "+ (div.scrollHeight) + " "+ "scrollpos: "+ this.scrollPosition + " okay: "+ (div.scrollHeight - div.clientHeight)); 
       // Trigger your custom logic
       if (this.scrollPosition >= ((div.scrollHeight - div.clientHeight)-5)) {
-        this.readMessageEmit();
-        console.log("reading new message..");
+        this.readMessageEmit(); 
       }
     });
   }
