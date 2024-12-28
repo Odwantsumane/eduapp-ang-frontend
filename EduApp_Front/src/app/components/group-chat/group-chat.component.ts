@@ -100,6 +100,10 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.socketservice.emitEvent('chat message', {input:this.message});
   }
 
+  sendAudio() {
+    this.socketservice.emitEvent('audio message', {input:this.audioUrl});
+  }
+
   receiveSenderMessage() { 
 
     this.socketservice.onEvent<Message>('sender chat message').subscribe(data => {
