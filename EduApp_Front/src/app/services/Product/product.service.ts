@@ -9,12 +9,12 @@ export class ProductService {
 
   placeholder_product : product = {name: "", specs:[], createdBy:"", category:"", location:"", price:0, imageUrl:""}
   
-    constructor(private folderApi: ApiService, private cookieservice: CookieLocalService) { } 
+    constructor(private productApi: ApiService, private cookieservice: CookieLocalService) { } 
     
     async createNewProduct(newProduct:product): Promise<product> {
     
       try {
-        const response = await this.folderApi
+        const response = await this.productApi
           .createProduct(newProduct, this.cookieservice.getCookie() || "notoken")
           .toPromise();
         return this.handleProductResp(response);
@@ -27,7 +27,7 @@ export class ProductService {
     async updateProduct(id:string, newProduct:product): Promise<product> {
     
       try {
-        const response = await this.folderApi
+        const response = await this.productApi
           .updateProduct(id, newProduct, this.cookieservice.getCookie() || "notoken")
           .toPromise();
         return this.handleProductResp(response);
@@ -40,7 +40,7 @@ export class ProductService {
     async removeProduct(id:string): Promise<product> {
     
       try {
-        const response = await this.folderApi
+        const response = await this.productApi
           .removeProduct(id, this.cookieservice.getCookie() || "notoken")
           .toPromise();
         return this.handleProductResp(response);
