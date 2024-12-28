@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-class folder {
-  constructor(private title:string, private description:string, private createdBy:string){}
+export class folder {
+  constructor(public title:string, public description:string, public createdBy:string){}
 }
 
 @Injectable({
