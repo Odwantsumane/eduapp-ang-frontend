@@ -8,9 +8,23 @@ import { CookieLocalService } from '../cookie-local.service';
 export class FolderService {
 
   placeholder_folder : folder = {title: "", description:"", createdBy:"", course:""}
+  placeholder_array : Array<folder> = [];
 
-  constructor(private folderApi: ApiService, private cookieservice: CookieLocalService) { } 
+  constructor(private folderApi: ApiService, private cookieservice: CookieLocalService) { }
+
+  async getAllFolders(): Promise<Array<folder>> {
   
+    try {
+      const response = await this.folderApi
+        .getAll(this.cookieservice.getCookie() || "notoken")
+        .toPromise();
+      return this.handleArrayFolderResp(response);
+    } catch (error) {
+      this.handleError(error);
+      return this.placeholder_array; // Return a placeholder array on error
+    }
+  } 
+
   async createNewFolder(newFolder:folder): Promise<folder> {
   
     try {
@@ -48,6 +62,12 @@ export class FolderService {
       this.handleError(error);
       return this.placeholder_folder; // Return a placeholder array on error
     }
+  }
+
+  handleArrayFolderResp(response: Array<folder> | undefined): Array<folder> {
+
+    if(response === undefined) return this.placeholder_array;
+    return response;
   }
   
   handleFolderResp(response: folder | undefined): folder {

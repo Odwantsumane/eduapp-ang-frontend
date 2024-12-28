@@ -18,9 +18,14 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  getAll(token:string) {
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
+    return this.http.get<Array<folder>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true});
+  }
+
   getFolder(id: string, token:string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.get<folder>(`${this.url}/getFolder/${id}`,  {headers: this.Headers, withCredentials: true});
+    return this.http.get<folder>(`${this.url}/${id}`,  {headers: this.Headers, withCredentials: true});
   }
 
   createFolder(folder: folder, token:string) {
