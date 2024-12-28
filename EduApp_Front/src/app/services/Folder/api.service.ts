@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export class folder {
-  constructor(public title:string, public description:string, public createdBy:string){}
+  constructor(public title:string, public description:string, public createdBy:string, public course:string){}
 }
 
 @Injectable({

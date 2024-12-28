@@ -7,7 +7,7 @@ import { CookieLocalService } from '../cookie-local.service';
 })
 export class FolderService {
 
-  placeholder_folder : folder = {title: "", description:"", createdBy:""}
+  placeholder_folder : folder = {title: "", description:"", createdBy:"", course:""}
 
   constructor(private folderApi: ApiService, private cookieservice: CookieLocalService) { } 
   

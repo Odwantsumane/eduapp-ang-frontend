@@ -10,18 +10,19 @@
   
         <!-- Modal body -->
         <div class="modal-body">
-            <form>
+            <form> 
+                <p *ngIf="create_fail_ind" class="text-danger">{{create_fail_message}}</p>
                 <div class="mb-3 mt-3">
                   <label for="title_" class="form-label">Title:</label>
-                  <input type="text" class="form-control" id="title_" placeholder="Enter title" name="title_">
+                  <input type="text" class="form-control" id="title_" placeholder="Enter title" name="title_" (change)="verify()" [(ngModel)]="newFolder.title">
                 </div> 
                 <div class="mb-3 mt-3">
                   <label for="description" class="form-label">Description <span class="text-muted"> (Optional)</span>:</label>
-                  <input type="text" class="form-control" id="description" placeholder="Write a description" name="description">
+                  <input type="text" class="form-control" id="description" placeholder="Write a description" name="description" (change)="verify()" [(ngModel)]="newFolder.description">
                 </div> 
                 <div class="mb-3 mt-3">
                     <label for="title_" class="form-label">Course:</label>
-                    <select class="form-select" id="designation" name="designations">
+                    <select class="form-select" id="designation" name="designations" (change)="verify()" [(ngModel)]="newFolder.course">
                         <option>Law</option>
                         <option>Science</option>
                         <option>Humanities</option>
@@ -34,7 +35,8 @@
   
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Create folder</button>
+          <button *ngIf="!filled_fill_ind" type="button" class="btn btn-primary" (click)="createFolder()">Create folder</button> <!--data-bs-dismiss="modal"-->
+          <button *ngIf="filled_fill_ind" type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createFolder()">Create folder</button> <!---->
         </div>
   
       </div>
