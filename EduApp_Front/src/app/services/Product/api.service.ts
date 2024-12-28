@@ -19,22 +19,22 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-    getFolder(id: string, token:string) {
+    getProduct(id: string, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
       return this.http.get<product>(`${this.url}/getProduct/${id}`,  {headers: this.Headers, withCredentials: true});
     }
   
-    createFolder(product: product, token:string) {
+    createProduct(product: product, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
       return this.http.post<product>(`${this.url}/create`, product, {headers: this.Headers, withCredentials: true});
     }
   
-    updateFolder(id: string, product: product, token:string) {
+    updateProduct(id: string, product: product, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
       return this.http.post<product>(`${this.url}/update/${id}`, product, {headers: this.Headers, withCredentials: true});
     }
   
-    removeFolder(id: string, token:string) {
+    removeProduct(id: string, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
       return this.http.post<product>(`${this.url}/remove/${id}`, {headers: this.Headers, withCredentials: true});
     }
