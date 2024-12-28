@@ -63,33 +63,38 @@ export class UserrequestService {
   maxAge = 3 * 24 * 60 * 60;
   
 
-  Headers: HttpHeaders = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()}); //, Cookie: `jwt=${this.createToken("myid")}`
+  Headers: HttpHeaders = new HttpHeaders (); //, Cookie: `jwt=${this.createToken("myid")}`
   url : string = "http://localhost:4001/user";
 
   constructor(private http: HttpClient) { }
 
   getAllUsers() { // will use token later to identify who is requesting
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
     return this.http.get<Array<User>>(`${this.url}/AllUsers`,  {headers: this.Headers});
   }
 
   getUser(id: string) {
-
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
     return this.http.get<User>(`${this.url}/getUser/${id}`,  {headers: this.Headers});
   }
 
   addUser(user: SignInUser) {  
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
     return this.http.post<LoginResponse>(`${this.url}/signin`, user, {headers: this.Headers});
   }
 
-  login (loginReq: LoginReq) {  
+  login (loginReq: LoginReq) { 
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()}); 
     return this.http.post<LoginResponse>(`${this.url}/login`, loginReq, {headers: this.Headers});
   }
 
   logout () {  
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
     return this.http.get<Logout>(`${this.url}/logout`, {headers: this.Headers});
   }
 
   isloggedIn(token: string) { 
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
     return this.http.get<isLoggedIn>(`${this.url}/isloggedIn/${token}`, {headers: this.Headers});
   }
 

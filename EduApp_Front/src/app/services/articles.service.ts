@@ -13,7 +13,7 @@ export class Article {
 export class ArticlesService {
 
   url : string = "http://localhost:4001/articles";
-  Headers: HttpHeaders = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()}); //, Cookie: `jwt=${this.createToken("myid")}`
+  Headers: HttpHeaders = new HttpHeaders (); //, Cookie: `jwt=${this.createToken("myid")}`
 
   constructor(private http: HttpClient) { }
 

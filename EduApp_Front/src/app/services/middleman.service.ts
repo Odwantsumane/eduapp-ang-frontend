@@ -104,18 +104,5 @@ export class MiddlemanService {
 
   handleError(error: any) {
 
-  }
-
-  createBasicAuthHeaders() { ;
-    let username = "user";
-    let password = "password"; 
-    let BasicAuthHeader = "";
-
-    if (typeof window !== 'undefined') {
-      BasicAuthHeader = "Basic " + window.btoa(username + ":" + password);
-    } else {
-      console.error("Window is not defined. Ensure you're running this in a browser.");
-    } 
-    return BasicAuthHeader;
-  }
+  } 
 }

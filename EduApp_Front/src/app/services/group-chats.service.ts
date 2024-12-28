@@ -24,7 +24,7 @@ export class GroupChatsService {
   url : string = "http://localhost:4001/chat";
   url_ : string = "http://localhost:4001/topic";
   url__ : string = "http://localhost:4001/message";
-  Headers: HttpHeaders = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()}); //, Cookie: `jwt=${this.createToken("myid")}`
+  Headers: HttpHeaders = new HttpHeaders(); //, Cookie: `jwt=${this.createToken("myid")}`
 
   constructor(private http: HttpClient) { }
 
