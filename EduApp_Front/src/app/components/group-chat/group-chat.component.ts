@@ -109,6 +109,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     this.socketservice.onEvent<Message>('sender chat message').subscribe(data => {
        // some logic 
+       console.log(data);
        this.filteredMessages.push(data);
        this.scroll = true;
     });
@@ -256,9 +257,9 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     }
   }
 
-  generateAudioUrl(audioBlob: Blob | null):string {
-    if (!audioBlob) return "";
-    return URL.createObjectURL(audioBlob);
+  generateAudioUrl(audioUrl:string):string { 
+    console.log(audioUrl);
+    return audioUrl;
   }
 
   attachEmoji(value: string) {  

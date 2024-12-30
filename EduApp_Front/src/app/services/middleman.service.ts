@@ -14,7 +14,7 @@ export class MiddlemanService {
     _id:"",__v:0, title:"", description:"",messages:[],participants:[],groupPic:"",createdAt:""
   }
   PlaceHolderMsg:Message = {
-    _id:"",__v:0,createdAt:"", username: "", message: "", room_id: "", audioBlob: null
+    _id:"",__v:0,createdAt:"", username: "", message: "", room_id: "", audioUrl: ""
   }
 
   constructor(private groupchatservice: GroupChatsService, private cookieservice: CookieLocalService) { }
