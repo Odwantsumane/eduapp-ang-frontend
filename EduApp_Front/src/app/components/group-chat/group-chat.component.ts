@@ -179,7 +179,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     console.log("blob: "+ this.audioBlobStore);
     if (this.messageFieldValue !== "" || this.audioUrl !== "") {
 
-      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:"", filetype:"", username: this.user[0].name + " " + this.user[0].surname, 
+      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:"frontaudio.mp3", filetype:"audio/mpeg", username: this.user[0].name + " " + this.user[0].surname, 
         roomId: this.roomId, userId: this.user[0]._id, audioBlob:this.audioBlobStore
       });
     } 
