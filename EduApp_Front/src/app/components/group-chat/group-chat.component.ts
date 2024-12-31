@@ -62,6 +62,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
   scroll: boolean = true;
   newMessageInd : boolean = false;
   scrollPosition: number = 0;
+  chatTitle: string = "Home";
 
   constructor (private groupchatreqservice: MiddlemanService, 
     private authservice: AuthenticateService, 
@@ -165,13 +166,13 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     // this.getMessages(this.groupChats[0]._id);
   }
 
-  async getMessages(id:string) {
+  async getMessages(id:string, chatTitle:string) {
     // console.log(id);
 
     this.roomId = id;
     // get and filter messages
     this.filteredMessages = await this.groupchatreqservice.getAllChatMessages(id); 
- 
+    this.chatTitle = chatTitle;
     this.enterUserInRoom();
     this.scroll = true;
   }

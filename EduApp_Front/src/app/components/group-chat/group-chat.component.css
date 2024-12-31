@@ -5,3 +5,11 @@
 .emj {
     text-decoration: none;
 }
+
+.emojis_icon {
+    display: none;
+}
+
+.message_body:hover .emojis_icon {
+    display: block;
+}

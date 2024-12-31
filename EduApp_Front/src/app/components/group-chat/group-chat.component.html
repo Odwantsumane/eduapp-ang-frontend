@@ -7,7 +7,7 @@
         <div class="d-flex flex-column" style="overflow-y: auto; height: 545px;">
             <div *ngFor="let chat of groupChats" class="w-100 p-1 border-bottom chat_group" >
                 <span class="float-end me-1">10 min</span>
-                <div class="d-flex" (click)="getMessages(chat._id)">
+                <div class="d-flex" (click)="getMessages(chat._id, chat.title)">
                     <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
                         <img src="favicon.ico" alt="chat profile" style="max-width: 100%; height: auto;">
                     </div>
@@ -29,15 +29,22 @@
 
     <div class="d-flex flex-column w-50 conversation" style="height: 600px;">
         <div class="w-100 bg-light d-flex justify-content-between" style="height: 10%;">
-            <div class="ms-2 mt-1 mb-1 border rounded-4 p-2"><i class="bi bi-people-fill fs-3"></i></div>
-            <div class="text-muted mt-3 p-3 d-flex flex-nowrap">
-                <p>Odwa</p>
-                <p>, Aphele</p>
-                <p>, Andi</p>
-                <p>, Lungi</p>
-                <p>, Miz</p> 
-                <p class="text-primary"> ..more</p>
-            </div>
+            <div class="d-flex flex-row">
+                <div class="ms-2 mt-1 mb-1 border rounded-4 p-2">
+                    <i class="bi bi-people-fill fs-3"></i>
+                </div>
+                
+                <div class="d-flex flex-column mt-3 p-2 justify-content-center">
+                    <span class=""><b>{{chatTitle}}</b></span>
+                    <div class="text-muted d-flex flex-nowrap">
+                        <p>Odwa</p>
+                        <p>, Aphele</p>
+                        <p>, Andi</p>
+                        <p>, Lungi</p> 
+                        <p class="text-primary"> ..more</p>
+                    </div>
+                </div>
+            </div> 
             <a href="#" class="p-2 text-dark"><i class="bi bi-three-dots-vertical fs-4"></i></a>
         </div>
         <div class="messages ps-4 pe-4 mb-3" style="height: 73%;"> 
@@ -47,22 +54,30 @@
                     <div *ngIf="user[0].name +' '+ user[0].surname !== message.username" class="message w-100 d-flex mb-3" style="height: fit-content;">
                         <div class="external-message w-50 bg-white rounded-4">
                             
-                            <!-- <p class="fs-6"><span class=""><i class="bi bi-person-circle fs-5"></i></span><span><b class="ps-1">{{message.username}}</b></span></p> -->
-                            <p class="fs-6 bg-white"><img src="jkspr.jpg" alt="chat profile" style="max-width: 15%; height: 5%;" class="rounded-5"><span><br><b class="ps-1" style="font-size: small;">{{message.username}}</b></span></p>
-                            <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') === (todayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">{{message.createdAt | date: 'hh:mm' : 'SAST'}}</span>
-                            <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') === (yesterdayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">Yesterday</span>
-                            <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') !== (yesterdayDate | date: 'dd/MM/yyyy') 
-                                && (message.createdAt | date: 'dd/MM/yyyy') !== (todayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">{{message.createdAt | date: 'dd/MM/yyyy'}}</span>
-                            <span class="text-muted ms-2 float-start fs-6"><i class="bi bi-emoji-smile"></i></span><br>
-                            <p *ngIf="message.message !== '' && (!message.audioUrl)" class="rounded-4 ps-2 pe-2 pb-2 bg-light" style="width: fit-content;">
-                                {{message.message}}
-                            </p> 
-                            <p *ngIf="message.audioUrl" style="width: fit-content;">
-                                <!-- <audio *ngIf="audioUrl" class="ms-5 pt-2" src="http://localhost:4001/uploads/audio/Mon-Dec-30-2024/frontaudio.mp3" style="width: 50%; height: 20px;" controls></audio>  -->
-                                <audio controls>
-                                    <source [src]="'http://localhost:4001'+message.audioUrl" type="audio/mpeg">  
-                                </audio> 
-                            </p> 
+                            <div class="d-flex flex-row w-100">
+                                <div class="" style="width: 10%;">
+                                    <!-- <p class="fs-6"><span class=""><i class="bi bi-person-circle fs-5"></i></span><span><b class="ps-1">{{message.username}}</b></span></p> -->
+                                    <p class="fs-6 bg-white"><img src="jkspr.jpg" alt="chat profile" style="max-width: 95%; height: 80%;" class="rounded-5"></p>
+                                </div>
+                                <div class="message_body" style="width: 90%;">
+                                    <span><b class="ps-1" style="font-size: small;">{{message.username}}</b></span>
+                                    <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') === (todayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">{{message.createdAt | date: 'hh:mm' : 'SAST'}}</span>
+                                    <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') === (yesterdayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">Yesterday</span>
+                                    <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') !== (yesterdayDate | date: 'dd/MM/yyyy') 
+                                        && (message.createdAt | date: 'dd/MM/yyyy') !== (todayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">{{message.createdAt | date: 'dd/MM/yyyy'}}</span><br>
+                                    <!-- <span class="text-muted ms-2 float-start fs-6 emojis_icon"><i class="bi bi-emoji-smile"></i></span><br> -->
+                                    <p *ngIf="message.message !== '' && (!message.audioUrl)" class="rounded-4 ps-2 pe-2 pb-2" style="width: fit-content; background-color: rgb(238, 241, 248);">
+                                        {{message.message}}
+                                        <span class="text-muted ms-2 float-end fs-6 emojis_icon"><i class="bi bi-emoji-smile"></i></span>
+                                    </p> 
+                                    <p *ngIf="message.audioUrl" style="width: fit-content;">
+                                        <!-- <audio *ngIf="audioUrl" class="ms-5 pt-2" src="http://localhost:4001/uploads/audio/Mon-Dec-30-2024/frontaudio.mp3" style="width: 50%; height: 20px;" controls></audio>  -->
+                                        <audio controls>
+                                            <source [src]="'http://localhost:4001'+message.audioUrl" type="audio/mpeg">  
+                                        </audio> 
+                                    </p>
+                                </div> 
+                            </div> 
                         </div>
                         <div class="your-message w-50 p-2">
                             <p class="p-2 bg-white rounded-4"></p>
