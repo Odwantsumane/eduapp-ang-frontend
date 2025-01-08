@@ -79,6 +79,9 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.receiveSenderMessage();
     this.receiveBroadcastMessage();
     this.readMessageReceipt();
+
+    console.log("Hello")
+    // console.log(this.generateUniqueFileName());
   }
 
   manageSocketActivity(): void {
@@ -177,11 +180,12 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.scroll = true;
   }
 
-  async sendMessage() { 
-    console.log("blob: "+ this.audioBlobStore);
+  async sendMessage() {  
+    // console.log("blob: "+ this.audioBlobStore);
+    
     if (this.messageFieldValue !== "" || this.audioUrl !== "") {
 
-      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:"frontaudio.mp3", filetype:"audio/mpeg", username: this.user[0].name + " " + this.user[0].surname, 
+      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:this.generateUniqueFileName() + ".mp3", filetype:"audio/mpeg", username: this.user[0].name + " " + this.user[0].surname, 
         roomId: this.roomId, userId: this.user[0]._id, audioBlob:this.audioBlobStore
       });
     } 
@@ -190,7 +194,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     console.log("Clearing field value...");
     this.messageFieldValue = "";
     this.typing = false;
-    this.audioUrl = "";
+    this.audioUrl = ""; 
   }
 
   // onChange(change: user) { // argtype=user
@@ -204,6 +208,17 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
   //   // this.users.push(user);
 
   // }
+
+  generateUniqueFileName():string {
+    var date = new Date();
+    var getDay = date.getDay();
+    var getTime = date.getTime();
+    var getHours = date.getHours();
+    var type = "Audio";
+    var result = type + "_U_" + this.user[0]._id + "_R_" + this.roomId + "_D_" + getDay + "_T_" + getTime + "_H_"+ getHours;
+
+    return result;
+  }
 
   ngOnDestroy(): void {
     this.socketservice.disconnect();
