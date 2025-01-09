@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CreateFolderComponent } from '../create-folder/create-folder.component';
+import { FolderService } from '../../services/Folder/folder.service';
+import { AuthenticateService } from '../../services/authenticate.service';
+import { folder } from '../../services/Folder/api.service';
 
 @Component({
   selector: 'app-repository',
@@ -18,11 +21,33 @@ export class RepositoryComponent implements OnInit {
   law : boolean = true;
   it : boolean = true;
   other : boolean = true;
+  folder : folder | null = null;
+  current_user:string = "";
+  folder_list:Array<folder> = [];
 
-  constructor(){}
+  constructor(private folderservice: FolderService, private autheservice: AuthenticateService){}
+  
+  async ngOnInit() {
 
-  ngOnInit(): void {
-    
+    this.current_user = (await this.autheservice.isLoggedInGetUser()).username || "unknown";
+
+    this.getAllFolders();
+  }
+
+  async getFolder(id:string) { 
+    try { 
+      this.folder_list.push(await this.folderservice.getFolder(id));
+    } catch (e) {
+      console.log(`${new Date()}: `+ "Failed to get folder, " + `${e}`);
+    }   
+  }
+  
+  async getAllFolders() { 
+    try {
+      this.folder_list = await this.folderservice.getAllFolders(); 
+    } catch (e) {
+      console.log(`${new Date()}: `+ "Failed to get folders, " + `${e}`);
+    }   
   }
 
   OnFilter(filter: string) {
