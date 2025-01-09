@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FolderService } from '../../services/Folder/folder.service';
 import { folder } from '../../services/Folder/api.service';
@@ -14,6 +14,8 @@ import { User } from '../../services/userrequest.service';
   styleUrl: './create-folder.component.css'
 })
 export class CreateFolderComponent implements OnInit{
+
+  @Output() dataEmitter: EventEmitter<folder> = new EventEmitter<folder>();
 
   folder : Array<folder> = [];
   current_user : string = "";
@@ -36,10 +38,15 @@ export class CreateFolderComponent implements OnInit{
     this.current_user = (await this.autheservice.isLoggedInGetUser()).username || "unknown";
   }
 
+  sendDataToParent(sendFolder:folder) {
+    this.dataEmitter.emit(sendFolder);
+  }
+
   async createFolder() {
     if(this.verify()) {
       try {
-        this.folder.push(await this.folderservice.createNewFolder(this.newFolder));
+        // this.folder.push(await this.folderservice.createNewFolder(this.newFolder));
+        this.sendDataToParent(await this.folderservice.createNewFolder(this.newFolder));
       } catch (e) {
         if (this.folder.length === 0) console.log(`${new Date()}: `+ "Failed to create folder, " + `${e}`)
       } 

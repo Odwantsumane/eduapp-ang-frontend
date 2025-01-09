@@ -34,9 +34,9 @@ export class RepositoryComponent implements OnInit {
     this.getAllFolders();
   }
 
-  async getFolder(id:string) { 
+  async addFolder(newFolder:folder) { 
     try { 
-      this.folder_list.push(await this.folderservice.getFolder(id));
+      this.folder_list.push(newFolder);
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folder, " + `${e}`);
     }   
@@ -44,8 +44,7 @@ export class RepositoryComponent implements OnInit {
   
   async getAllFolders() { 
     try {
-      this.folder_list = await this.folderservice.getAllFolders(); 
-      console.log(this.folder_list);
+      this.folder_list = await this.folderservice.getAllFolders();  
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folders, " + `${e}`);
     }   

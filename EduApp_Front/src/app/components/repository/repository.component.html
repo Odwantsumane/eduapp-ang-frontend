@@ -40,7 +40,7 @@
                 </div>
             </div>  
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
-            <app-create-folder></app-create-folder>
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder>
         </div>
         
     </div>
