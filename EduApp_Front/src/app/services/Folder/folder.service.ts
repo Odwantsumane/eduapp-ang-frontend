@@ -25,6 +25,19 @@ export class FolderService {
     }
   } 
 
+  async getFolder(id:string): Promise<folder> {
+  
+    try {
+      const response = await this.folderApi
+        .getFolder(id,this.cookieservice.getCookie() || "notoken")
+        .toPromise();
+      return this.handleFolderResp(response);
+    } catch (error) {
+      this.handleError(error);
+      return this.placeholder_folder; // Return a placeholder array on error
+    }
+  } 
+
   async createNewFolder(newFolder:folder): Promise<folder> {
   
     try {
