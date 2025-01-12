@@ -25,6 +25,13 @@ export class RepositoryComponent implements OnInit {
   current_user:string = "";
   folder_list:Array<folder> = [];
 
+  science_arr : Array<folder> = [];
+  humanities_arr : Array<folder> = [];
+  law_arr : Array<folder> = [];
+  it_arr : Array<folder> = [];
+  other_arr : Array<folder> = [];
+
+
   constructor(private folderservice: FolderService, private autheservice: AuthenticateService){}
   
   async ngOnInit() {
@@ -37,6 +44,7 @@ export class RepositoryComponent implements OnInit {
   async addFolder(newFolder:folder) { 
     try { 
       this.folder_list.push(newFolder);
+      this.distribute_folders();
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folder, " + `${e}`);
     }   
@@ -45,9 +53,32 @@ export class RepositoryComponent implements OnInit {
   async getAllFolders() { 
     try {
       this.folder_list = await this.folderservice.getAllFolders();  
+      this.distribute_folders();
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folders, " + `${e}`);
     }   
+  }
+
+  distribute_folders() {
+    this.folder_list.forEach(folder => {
+      switch (folder.course.toLowerCase()) {
+        case "science":
+          this.science_arr.push(folder);
+          break;
+        case "humanities":
+          this.humanities_arr.push(folder);
+          break;
+        case "law":
+          this.law_arr.push(folder);
+          break;
+        case "it":
+          this.it_arr.push(folder);
+          break; 
+        default:
+          this.other_arr.push(folder);
+          break;
+      }
+    })
   }
 
   OnFilter(filter: string) {
