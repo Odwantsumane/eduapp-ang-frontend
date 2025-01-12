@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export class folder {
-  constructor(public title:string, public description:string, public createdBy:string, public course:string){}
+  constructor(public _id:string, public title:string, public description:string, public createdBy:string, public course:string){}
 }
 
 @Injectable({
@@ -35,12 +35,12 @@ export class ApiService {
 
   updateFolder(id: string, folder: folder, token:string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.post<folder>(`${this.url}/update/${id}`, folder, {headers: this.Headers, withCredentials: true});
+    return this.http.put<folder>(`${this.url}/update/${id}`, folder, {headers: this.Headers, withCredentials: true});
   }
 
   removeFolder(id: string, token:string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.post<folder>(`${this.url}/remove/${id}`, {headers: this.Headers, withCredentials: true});
+    return this.http.delete<folder>(`${this.url}/remove/${id}`, {headers: this.Headers, withCredentials: true});
   }
 
   createBasicAuthHeaders() { ;

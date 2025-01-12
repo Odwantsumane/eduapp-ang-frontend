@@ -33,8 +33,13 @@
             </div>     
             <div *ngFor="let folder of science_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
-                <div class="p-1">
-                    <span class="float-end"><a href="#"><i class="bi bi-three-dots-vertical text-dark"></i></a></span>
+                <div class="p-1" id="{{folder._id}}"> 
+                    <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
+                            <li><a class="dropdown-item text-danger" href="#" (click)="removeFolder(folder._id)">Delete</a></li> 
+                          </ul></span>
+
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
@@ -59,8 +64,12 @@
             </div>  
             <div *ngFor="let folder of law_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
-                <div class="p-1">
-                    <span class="float-end"><a href="#"><i class="bi bi-three-dots-vertical text-dark"></i></a></span>
+                <div class="p-1" id="{{folder._id}}">
+                    <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
+                            <li><a class="dropdown-item text-danger" href="#{{folder._id}}" (click)="removeFolder(folder._id)">Delete</a></li> 
+                          </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
@@ -85,8 +94,12 @@
             </div>  
             <div *ngFor="let folder of it_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
-                <div class="p-1">
-                    <span class="float-end"><a href="#"><i class="bi bi-three-dots-vertical text-dark"></i></a></span>
+                <div class="p-1" id="{{folder._id}}">
+                    <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
+                            <li><a class="dropdown-item text-danger" href="#{{folder._id}}" (click)="removeFolder(folder._id)">Delete</a></li> 
+                          </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
@@ -111,8 +124,12 @@
             </div>  
             <div *ngFor="let folder of humanities_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
-                <div class="p-1">
-                    <span class="float-end"><a href="#"><i class="bi bi-three-dots-vertical text-dark"></i></a></span>
+                <div class="p-1" id="{{folder._id}}">
+                    <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
+                            <li><a class="dropdown-item text-danger" href="#{{folder._id}}" (click)="removeFolder(folder._id)">Delete</a></li> 
+                          </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
@@ -137,8 +154,12 @@
             </div>  
             <div *ngFor="let folder of other_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
-                <div class="p-1">
-                    <span class="float-end"><a href="#"><i class="bi bi-three-dots-vertical text-dark"></i></a></span>
+                <div class="p-1" id="{{folder._id}}">
+                    <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
+                            <li><a class="dropdown-item text-danger" href="#{{folder._id}}" (click)="removeFolder(folder._id)">Delete</a></li> 
+                          </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>

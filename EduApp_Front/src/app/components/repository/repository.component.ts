@@ -23,6 +23,7 @@ export class RepositoryComponent implements OnInit {
   other : boolean = true;
   folder : folder | null = null;
   current_user:string = "";
+  removed_folder : folder | null = null;
   folder_list:Array<folder> = [];
 
   science_arr : Array<folder> = [];
@@ -44,10 +45,19 @@ export class RepositoryComponent implements OnInit {
   async addFolder(newFolder:folder) { 
     try { 
       this.folder_list.push(newFolder);
+      this.cleanFolders();
       this.distribute_folders();
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folder, " + `${e}`);
     }   
+  }
+
+  cleanFolders() {
+    this.science_arr = [];
+    this.humanities_arr = [];
+    this.law_arr = [];
+    this.it_arr = [];
+    this.other_arr = [];
   }
   
   async getAllFolders() { 
@@ -57,6 +67,17 @@ export class RepositoryComponent implements OnInit {
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folders, " + `${e}`);
     }   
+  }
+
+  async removeFolder(id:string) {
+    try { 
+      this.removed_folder = await this.folderservice.removeFolder(id);
+      this.folder_list = await this.folderservice.getAllFolders();  
+      this.cleanFolders();
+      this.distribute_folders();
+    } catch (e) {
+      console.log(`${new Date()}: `+ "Failed to remove folder, " + `${e}`);
+    } 
   }
 
   distribute_folders() {
