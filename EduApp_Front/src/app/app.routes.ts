@@ -15,6 +15,7 @@ import { NewChatComponent } from './components/new-chat/new-chat.component';
 import { ManagerComponent } from './components/Administration/manager/manager.component';
 import { AdminRouteGuardService } from './services/Aministration/admin-route-guard.service';
 import { MarketPlaceComponent } from './components/market-place/market-place.component';
+import { FolderComponent } from './components/folder/folder.component';
 
 export const routes: Routes = [
     { path: '', component: HomecontentComponent, },
@@ -29,6 +30,7 @@ export const routes: Routes = [
     { path: 'profile', component: ProfileComponent, canActivate: [RouteGuardServiceService]},
     { path: 'manager', component: ManagerComponent, canActivate: [AdminRouteGuardService]},
     { path: 'market', component: MarketPlaceComponent, canActivate: [RouteGuardServiceService]},
+    { path: 'repository/folder/:id', component: FolderComponent, canActivate: [RouteGuardServiceService]},
     { path: 'logout', component: LogoutComponent},
     { path: '**', component: ErrorPageComponent},
 ];
