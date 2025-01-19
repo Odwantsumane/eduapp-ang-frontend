@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService, folder } from '../api.service';
 import { CookieLocalService } from '../../cookie-local.service';
-import { ApiFileService, file } from './api.file.service'; ;
+import { ApiFileService, file, uploadResp } from './api.file.service'; ;
 
 @Injectable({
   providedIn: 'root'
@@ -49,16 +49,15 @@ export class FileService {
   async fileUpload(file: File, metadata: file) : Promise<file | null> {
     const response = await this.upload(file);
 
-    if (response){
-      ///const to_return = {_id:"",name: "", folderId:"", createdBy:"", group:"", type:"", createdAt:"", filepath:""} 
-      const finalResponse = await this.createNewFolder(metadata);
+    if (response){ 
+      const finalResponse = await this.createNewFile(metadata, response);
       return finalResponse;
     }
 ;
     return this.placeholder_file;
   }
 
-  async upload(file:File): Promise<string> {
+  async upload(file:File): Promise<uploadResp | null> {
   
     try {
       const response = await this.fileApi
@@ -67,12 +66,13 @@ export class FileService {
       return this.handleFileResp(response);
     } catch (error) {
       this.handleError(error);
-      return ""; // Return a placeholder array on error
+      return null; // Return a placeholder array on error
     }
   } 
 
-  async createNewFolder(file:file): Promise<file | null> {
-  
+  async createNewFile(file:file, uploadResp:uploadResp): Promise<file | null> {
+    file.filepath = uploadResp.path.replace("./uploads", "/uploads");
+    
     try {
       const response = await this.fileApi
         .createFile(file, this.cookieservice.getCookie() || "notoken")
@@ -103,9 +103,9 @@ export class FileService {
     return response;
   }
   
-  handleFileResp(response: string |undefined): string {
+  handleFileResp(response: uploadResp | undefined): uploadResp | null{
 
-    if(response === undefined) return "";
+    if(!response) return null;
     return response;
   }
 

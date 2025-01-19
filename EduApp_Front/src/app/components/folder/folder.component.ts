@@ -52,6 +52,7 @@ export class FolderComponent {
   }
 
   async uploadFile() {
+    this.file_obj.folderId = this.id ? this.id : "";
     if (this.file)
       await this.FileMiddleManService.fileUpload(this.file, this.file_obj);
   }

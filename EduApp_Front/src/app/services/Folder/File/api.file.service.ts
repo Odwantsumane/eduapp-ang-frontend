@@ -4,7 +4,11 @@ import { Injectable } from '@angular/core';
 export class file {
     constructor(public _id:string, public name:string, public folderId:string, public createdBy:string, 
         public group:string, public type:string, public createdAt:string, public filepath:string){}
-  }
+}
+
+export class uploadResp {
+    constructor(public message:string, public path:string){}
+}
 
 @Injectable({
     providedIn: 'root'
@@ -22,8 +26,7 @@ export class ApiFileService {
 
     getAll(token:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-        //return this.http.get<Array<file>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true});
-        return this.http.get<string>(`${this.upload_url}/test`,  {headers: this.Headers, withCredentials: true});
+        return this.http.get<Array<file>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true}); 
       }
     
     //   getFolder(id: string, token:string) {
@@ -36,7 +39,7 @@ export class ApiFileService {
         formData.append('File', file); // 'File' matches the key expected by formidable
 
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-        return this.http.post<string>(`${this.upload_url}`, formData, {headers: this.Headers, withCredentials: true});
+        return this.http.post<uploadResp>(`${this.upload_url}`, formData, {headers: this.Headers, withCredentials: true});
     }
     createFile(file: file, token:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
