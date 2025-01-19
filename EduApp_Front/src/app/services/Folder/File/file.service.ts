@@ -15,17 +15,17 @@ export class FileService {
 
   placeholder_file : file = {_id:"",name: "", folderId:"", createdBy:"", group:"", type:"", createdAt:"", filepath:""};
   toReturn : file = {_id:"",name: "", folderId:"", createdBy:"", group:"", type:"", createdAt:"", filepath:""};
-  placeholder_array : Array<folder> = [];
+  placeholder_array : Array<file> = [];
 
   constructor(private folderApi: ApiService, private cookieservice: CookieLocalService, private fileApi: ApiFileService) { }
 
-  async getAllFolders(): Promise<Array<folder>> {
+  async getAllFiles(): Promise<Array<file>> {
   
     try {
-      const response = await this.folderApi
+      const response = await this.fileApi
         .getAll(this.cookieservice.getCookie() || "notoken")
         .toPromise();
-      return this.handleArrayFolderResp(response);
+      return this.handleArrayFileResp(response);
     } catch (error) {
       this.handleError(error);
       return this.placeholder_array; // Return a placeholder array on error
@@ -97,7 +97,7 @@ export class FileService {
 //     }
 //   }
 
-  handleArrayFolderResp(response: Array<folder> | undefined): Array<folder> {
+handleArrayFileResp(response: Array<file> | undefined): Array<file> {
 
     if(response === undefined) return this.placeholder_array;
     return response;
