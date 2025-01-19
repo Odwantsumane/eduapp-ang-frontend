@@ -57,12 +57,7 @@ export class FolderComponent {
     this.file_obj.folderId = this.id ? this.id : "";
     if (this.file)
       await this.FileMiddleManService.fileUpload(this.file, this.file_obj);
-  }
-
-  // update_folder() {
-  //   this.file_obj.folderId = this.id;
-  //   this.file_obj.createdBy = this.user?._id;
-  // }
+  } 
 
   async getuserInfo() {
     await this.authservice.isLoggedInGetUser(); 
