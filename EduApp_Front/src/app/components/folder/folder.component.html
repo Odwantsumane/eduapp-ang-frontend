@@ -1,2 +1,45 @@
 <a routerLink="/repository" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
-<p>folder works!</p>
+<div>
+    <a type="button" class="btn btn-rounded btn-primary float-end" data-bs-toggle="modal" data-bs-target="#fileuploadmodal">Add</a>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="fileuploadmodal">
+        <div class="modal-dialog">
+            <div class="modal-content"> 
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div> 
+
+                <div class="modal-body">
+                    <input type="file" name="" id="" value="" (change)="onFileSelected($event)">
+                </div> 
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="uploadFile()">Upload</button>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    <ul style="list-style: none;">
+        <li>
+            <img src="favicon.ico" alt="icon" width="20px" height="20px"> file name
+        </li>
+        <li>
+            <img src="favicon.ico" alt="icon" width="20px" height="20px"> file name
+        </li>
+        <li>
+            <img src="favicon.ico" alt="icon" width="20px" height="20px"> file name
+        </li>
+        <li>
+            <img src="favicon.ico" alt="icon" width="20px" height="20px"> file name
+        </li>
+        <li>
+            <img src="favicon.ico" alt="icon" width="20px" height="20px"> file name
+        </li>
+    </ul>
+</div>
+
