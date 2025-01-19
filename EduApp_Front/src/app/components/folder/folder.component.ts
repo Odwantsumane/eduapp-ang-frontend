@@ -19,6 +19,7 @@ export class FolderComponent {
   id: string | null = null;
   file : File | null = null;
   user: User | null = null;
+  allFiles: Array<file> = [];
   file_obj = {
     _id: "",
     name:"",
@@ -35,6 +36,7 @@ export class FolderComponent {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id'); // Get the 'id' from the URL 
     this.getuserInfo();
+    this.getAllFiles();
   }
 
   onFileSelected(event: Event): void {
@@ -47,8 +49,8 @@ export class FolderComponent {
     }
   }
 
-  getAllFiles() {
-    
+  async getAllFiles() {
+    this.allFiles = await this.FileMiddleManService.getAllFiles();
   }
 
   async uploadFile() {
@@ -63,8 +65,6 @@ export class FolderComponent {
   // }
 
   async getuserInfo() {
-    await this.authservice.isLoggedInGetUser();
-
-
+    await this.authservice.isLoggedInGetUser(); 
   }
 }

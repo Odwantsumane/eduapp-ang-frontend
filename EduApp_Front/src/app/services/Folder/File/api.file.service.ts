@@ -29,10 +29,10 @@ export class ApiFileService {
         return this.http.get<Array<file>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true}); 
       }
     
-    //   getFolder(id: string, token:string) {
-    //     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    //     return this.http.get<folder>(`${this.url}/${id}`,  {headers: this.Headers, withCredentials: true});
-    //   }
+      getFile(id: string, token:string) {
+        this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
+        return this.http.get<file>(`${this.url}/${id}`,  {headers: this.Headers, withCredentials: true});
+      }
     
     uploadFile(file: File, token:string) {
         const formData = new FormData();

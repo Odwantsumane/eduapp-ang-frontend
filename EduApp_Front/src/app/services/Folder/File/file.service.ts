@@ -32,18 +32,18 @@ export class FileService {
     }
   } 
 
-//   async getFolder(id:string): Promise<folder> {
+  // async getFile(id:string): Promise<folder> {
   
-//     try {
-//       const response = await this.folderApi
-//         .getFolder(id,this.cookieservice.getCookie() || "notoken")
-//         .toPromise();
-//       return this.handleFolderResp(response);
-//     } catch (error) {
-//       this.handleError(error);
-//       return this.placeholder_folder; // Return a placeholder array on error
-//     }
-//   } 
+  //   try {
+  //     const response = await this.folderApi
+  //       .getFolder(id,this.cookieservice.getCookie() || "notoken")
+  //       .toPromise();
+  //     return this.handleFileResp(response);
+  //   } catch (error) {
+  //     this.handleError(error);
+  //     return this.placeholder_file; // Return a placeholder array on error
+  //   }
+  // } 
 
 
   async fileUpload(file: File, metadata: file) : Promise<file | null> {
