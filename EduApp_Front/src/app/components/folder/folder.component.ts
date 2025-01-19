@@ -2,6 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { file } from '../../services/Folder/api.file.service';
+import { FileService } from '../../services/Folder/file.service';
+import { AuthenticateService } from '../../services/authenticate.service';
+import { User } from '../../services/userrequest.service';
 
 @Component({
   selector: 'app-folder',
@@ -14,23 +18,31 @@ export class FolderComponent {
 
   id: string | null = null;
   file : File | null = null;
+  user: User | null = null;
   file_obj = {
+    _id: "",
     name:"",
-    file: this.file
+    type: "",
+    folderId: this.id ? this.id : "",
+    createdBy: this.user?._id ? this.user?._id : "",
+    group: "",
+    createdAt:"",
+    filepath:""
   }
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private FileMiddleManService: FileService, private authservice: AuthenticateService) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id'); // Get the 'id' from the URL 
+    this.getuserInfo();
   }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      const selectedFile = input.files[0];
-      this.file_obj.file = selectedFile;
+      const selectedFile = input.files[0]; 
       this.file_obj.name = selectedFile.name; 
+      this.file_obj.type = selectedFile.type; 
       this.file = selectedFile;
     }
   }
@@ -39,7 +51,19 @@ export class FolderComponent {
     
   }
 
-  uploadFile() {
-    console.log(this.file);
+  async uploadFile() {
+    if (this.file)
+      await this.FileMiddleManService.fileUpload(this.file, this.file_obj);
+  }
+
+  // update_folder() {
+  //   this.file_obj.folderId = this.id;
+  //   this.file_obj.createdBy = this.user?._id;
+  // }
+
+  async getuserInfo() {
+    await this.authservice.isLoggedInGetUser();
+
+
   }
 }

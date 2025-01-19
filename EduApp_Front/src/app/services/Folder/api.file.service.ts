@@ -30,9 +30,9 @@ export class ApiFileService {
     //     return this.http.get<folder>(`${this.url}/${id}`,  {headers: this.Headers, withCredentials: true});
     //   }
     
-    uploadFile(file: file, token:string) {
+    uploadFile(file: File, token:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-        return this.http.post<file>(`${this.upload_url}`, file, {headers: this.Headers, withCredentials: true});
+        return this.http.post<File>(`${this.upload_url}`, file, {headers: this.Headers, withCredentials: true});
     }
     createFile(file: file, token:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
