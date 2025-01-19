@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService, folder } from './api.service';
-import { CookieLocalService } from '../cookie-local.service';
+import { ApiService, folder } from '../api.service';
+import { CookieLocalService } from '../../cookie-local.service';
 import { ApiFileService, file } from './api.file.service'; ;
 
 @Injectable({
@@ -58,16 +58,16 @@ export class FileService {
     return this.placeholder_file;
   }
 
-  async upload(file:File): Promise<File | null> {
+  async upload(file:File): Promise<string> {
   
     try {
       const response = await this.fileApi
-        .uploadFile(file, this.cookieservice.getCookie() || "notoken")
+        .uploadFile(file, this.cookieservice.getCookie() || "notoken") 
         .toPromise();
       return this.handleFileResp(response);
     } catch (error) {
       this.handleError(error);
-      return  null; // Return a placeholder array on error
+      return ""; // Return a placeholder array on error
     }
   } 
 
@@ -103,9 +103,9 @@ export class FileService {
     return response;
   }
   
-  handleFileResp(response: File | undefined): File | null {
+  handleFileResp(response: string |undefined): string {
 
-    if(response === undefined) return null;
+    if(response === undefined) return "";
     return response;
   }
 

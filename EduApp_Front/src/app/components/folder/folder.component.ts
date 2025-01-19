@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { file } from '../../services/Folder/api.file.service';
-import { FileService } from '../../services/Folder/file.service';
+import { file } from '../../services/Folder/File/api.file.service';
+import { FileService } from '../../services/Folder/File/file.service';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { User } from '../../services/userrequest.service';
 

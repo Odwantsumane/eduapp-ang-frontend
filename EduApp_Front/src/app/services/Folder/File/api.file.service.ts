@@ -22,7 +22,8 @@ export class ApiFileService {
 
     getAll(token:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-        return this.http.get<Array<file>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true});
+        //return this.http.get<Array<file>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true});
+        return this.http.get<string>(`${this.upload_url}/test`,  {headers: this.Headers, withCredentials: true});
       }
     
     //   getFolder(id: string, token:string) {
@@ -31,8 +32,11 @@ export class ApiFileService {
     //   }
     
     uploadFile(file: File, token:string) {
+        const formData = new FormData();
+        formData.append('File', file); // 'File' matches the key expected by formidable
+
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-        return this.http.post<File>(`${this.upload_url}`, file, {headers: this.Headers, withCredentials: true});
+        return this.http.post<string>(`${this.upload_url}`, formData, {headers: this.Headers, withCredentials: true});
     }
     createFile(file: file, token:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
