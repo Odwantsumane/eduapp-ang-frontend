@@ -31,6 +31,19 @@ export class FileService {
       return this.placeholder_array; // Return a placeholder array on error
     }
   } 
+  // getAllFiltered
+  async getAllFilesFiltered(folderId:string): Promise<Array<file>> {
+  
+    try {
+      const response = await this.fileApi
+        .getAllFiltered(this.cookieservice.getCookie() || "notoken",folderId)
+        .toPromise();
+      return this.handleArrayFileResp(response);
+    } catch (error) {
+      this.handleError(error);
+      return this.placeholder_array; // Return a placeholder array on error
+    }
+  } 
 
   // async getFile(id:string): Promise<folder> {
   

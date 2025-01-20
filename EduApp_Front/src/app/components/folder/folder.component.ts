@@ -20,6 +20,7 @@ export class FolderComponent {
   file : File | null = null;
   user: User | null = null;
   allFiles: Array<file> = [];
+  filteredFiles: Array<file> = [];
   file_obj = {
     _id: "",
     name:"",
@@ -37,6 +38,7 @@ export class FolderComponent {
     this.id = this.route.snapshot.paramMap.get('id'); // Get the 'id' from the URL 
     this.getuserInfo();
     this.getAllFiles();
+    this.getAllFilesFiltered(this.id);
   }
 
   onFileSelected(event: Event): void {
@@ -51,6 +53,11 @@ export class FolderComponent {
 
   async getAllFiles() {
     this.allFiles = await this.FileMiddleManService.getAllFiles();
+  }
+
+  async getAllFilesFiltered(folderId: string | null) {
+    if(folderId) this.filteredFiles = await this.FileMiddleManService.getAllFilesFiltered(folderId);
+    else console.log("failed to retrieve, files");
   }
 
   async uploadFile() {

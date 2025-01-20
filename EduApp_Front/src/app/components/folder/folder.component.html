@@ -25,7 +25,7 @@
     </div>
 
     <ul style="list-style: none;"> 
-        <li *ngFor="let file of allFiles">
+        <li *ngFor="let file of filteredFiles">
             <a href="http://localhost:4001{{file.filepath}}" style="text-decoration: none;" class="text-dark" download><img src="pdf.ico" alt="icon" width="20px" height="20px"> {{file.name}}</a>
         </li>
     </ul>
