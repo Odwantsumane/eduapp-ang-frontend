@@ -63,8 +63,9 @@ export class FolderComponent {
   async uploadFile() {
     this.file_obj.folderId = this.id ? this.id : "";
     if (this.file) {
-      await this.FileMiddleManService.fileUpload(this.file, this.file_obj);
-      this.getAllFilesFiltered(this.id);
+      const newFile = await this.FileMiddleManService.fileUpload(this.file, this.file_obj);
+      if(newFile) this.filteredFiles.push(newFile); 
+      else console.log("error: failed to upload the file");
     }
   } 
 
