@@ -21,6 +21,8 @@ export class FolderComponent {
   user: User | null = null;
   allFiles: Array<file> = [];
   filteredFiles: Array<file> = [];
+  loading:boolean = false;
+  failLoadingMessage:boolean = false;
   file_obj = {
     _id: "",
     name:"",
@@ -57,15 +59,23 @@ export class FolderComponent {
 
   async getAllFilesFiltered(folderId: string | null) {
     if(folderId) this.filteredFiles = await this.FileMiddleManService.getAllFilesFiltered(folderId);
-    else console.log("failed to retrieve, files");
+    else console.error("failed to retrieve, files");
   }
 
   async uploadFile() {
-    this.file_obj.folderId = this.id ? this.id : "";
+    this.loading = true;
+    this.file_obj.folderId = this.id ? this.id : ""; 
     if (this.file) {
       const newFile = await this.FileMiddleManService.fileUpload(this.file, this.file_obj);
       if(newFile) this.filteredFiles.push(newFile); 
-      else console.log("error: failed to upload the file");
+      else {console.error("failed to upload the file"); this.failLoadingMessage = true;}
+      this.loading = false;
+      this.failLoadingMessage = false;
+    }
+
+    if(this.loading) {
+      this.loading = false;
+      this.failLoadingMessage = true;
     }
   } 
 
