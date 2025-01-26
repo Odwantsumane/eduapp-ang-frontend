@@ -66,7 +66,6 @@ export class FileService {
       const finalResponse = await this.createNewFile(metadata, response);
       return finalResponse;
     }
-;
     return this.placeholder_file;
   }
 

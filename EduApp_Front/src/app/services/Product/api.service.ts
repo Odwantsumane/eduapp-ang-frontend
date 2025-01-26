@@ -6,6 +6,10 @@ export class product {
     public category:string, public location:string, public price:Number, public imageUrl:string){}
 }
 
+export class uploadResp {
+  constructor(public message:string, public path:string){}
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,12 +20,21 @@ export class ApiService {
 
   Headers: HttpHeaders = new HttpHeaders(); //{Authorization: this.createBasicAuthHeaders()}, Cookie: `jwt=${this.createToken("myid")}`
   url : string = "http://localhost:4001/product";
+  upload_url : string = "http://localhost:4001/upload";
 
   constructor(private http: HttpClient) { }
 
     getProduct(id: string, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
       return this.http.get<product>(`${this.url}/getProduct/${id}`,  {headers: this.Headers, withCredentials: true});
+    }
+
+    uploadPicture(file: File, token:string) {
+      const formData = new FormData();
+      formData.append('File', file); // 'File' matches the key expected by formidable
+
+      this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
+      return this.http.post<uploadResp>(`${this.upload_url}`, formData, {headers: this.Headers, withCredentials: true});
     }
   
     createProduct(product: product, token:string) {
