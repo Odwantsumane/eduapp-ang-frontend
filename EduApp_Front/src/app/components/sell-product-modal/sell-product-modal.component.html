@@ -10,25 +10,28 @@
   
         <!-- Modal body -->
         <div class="modal-body">
+            <div *ngIf="failed_to_post" class="alert alert-danger">
+              <strong>Sorry!</strong> We were unable to upload this information
+            </div>
             <form>
                 <div class="mb-3 mt-3">
                   <label for="name_" class="form-label">Name:</label>
-                  <input type="text" class="form-control" id="name_" placeholder="Enter name" name="name_">
+                  <input type="text" class="form-control" id="name_" placeholder="Enter name" name="name_" [(ngModel)]="product_obj.name">
                 </div> 
                 <div class="mb-3 mt-3">
                     <label for="specs" class="form-label">Specs:</label>
-                    <input type="text" class="form-control" id="specs" placeholder="List specs separate by ';'" name="specs">
+                    <input type="text" class="form-control" id="specs" placeholder="List specs separate by ';'" name="specs" [(ngModel)]="spec" (input)="monitorSpecs()">
                   </div> 
                 <div class="mb-3 mt-3">
                     <label for="price_" class="form-label">Price:</label>
                     <div class="input-group"> 
                         <span class="input-group-text">R</span>
-                        <input type="number" class="form-control" id="price_" placeholder="00.00" name="price_">
+                        <input type="number" class="form-control" id="price_" placeholder="00.00" name="price_" [(ngModel)]="product_obj.price">
                     </div>
                 </div>  
                 <div class="mb-3 mt-3">
                     <label for="category" class="form-label">Category:</label>
-                    <select class="form-select" id="category" name="category">
+                    <select class="form-select" id="category" name="category" [(ngModel)]="product_obj.category">
                         <option>Entertainment</option>
                         <option>Learning</option>
                         <option>Clothes</option>
@@ -38,7 +41,7 @@
                 </div> 
                 <div class="mb-3 mt-3">
                     <label for="location" class="form-label">Where are you located?</label>
-                    <select class="form-select" id="location" name="location">
+                    <select class="form-select" id="location" name="location" [(ngModel)]="product_obj.location">
                         <option>Grahamstown</option>
                         <option>Johannesburg</option>
                         <option>Limpopo University</option>
@@ -50,16 +53,21 @@
                         <option>Other</option>
                     </select>
                 </div>
+                <div class="mb-3 mt-3">
+                  <label for="picture_" class="form-label">Upload Picture:</label>
+                  <input type="file" class="form-control" id="picture_" name="picture_" (change)="onFileSelected($event)">
+                </div> 
                 <div *ngIf="false" class="mb-3 mt-3">
                     <label for="other" class="form-label">Other:</label>
                     <input type="text" class="form-control" id="other" placeholder="" name="other">
                 </div>  
             </form>
         </div>
-  
+         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Post</button>
+          <!-- <button *ngIf="!failed_to_post" type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="handlePost()">Post</button> -->
+          <button type="button" class="btn btn-success" (click)="handlePost()">Post</button>
         </div>
   
       </div>

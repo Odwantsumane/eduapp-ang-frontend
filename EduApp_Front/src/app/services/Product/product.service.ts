@@ -10,8 +10,21 @@ import { file } from '../Folder/File/api.file.service';
 export class ProductService {
 
   placeholder_product : product = {name: "", specs:[], createdBy:"", category:"", location:"", price:0, imageUrl:""}
+  placeholder_array : Array<product> = [];
   
     constructor(private productApi: ApiService, private cookieservice: CookieLocalService) { } 
+
+    async getAll() : Promise<Array<product>> {
+      try {
+        const response = await this.productApi
+          .getAll(this.cookieservice.getCookie() || "notoken") 
+          .toPromise();
+        return this.handleProductRespAll(response);
+      } catch (error) {
+        this.handleError(error);
+        return this.placeholder_array; // Return a placeholder array on error
+      }
+    }
 
     async fileUpload(file: File, metadata: product) : Promise<product | null> {
       const response = await this.upload(file);
@@ -79,6 +92,12 @@ export class ProductService {
     handleProductResp(response: product | undefined): product {
   
       if(response === undefined) return this.placeholder_product;
+      return response;
+    }
+
+    handleProductRespAll(response: Array<product> | undefined): Array<product> {
+  
+      if(!response) return this.placeholder_array;
       return response;
     }
      

@@ -24,6 +24,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+    getAll(token:string) {
+      this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
+      return this.http.get<Array<product>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true});
+    }
+
     getProduct(id: string, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
       return this.http.get<product>(`${this.url}/getProduct/${id}`,  {headers: this.Headers, withCredentials: true});
