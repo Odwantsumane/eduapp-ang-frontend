@@ -23,6 +23,8 @@ export class FolderComponent {
   filteredFiles: Array<file> = [];
   loading:boolean = false;
   failLoadingMessage:boolean = false;
+  today = new Date();
+  yesterday = new Date();
   file_obj = {
     _id: "",
     name:"",
