@@ -17,6 +17,7 @@ export class SellProductModalComponent implements OnInit{
   failed_to_post:boolean = false;
   current_user = "";
   picture : File | null = null;
+  formValid:boolean = false;
 
   product_obj = {
     _id: "",
@@ -63,13 +64,30 @@ export class SellProductModalComponent implements OnInit{
       && this.product_obj.category !== "" && this.product_obj.location !== "" && this.product_obj.price > 0) {
         this.product_obj.createdBy = this.current_user; 
         this.product_obj.file = this.picture;
+        this.failed_to_post = false;
         this.submit();
     } else {
       this.failed_to_post = true;
     }
   }
 
+  monitorFields() {
+    if(this.product_obj.name !== "" && this.product_obj.specs.length > 1
+      && this.product_obj.category !== "" && this.product_obj.location !== "" && this.product_obj.price > 0) {
+        this.product_obj.createdBy = this.current_user; 
+        this.product_obj.file = this.picture;
+        this.failed_to_post = false;
+        //this.submit();
+        this.formValid = true;
+    } else {
+      this.formValid = false;
+    }
+  }
+
   submit() {
     this.sendDataToParent(this.product_obj);
+  }
+  submitFailed() {
+    this.failed_to_post = true;
   }
 }

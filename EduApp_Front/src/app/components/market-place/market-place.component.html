@@ -19,18 +19,18 @@
 
     <div> 
         <div class="d-flex flex-wrap">
-            <div class="border p-1 d-flex flex-column" style="width: 20%;">
+            <!-- <div class="border p-1 d-flex flex-column" style="width: 20%;">
                 <img src="mkpllap.jpg" alt="marketpicture" width="100%" height="100%">
                 <div class="d-flex flex-row justify-content-between" style="width: 100%;">
                     <p class="fs-6 text-dark">R24 000.85</p>
                     <a href="#" class="fs-5" style="text-decoration: none;">Buy</a> 
                 </div> 
-            </div> 
+            </div>  -->
             
-            <div class="border p-1 d-flex flex-column" style="width: 20%;">
-                <img src="mkpllap.jpg" alt="marketpicture" width="100%" height="100%">
+            <div *ngFor="let product of allProducts" class="border p-1 d-flex flex-column m-2" style="width: 20%;">
+                <img src="http://localhost:4001{{product.imageUrl}}" alt="marketpicture" width="100%" height="70%">
                 <div class="d-flex flex-row justify-content-between" style="width: 100%;">
-                    <p class="fs-6 text-dark">R15 001.85</p>
+                    <p class="fs-6 text-dark">R {{product.price}}</p>
                     <a href="#" class="fs-5" style="text-decoration: none;">Buy</a>
                 </div> 
             </div>  

@@ -16,22 +16,22 @@
             <form>
                 <div class="mb-3 mt-3">
                   <label for="name_" class="form-label">Name:</label>
-                  <input type="text" class="form-control" id="name_" placeholder="Enter name" name="name_" [(ngModel)]="product_obj.name">
+                  <input type="text" class="form-control" id="name_" placeholder="Enter name" name="name_" [(ngModel)]="product_obj.name" (input)="monitorFields();">
                 </div> 
                 <div class="mb-3 mt-3">
                     <label for="specs" class="form-label">Specs:</label>
-                    <input type="text" class="form-control" id="specs" placeholder="List specs separate by ';'" name="specs" [(ngModel)]="spec" (input)="monitorSpecs()">
+                    <input type="text" class="form-control" id="specs" placeholder="List specs separate by ';'" name="specs" [(ngModel)]="spec" (input)="monitorSpecs()" (input)="monitorFields();">
                   </div> 
                 <div class="mb-3 mt-3">
                     <label for="price_" class="form-label">Price:</label>
                     <div class="input-group"> 
                         <span class="input-group-text">R</span>
-                        <input type="number" class="form-control" id="price_" placeholder="00.00" name="price_" [(ngModel)]="product_obj.price">
+                        <input type="number" class="form-control" id="price_" placeholder="00.00" name="price_" [(ngModel)]="product_obj.price" (input)="monitorFields();">
                     </div>
                 </div>  
                 <div class="mb-3 mt-3">
                     <label for="category" class="form-label">Category:</label>
-                    <select class="form-select" id="category" name="category" [(ngModel)]="product_obj.category">
+                    <select class="form-select" id="category" name="category" [(ngModel)]="product_obj.category" (input)="monitorFields();">
                         <option>Entertainment</option>
                         <option>Learning</option>
                         <option>Clothes</option>
@@ -41,7 +41,7 @@
                 </div> 
                 <div class="mb-3 mt-3">
                     <label for="location" class="form-label">Where are you located?</label>
-                    <select class="form-select" id="location" name="location" [(ngModel)]="product_obj.location">
+                    <select class="form-select" id="location" name="location" [(ngModel)]="product_obj.location" (input)="monitorFields();">
                         <option>Grahamstown</option>
                         <option>Johannesburg</option>
                         <option>Limpopo University</option>
@@ -66,8 +66,8 @@
          
         <!-- Modal footer -->
         <div class="modal-footer">
-          <!-- <button *ngIf="!failed_to_post" type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="handlePost()">Post</button> -->
-          <button type="button" class="btn btn-success" (click)="handlePost()">Post</button>
+          <button *ngIf="formValid" type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="handlePost()">Post</button>
+          <button *ngIf="!formValid" type="button" class="btn btn-success" (click)="handlePost()">Post</button>
         </div>
   
       </div>

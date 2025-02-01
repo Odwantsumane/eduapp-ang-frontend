@@ -3,11 +3,13 @@ import { RouterLink } from '@angular/router';
 import { SellProductModalComponent } from '../sell-product-modal/sell-product-modal.component';
 import { product } from '../../services/Product/api.service';
 import { ProductService } from '../../services/Product/product.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-market-place',
   standalone: true,
-  imports: [RouterLink,SellProductModalComponent],
+  imports: [RouterLink,SellProductModalComponent, CommonModule, FormsModule],
   templateUrl: './market-place.component.html',
   styleUrl: './market-place.component.css'
 })
@@ -28,14 +30,14 @@ export class MarketPlaceComponent implements OnInit{
     this.product_obj = newProduct;
     this.uploadedFile = newProduct.file;
     console.log(newProduct);
-    this.createProduct(newProduct);
+    this.createProduct();
   }
 
   async getAll() {
     this.allProducts = await this.productsService.getAll();
   }
 
-  async createProduct(newPrd:product) {
+  async createProduct() {
     
     if (this.uploadedFile && this.product_obj) {
       const newProduct = await this.productsService.fileUpload(this.uploadedFile, this.product_obj); 

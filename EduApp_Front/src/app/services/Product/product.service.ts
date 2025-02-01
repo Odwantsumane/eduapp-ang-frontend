@@ -28,7 +28,7 @@ export class ProductService {
 
     async fileUpload(file: File, metadata: product) : Promise<product | null> {
       const response = await this.upload(file);
-      if(response?.path) metadata.imageUrl = response?.path;
+      if(response?.path) metadata.imageUrl = response?.path.replace("./uploads", "/uploads");
   
       if (response){ 
         const finalResponse = await this.createNewProduct(metadata);
