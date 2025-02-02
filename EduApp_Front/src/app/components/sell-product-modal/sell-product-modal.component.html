@@ -66,8 +66,8 @@
          
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button *ngIf="formValid" type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="handlePost()">Post</button>
-          <button *ngIf="!formValid" type="button" class="btn btn-success" (click)="handlePost()">Post</button>
+          <button *ngIf="formValid" type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="submit()">Post</button>
+          <button *ngIf="!formValid" type="button" class="btn btn-success" (click)="submitFailed()">Post</button>
         </div>
   
       </div>

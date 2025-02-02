@@ -18,7 +18,7 @@
     <hr class="text-primary">
 
     <div> 
-        <div class="d-flex flex-wrap">
+        <div class="d-flex flex-wrap" style="height: fit-content;">
             <!-- <div class="border p-1 d-flex flex-column" style="width: 20%;">
                 <img src="mkpllap.jpg" alt="marketpicture" width="100%" height="100%">
                 <div class="d-flex flex-row justify-content-between" style="width: 100%;">
@@ -27,11 +27,15 @@
                 </div> 
             </div>  -->
             
-            <div *ngFor="let product of allProducts" class="border p-1 d-flex flex-column m-2" style="width: 20%;">
-                <img src="http://localhost:4001{{product.imageUrl}}" alt="marketpicture" width="100%" height="70%">
-                <div class="d-flex flex-row justify-content-between" style="width: 100%;">
-                    <p class="fs-6 text-dark">R {{product.price}}</p>
-                    <a href="#" class="fs-5" style="text-decoration: none;">Buy</a>
+            <div *ngFor="let product of allProducts" class="border p-1 d-flex flex-column m-2" style="width: 20%; height: 290px;">
+                <img src="http://localhost:4001{{product.imageUrl}}" alt="marketpicture" width="100%" height="60%">
+                <div class="" style="width: 100%;">
+                    <h6 class="text-primary">{{product.name}}</h6>
+                    <h3 class="fs-6 text-dark">R {{product.price}}</h3>
+                    <div class="d-flex flex-row justify-content-between">
+                        <a href="#" class="text-success fs-6" style="text-decoration: none;">Message</a>
+                        <a href="#" class="fs-5 float-end btn btn-success" style="text-decoration: none;">Buy</a>
+                    </div> 
                 </div> 
             </div>  
         </div> 
