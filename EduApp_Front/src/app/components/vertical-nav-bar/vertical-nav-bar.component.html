@@ -1,4 +1,4 @@
-<div class="vertical-nav w-100"> 
+<div class="vertical-nav w-100 sticky-top"> 
     <div class="clearfix w-100">
       <div class="float-start w-100">
         <ul class="nav flex-column w-100">
@@ -7,6 +7,12 @@
               <a routerLink="/manager" class="fs-1" style="cursor: pointer;"><i class="bi bi-list text-dark"></i></a>
             </div> 
           </li> -->
+          <li class="nav-item pe-2 ps-2 pt-1">
+            <div style="text-align: center;" class="d-flex flex-column justify-content-center">
+              <a routerLink="/profile" style="cursor: pointer;"><i class="bi bi-person-circle fs-3"></i></a>
+              <p *ngIf="user" style="font-size: medium;">{{user.name + " " + user.surname}}</p>
+            </div>
+          </li>
 
           <li *ngIf="isAdmin" class="nav-item p-2">
             <div style="text-align: center;" class="d-flex flex-row justify-content-center">

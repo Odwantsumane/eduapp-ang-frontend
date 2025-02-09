@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { RefreshService } from '../../services/refresh.service';
 import { Subscription } from 'rxjs';
+import { User } from '../../services/userrequest.service';
 
 @Component({
   selector: 'app-vertical-nav-bar',
@@ -17,12 +18,14 @@ import { Subscription } from 'rxjs';
 export class VerticalNavBarComponent implements OnInit { 
   isLoggedIn : boolean = false;//Promise<boolean>;
   isAdmin:boolean = false;
+  user : User | null = null;
 
   constructor(private authenticator: AuthenticateService) { 
     //this.isLoggedIn = new Promise((resolve, reject) => {});
   }
 
   async ngOnInit() {
+    this.user = await this.authenticator.isLoggedInGetUser();
     this.isLoggedIn = await this.authenticator.isLoggedIn2();//this.authenticator.isUserLoggedIn(); 
 
     this.isAdmin = await this.authenticator.isAdmin();
