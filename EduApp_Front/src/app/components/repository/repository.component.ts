@@ -30,7 +30,24 @@ export class RepositoryComponent implements OnInit {
   humanities_arr : Array<folder> = [];
   law_arr : Array<folder> = [];
   it_arr : Array<folder> = [];
-  other_arr : Array<folder> = [];
+  other_arr : Array<folder> = []; 
+  //folderLoading : boolean = false;
+  foldersLoading : boolean = false;
+  loadFoldersErr : boolean = false;
+  scienceFolderLoading : boolean = false;
+
+  folderLoading = {
+    lawFolderLoading: false,
+    lawFolderFailLoading: false,
+    scienceFolderLoading: false,
+    scienceFolderFailLoading: false,
+    humanitiesFolderLoading: false,
+    humanitiesFolderFailLoading: false,
+    itFolderLoading: false,
+    itFolderFailLoading: false,
+    otherFolderLoading: false, 
+    otherFolderFailLoading: false,
+  }
 
 
   constructor(private folderservice: FolderService, private autheservice: AuthenticateService){}
@@ -44,11 +61,16 @@ export class RepositoryComponent implements OnInit {
 
   async addFolder(newFolder:folder) { 
     try { 
+      this.setFolderLoading(newFolder.course.toLowerCase(), false);
+
       this.folder_list.push(newFolder);
       this.cleanFolders();
       this.distribute_folders();
+
+      this.stopFolderLoading();
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folder, " + `${e}`);
+      this.stopFolderLoadingFail(newFolder.course.toLowerCase());
     }   
   }
 
@@ -61,12 +83,16 @@ export class RepositoryComponent implements OnInit {
   }
   
   async getAllFolders() { 
+    this.foldersLoading = true;
     try {
       this.folder_list = await this.folderservice.getAllFolders();  
       this.distribute_folders();
+      this.foldersLoading = false;
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folders, " + `${e}`);
-    }   
+      this.foldersLoading = false;
+      this.loadFoldersErr = true;
+    }     
   }
 
   async removeFolder(id:string) {
@@ -126,6 +152,41 @@ export class RepositoryComponent implements OnInit {
         this.humanities = true; this.law = true; this.it = true; this.other = true; this.science = true;
         break;
     }
+  }
+
+  setFolderLoading(course:string, action:boolean):void {
+    switch (course) {
+      case "science":
+        this.folderLoading.scienceFolderLoading = true;
+        this.folderLoading.scienceFolderFailLoading = action;
+        break;
+      case "humanities":
+        this.folderLoading.humanitiesFolderLoading = true;
+        this.folderLoading.humanitiesFolderFailLoading = action;
+        break;
+      case "law":
+        this.folderLoading.lawFolderLoading = true;
+        this.folderLoading.lawFolderFailLoading = action;
+        break;
+      case "it":
+        this.folderLoading.itFolderLoading = true;
+        this.folderLoading.itFolderFailLoading = action;
+        break; 
+      default: 
+        this.folderLoading.otherFolderLoading = true;
+        this.folderLoading.otherFolderFailLoading = action;
+        break;
+    }
+  }
+  stopFolderLoading() {
+    this.folderLoading.scienceFolderLoading = false;this.folderLoading.humanitiesFolderLoading = false;
+    this.folderLoading.lawFolderLoading = false;this.folderLoading.itFolderLoading = false;
+    this.folderLoading.otherFolderLoading = false;
+  }
+
+  stopFolderLoadingFail(course:string) {
+    this.setFolderLoading(course, true);
+    this.stopFolderLoading();
   }
 
 

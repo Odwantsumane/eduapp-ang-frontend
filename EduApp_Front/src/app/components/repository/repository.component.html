@@ -1,26 +1,31 @@
 <a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
 <h2>Repository</h2>
 
-<div class="d-flex w-100">
+<div class="repo-nav d-flex w-100">
     <!-- <i class="bi bi-table"></i> -->
     <div class="labels d-flex flex-nowrap w-50 mt-5">
-        <div class="rounded-3 border w-25 m-1"><a href="#all" class="btn w-100" (click)="OnFilter('all')">All</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#science" class="btn w-100" (click)="OnFilter('science')">Science</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#law" class="btn w-100" (click)="OnFilter('law')">Law</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#it" class="btn w-100" (click)="OnFilter('it')">IT</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#humanities" class="btn w-100" (click)="OnFilter('humanities')">Humanities</a></div>
-        <div class="rounded-3 border w-25 m-1"><a href="#other" class="btn w-100" (click)="OnFilter('other')">Other</a></div>
+        <div class="rounded-3 border w-25 m-1" style="height: fit-content;"><a href="repository#all" class="btn w-100" (click)="OnFilter('all')">All</a></div>
+        <div class="rounded-3 border w-25 m-1" style="height: fit-content;"><a href="repository#scienceCat" class="btn w-100" (click)="OnFilter('science')">Science</a></div>
+        <div class="rounded-3 border w-25 m-1" style="height: fit-content;"><a href="repository#lawCat" class="btn w-100" (click)="OnFilter('law')">Law</a></div>
+        <div class="rounded-3 border w-25 m-1" style="height: fit-content;"><a href="repository#itCat" class="btn w-100" (click)="OnFilter('it')">IT</a></div>
+        <div class="rounded-3 border w-25 m-1" style="height: fit-content;"><a href="repository#humanitiesCat" class="btn w-100" (click)="OnFilter('humanities')">Humanities</a></div>
+        <div class="rounded-3 border w-25 m-1" style="height: fit-content;"><a href="repository#otherCat" class="btn w-100" (click)="OnFilter('other')">Other</a></div>
     </div>
     <div class="w-50 mt-5">
-        <div class="rounded-3 border w-25 m-1 float-end"><a href="#" class="btn w-100" (click)="OnFilter('all')"><i class="bi bi-table fs-5"></i></a></div>
-        <div class="rounded-3 border w-25 m-1 float-end"><a href="#" class="btn w-100" (click)="OnFilter('all')"><i class="bi bi-card-list fs-5"></i></a></div>
+        <div class="rounded-3 border w-25 m-1 float-end"><a href="repository#displaylist" class="btn w-100" (click)="OnFilter('all')"><i class="bi bi-table fs-5"></i></a></div>
+        <div class="rounded-3 border w-25 m-1 float-end"><a href="repository#displayGrid" class="btn w-100" (click)="OnFilter('all')"><i class="bi bi-card-list fs-5"></i></a></div>
     </div>
 </div>
 
 <hr class="text-primary">
 
+<div *ngIf="loadFoldersErr" class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Failed!</strong> Sorry we couldn't load folders, please try again.
+</div>
+
 <div class="repo mt-3 d-flex flex-column">
-    <div *ngIf="science" class="science w-100 mt-4">
+    <div *ngIf="science" class="science w-100 mt-4" id="scienceCat">
         <h4>Science</h4>
         <div class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
@@ -40,22 +45,26 @@
                 <div class="p-1" id="{{folder._id}}"> 
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
-                            <li><a class="dropdown-item text-danger" href="#" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-success" href="repository#scienceCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
                           </ul></span>
 
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
-            </div>  
+            </div> 
+            <div *ngIf="folderLoading.scienceFolderLoading" class="pt-5"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-5"><i *ngIf="folderLoading.scienceFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div> 
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
             <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder>
         </div>
-        
+        <hr class="fs-1 text-secondary w-25">
+        <a routerLink="videos/scienceVids" class="text-muted fs-5" style="text-decoration: none;">Videos</a>
     </div>
 
     <!--  -->
-    <div *ngIf="law" class="law w-100 mt-4">
+    <div *ngIf="law" class="law w-100 mt-4" id="lawCat">
         <h4>Law</h4>
         <div class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
@@ -73,21 +82,25 @@
                 <div class="p-1" id="{{folder._id}}">
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
-                            <li><a class="dropdown-item text-danger" href="#{{folder._id}}" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-success" href="repository#lawCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
                           </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
-            </div>  
+            </div>
+            <div *ngIf="folderLoading.lawFolderLoading" class="pt-5"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-5"><i *ngIf="folderLoading.lawFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div>  
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
-            <app-create-folder></app-create-folder>
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder>
         </div>
-        
+        <hr class="fs-1 text-secondary w-25">
+        <a routerLink="videos/lawVids" class="text-muted fs-5" style="text-decoration: none;">Videos</a>
     </div>
     <!--  -->
 
-    <div *ngIf="it" class="it w-100 mt-4">
+    <div *ngIf="it" class="it w-100 mt-4" id="itCat">
         <h4>IT</h4>
         <div class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
@@ -105,21 +118,25 @@
                 <div class="p-1" id="{{folder._id}}">
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
-                            <li><a class="dropdown-item text-danger" href="#{{folder._id}}" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-success" href="repository#itCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
                           </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
-            </div>  
+            </div> 
+            <div *ngIf="folderLoading.itFolderLoading" class="pt-5"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-5"><i *ngIf="folderLoading.itFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div> 
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
-            <app-create-folder></app-create-folder> 
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder> 
         </div>
-        
+        <hr class="fs-1 text-secondary w-25">
+        <a routerLink="videos/itVids" class="text-muted fs-5" style="text-decoration: none;">Videos</a>
     </div>
 
     <!--  -->
-    <div *ngIf="humanities" class="humanities w-100 mt-4">
+    <div *ngIf="humanities" class="humanities w-100 mt-4" id="humanitiesCat">
         <h4>Humanities</h4>
         <div class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
@@ -137,21 +154,25 @@
                 <div class="p-1" id="{{folder._id}}">
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
-                            <li><a class="dropdown-item text-danger" href="#{{folder._id}}" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-success" href="repository#humanitiesCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
                           </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
             </div>  
+            <div *ngIf="folderLoading.humanitiesFolderLoading" class="pt-5"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-5"><i *ngIf="folderLoading.humanitiesFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div>
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
-            <app-create-folder></app-create-folder> 
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder> 
         </div>
-        
+        <hr class="fs-1 text-secondary w-25">
+        <a routerLink="videos/humanitiesVids" class="text-muted fs-5" style="text-decoration: none;">Videos</a>
     </div>
     <!--  -->
 
-    <div *ngIf="other" class="other w-100 mt-4">
+    <div *ngIf="other" class="other w-100 mt-4" id="otherCat">
         <h4>Other</h4>
         <div class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
@@ -169,17 +190,21 @@
                 <div class="p-1" id="{{folder._id}}">
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item text-success" href="#">Update</a></li>
-                            <li><a class="dropdown-item text-danger" href="#{{folder._id}}" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
                           </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
                 </div>
-            </div>  
+            </div> 
+            <div *ngIf="folderLoading.otherFolderLoading" class="pt-5"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-5"><i *ngIf="folderLoading.otherFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div> 
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
-            <app-create-folder></app-create-folder> 
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder> 
         </div>
-        
+        <hr class="fs-1 text-secondary w-25">
+        <a routerLink="videos/otherVids" class="text-muted fs-5" style="text-decoration: none;">Videos</a>
     </div>
 
     <!--  -->

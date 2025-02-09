@@ -16,6 +16,8 @@ import { ManagerComponent } from './components/Administration/manager/manager.co
 import { AdminRouteGuardService } from './services/Aministration/admin-route-guard.service';
 import { MarketPlaceComponent } from './components/market-place/market-place.component';
 import { FolderComponent } from './components/folder/folder.component';
+import { TherapyComponent } from './components/therapy/therapy.component';
+import { VideosComponent } from './components/repository/videos/videos.component';
 
 export const routes: Routes = [
     { path: '', component: HomecontentComponent, },
@@ -31,6 +33,8 @@ export const routes: Routes = [
     { path: 'manager', component: ManagerComponent, canActivate: [AdminRouteGuardService]},
     { path: 'market', component: MarketPlaceComponent, canActivate: [RouteGuardServiceService]},
     { path: 'repository/folder/:id', component: FolderComponent, canActivate: [RouteGuardServiceService]},
+    { path: 'therapy', component: TherapyComponent, canActivate: [RouteGuardServiceService]},
+    { path: 'repository/videos/:category', component: VideosComponent, canActivate: [RouteGuardServiceService]},
     { path: 'logout', component: LogoutComponent},
     { path: '**', component: ErrorPageComponent},
 ];
