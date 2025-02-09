@@ -1,6 +1,9 @@
 <h3 class="mt-2">Articles</h3>
 
-<div class="articles d-flex flex-column">
+<div class="articles d-flex flex-column"> 
+    <div class="card-body d-flex flex-row justify-content-end"> 
+        <div class=""><a href="#" style="text-decoration: none;" class=" btn btn-success text-white"><i class="bi bi-pen fs-4 text-white"></i>  <b>Create Article</b></a></div>
+    </div>   
 <ul *ngFor="let article of Articles" class="article-list">
     <li id="{{article._id}}"  class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
         <span class="text-muted float-end">{{article.createdAt | date: 'dd/MM/yyyy'}}</span>
