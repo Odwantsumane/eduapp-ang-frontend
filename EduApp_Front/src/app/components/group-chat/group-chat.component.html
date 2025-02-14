@@ -1,4 +1,4 @@
-<a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
+<!-- <a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a> -->
 <div class="d-flex w-100 m-2">
     <div class="chatgroups w-50" style="height: 600px;">
         <div class="bg-light w-100 p-1 border-bottom" style="height: 55px;">
@@ -12,7 +12,7 @@
                         <img src="favicon.ico" alt="chat profile" style="max-width: 100%; height: auto;">
                     </div>
                     <div class="mt-2">
-                        <a href="#" class="fs-5 text-dark" style="text-decoration: none;">{{chat.title}}</a>
+                        <a href="chatgroups#" class="fs-5 text-dark" style="text-decoration: none;">{{chat.title}}</a>
                         <p class="text-muted">{{chat.description}}</p>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div> 
-            <a href="#" class="p-2 text-dark"><i class="bi bi-three-dots-vertical fs-4"></i></a>
+            <a href="chatgroups#" class="p-2 text-dark"><i class="bi bi-three-dots-vertical fs-4"></i></a>
         </div>
         <div class="messages ps-4 pe-4 mb-3" style="height: 73%;"> 
             <div class="" style="text-align: center; font-size: small;"><i class="bi bi-lock"></i>end-to-end encrypted</div>
@@ -118,29 +118,29 @@
             <span *ngIf="newMessageInd" class="spinner-grow spinner-grow-sm text-success" style="font-size: x-small;"></span>
              
             <audio *ngIf="audioUrl" class="ms-5 pt-2" [src]="audioUrl" style="width: 50%; height: 20px;" controls></audio> 
-            <a href="#" *ngIf="audioUrl" class="p-3" style="text-decoration: none;" (click)="sendMessage()">Send</a>
+            <a href="chatgroups#" *ngIf="audioUrl" class="p-3" style="text-decoration: none;" (click)="sendMessage()">Send</a>
             <!--<i class="bi bi-send fs-6"></i>-->
             
             <span *ngIf="isRecording" style="font-size: x-small;">recording..</span>
             <div class="d-flex" style="height: 15%;">
-                <a href="#" class="mt-2 p-1 h-75 text-dark"><i class="bi bi-plus-square fs-5"></i></a>
+                <a href="chatgroups#" class="mt-2 p-1 h-75 text-dark"><i class="bi bi-plus-square fs-5"></i></a>
                 
 
                 <div class="dropup mt-2 p-1">
-                    <a href="#" class="h-75 text-dark" data-bs-toggle="dropdown"><i class="bi bi-emoji-smile fs-5"></i></a>
+                    <a href="chatgroups#" class="h-75 text-dark" data-bs-toggle="dropdown"><i class="bi bi-emoji-smile fs-5"></i></a>
                      
                     <ul class="dropdown-menu">
                         <div class="d-flex flex-wrap p-1" style="width: 280px;">
-                            <li><a href="#" class="emj" (click)="attachEmoji('😂')">😂</a></li> <li><a href="#" class="emj" (click)="attachEmoji('👍')">👍</a></li><li><a href="#" class="emj" (click)="attachEmoji('😎')">😎</a></li><li><a href="#" class="emj" (click)="attachEmoji('😁')">😁</a></li><li><a href="#" class="emj" (click)="attachEmoji('😊')">😊</a></li>
-                            <li><a href="#" class="emj" (click)="attachEmoji('🤣')">🤣</a></li> <li><a href="#" class="emj" (click)="attachEmoji('❤️')">❤️</a></li><li><a href="#" class="emj" (click)="attachEmoji('😍')">😍</a></li><li><a href="#" class="emj" (click)="attachEmoji('😒')">😒</a></li>
-                            <li><a href="#" class="emj" (click)="attachEmoji('👌')">👌</a></li> <li><a href="#" class="emj" (click)="attachEmoji('😘')">😘</a></li><li><a href="#" class="emj" (click)="attachEmoji('💕')">💕</a></li><li><a href="#" class="emj" (click)="attachEmoji('🙌')">🙌</a></li><li><a href="#" class="emj" (click)="attachEmoji('🤦‍♀️')">🤦‍♀️</a></li>
-                            <li><a href="#" class="emj" (click)="attachEmoji('🤦‍♂️')">🤦‍♂️</a></li> <li><a href="#" class="emj" (click)="attachEmoji('🤷‍♀️')">🤷‍♀️</a></li><li><a href="#" class="emj" (click)="attachEmoji('🤷‍♂️')">🤷‍♂️</a></li><li><a href="#" class="emj" (click)="attachEmoji('✌️')">✌️</a></li><li><a href="#" class="emj" (click)="attachEmoji('😉')">😉</a></li>
-                            <li><a href="#" class="emj" (click)="attachEmoji('🎶')">🎶</a></li> <li><a href="#" class="emj" (click)="attachEmoji('😢')">😢</a></li><li><a href="#" class="emj" (click)="attachEmoji('💖')">💖</a></li><li><a href="#" class="emj" (click)="attachEmoji('😜')">😜</a></li> 
-                            <li><a href="#" class="emj" (click)="attachEmoji('😃')">😃</a></li> <li><a href="#" class="emj" (click)="attachEmoji('😅')">😅</a></li><li><a href="#" class="emj" (click)="attachEmoji('😆')">😆</a></li>
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('😂')">😂</a></li> <li><a href="chatgroups#" class="emj" (click)="attachEmoji('👍')">👍</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😎')">😎</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😁')">😁</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😊')">😊</a></li>
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('🤣')">🤣</a></li> <li><a href="chatgroups#" class="emj" (click)="attachEmoji('❤️')">❤️</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😍')">😍</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😒')">😒</a></li>
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('👌')">👌</a></li> <li><a href="chatgroups#" class="emj" (click)="attachEmoji('😘')">😘</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('💕')">💕</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('🙌')">🙌</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('🤦‍♀️')">🤦‍♀️</a></li>
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('🤦‍♂️')">🤦‍♂️</a></li> <li><a href="chatgroups#" class="emj" (click)="attachEmoji('🤷‍♀️')">🤷‍♀️</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('🤷‍♂️')">🤷‍♂️</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('✌️')">✌️</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😉')">😉</a></li>
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('🎶')">🎶</a></li> <li><a href="chatgroups#" class="emj" (click)="attachEmoji('😢')">😢</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('💖')">💖</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😜')">😜</a></li> 
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('😃')">😃</a></li> <li><a href="chatgroups#" class="emj" (click)="attachEmoji('😅')">😅</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😆')">😆</a></li>
 
-                            <li><a href="#" class="emj" (click)="attachEmoji('😋')">😋</a></li><li><a href="#" class="emj" (click)="attachEmoji('😚')">😚</a></li><li><a href="#" class="emj" (click)="attachEmoji('🤗')">🤗</a></li>
-                            <li><a href="#" class="emj" (click)="attachEmoji('🤔')">🤔</a></li><li><a href="#" class="emj" (click)="attachEmoji('🫡')">🫡</a></li><li><a href="#" class="emj" (click)="attachEmoji('🤨')">🤨</a></li><li><a href="#" class="emj" (click)="attachEmoji('😐')">😐</a></li>
-                            <li><a href="#" class="emj" (click)="attachEmoji('😑')">😑</a></li><li><a href="#" class="emj" (click)="attachEmoji('😶')">😶</a></li><li><a href="#" class="emj" (click)="attachEmoji('🫥')">🫥</a></li>
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('😋')">😋</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😚')">😚</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('🤗')">🤗</a></li>
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('🤔')">🤔</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('🫡')">🫡</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('🤨')">🤨</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😐')">😐</a></li>
+                            <li><a href="chatgroups#" class="emj" (click)="attachEmoji('😑')">😑</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('😶')">😶</a></li><li><a href="chatgroups#" class="emj" (click)="attachEmoji('🫥')">🫥</a></li>
                         </div> 
                     </ul>
                   </div>
@@ -148,8 +148,8 @@
                 <div class="rounded-4  m-1 text-muted p-2 w-100 d-flex justify-content-between" style="height: fit-content;">
                     <div class="" style="width: 95%;"><textarea name="messageFieldValue" id="message_toSend" rows="1" class="form-control"  placeholder="write message.." [(ngModel)]="messageFieldValue" (keydown.enter)="sendMessage()" (input)="notifyWhenTyping()"></textarea></div>
                     <!-- <div class="" style="width: 95%;"><input type="text" name="" id="" class="border-light form-control" placeholder="write message.."></div> -->
-                    <a *ngIf="!isRecording" href="#" class="text-dark" style="text-decoration: none;" (click)="startRecording()"><i class="bi bi-mic fs-5"></i></a>
-                    <a *ngIf="isRecording" href="#" class="text-dark" style="text-decoration: none;" (click)="stopRecording()"><i class="bi bi-mic fs-5"></i></a>
+                    <a *ngIf="!isRecording" href="chatgroups#" class="text-dark" style="text-decoration: none;" (click)="startRecording()"><i class="bi bi-mic fs-5"></i></a>
+                    <a *ngIf="isRecording" href="chatgroups#" class="text-dark" style="text-decoration: none;" (click)="stopRecording()"><i class="bi bi-mic fs-5"></i></a>
                 </div>
 
                 <div>

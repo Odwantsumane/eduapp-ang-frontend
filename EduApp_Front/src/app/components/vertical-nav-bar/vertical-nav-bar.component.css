@@ -1,6 +1,8 @@
 .vertical-nav {
     /* background-color: rgb(4, 71, 79); */
-    background-color: rgb(218, 243, 201);
+    /* background-color: rgb(218, 243, 201); */
+    /* background-color: rgb(217, 241, 234); */
+    background-color: rgb(229, 249, 243);
 }
 .nav-item:hover {
     background-color: rgb(31, 88, 43);
