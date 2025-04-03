@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { ExtraOptions, Routes } from '@angular/router';
 import { AllchatsComponent } from './components/allchats/allchats.component';
 import { HomecontentComponent } from './components/homecontent/homecontent.component';
 import { GroupChatComponent } from './components/group-chat/group-chat.component';
@@ -38,3 +38,8 @@ export const routes: Routes = [
     { path: 'logout', component: LogoutComponent},
     { path: '**', component: ErrorPageComponent},
 ];
+
+export const routerOptions: ExtraOptions = {
+    scrollPositionRestoration: 'enabled', // Restores scroll position
+    anchorScrolling: 'enabled' // Enables scrolling to anchors
+  };

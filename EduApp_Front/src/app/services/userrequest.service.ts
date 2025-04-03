@@ -94,8 +94,8 @@ export class UserrequestService {
   }
 
   isloggedIn(token: string) { 
-    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
-    return this.http.get<isLoggedIn>(`${this.url}/isloggedIn/${token}`, {headers: this.Headers});
+    this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
+    return this.http.get<isLoggedIn>(`${this.url}/isloggedIn`, {headers: this.Headers, withCredentials: true}); 
   }
 
   createBasicAuthHeaders() { ;
