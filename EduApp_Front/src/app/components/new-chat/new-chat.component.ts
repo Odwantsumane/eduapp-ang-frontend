@@ -24,7 +24,7 @@ export class NewChatComponent implements OnInit{
 
 
   newChat = {
-    _id:"",__v:0, title:"", description:"",messages:[],participants:[],groupPic:"",createdAt:""
+    id:"",__v:0, title:"", description:"",messages:[],participants:[],groupPic:"",createdAt:""
   }
   constructor(private groupchatservice: MiddlemanService, private managerservice: ManagerService){}
 

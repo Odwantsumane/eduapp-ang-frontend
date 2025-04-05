@@ -2,17 +2,21 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'; 
 
 export class Group {
-  constructor(public _id:string, public title:string, public description:string, public messages:string[], 
+  constructor(public id:string, public title:string, public description:string, public messages:string[], 
     public participants:string[], public createdAt:string, public __v: number, public groupPic:string){}
 }
 
 export class Message {
-  constructor(public _id:string, public username:string, public message:string, public room_id:string, 
+  constructor(public id:string, public username:string, public message:string, public room_id:string, 
   public createdAt:string, public __v: number, public audioUrl:string){}
 } 
 
 export class readMessage {
   constructor(public userId:string, public roomId:string, public read:boolean){}
+}
+
+export class finalResponse {
+  constructor(public result: Array<Message>, success: boolean, fatal: boolean, message: string){};
 }
 
 
@@ -29,14 +33,20 @@ export class GroupChatsService {
   constructor(private http: HttpClient) { }
 
 
+  // getAllChatGroups(token: string) {
+  //   this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
+  //   return this.http.get<Array<Group>>(`${this.url}/allChatRooms`,  {headers: this.Headers, withCredentials: true});
+  // }
+
   getAllChatGroups(token: string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.get<Array<Group>>(`${this.url}/allChatRooms`,  {headers: this.Headers, withCredentials: true});
+    return this.http.get<Array<Group>>(`${this.url}/getAll_mysql`,  {headers: this.Headers, withCredentials: true});
   }
 
   getAllChatMessages(token: string, room_id:string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.get<Array<Message>>(`${this.url}/room/${room_id}`,  {headers: this.Headers, withCredentials: true});
+    //return this.http.get<Array<Message>>(`${this.url}/room/${room_id}`,  {headers: this.Headers, withCredentials: true});
+    return this.http.get<finalResponse>(`${this.url}/room/${room_id}`,  {headers: this.Headers, withCredentials: true});
   }
 
   createNewChat(token:string, newChat:Group) {

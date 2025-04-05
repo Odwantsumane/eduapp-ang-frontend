@@ -5,5 +5,9 @@
     background-color: rgb(255, 255, 255);
 }
 .nav-item:hover {
-    background-color: rgb(207, 207, 211);
+    background-color: rgb(237, 237, 251);
+}
+
+.nav-item:active {
+    background-color: rgb(204, 210, 226);
 }

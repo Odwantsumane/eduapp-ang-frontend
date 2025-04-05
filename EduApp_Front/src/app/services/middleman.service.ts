@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Group, GroupChatsService, Message } from './group-chats.service';
+import { Group, GroupChatsService, Message, finalResponse } from './group-chats.service';
 import { CookieLocalService } from './cookie-local.service';
 
 @Injectable({
@@ -11,10 +11,10 @@ export class MiddlemanService {
   PlaceHolderArrayMessages: Message[] = [];
 
   PlaceHolderGroup:Group = {
-    _id:"",__v:0, title:"", description:"",messages:[],participants:[],groupPic:"",createdAt:""
+    id:"",__v:0, title:"", description:"",messages:[],participants:[],groupPic:"",createdAt:""
   }
   PlaceHolderMsg:Message = {
-    _id:"",__v:0,createdAt:"", username: "", message: "", room_id: "", audioUrl: ""
+    id:"",__v:0,createdAt:"", username: "", message: "", room_id: "", audioUrl: ""
   }
 
   constructor(private groupchatservice: GroupChatsService, private cookieservice: CookieLocalService) { }
@@ -96,10 +96,10 @@ export class MiddlemanService {
     return response;
   }
 
-  handleGroupMessages(response: Array<Message> | undefined): Array<Message> {
-
+  handleGroupMessages(response: finalResponse | undefined): Array<Message> {
+    
     if(response === undefined) return this.PlaceHolderArrayMessages;
-    return response;
+    return response.result;
   }
 
   handleError(error: any) {

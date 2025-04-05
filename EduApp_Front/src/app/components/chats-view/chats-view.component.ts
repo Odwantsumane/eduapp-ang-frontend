@@ -49,7 +49,8 @@ export class ChatsViewComponent implements OnInit{
 
     if(this.groupChats && this.allchats !==0){
        for (let index = 0; index < 3; index++) {
-         this.filterArray.push(this.groupChats[index]);
+        if(index < this.groupChats.length)
+          this.filterArray.push(this.groupChats[index]);
         
        }
     } else {
