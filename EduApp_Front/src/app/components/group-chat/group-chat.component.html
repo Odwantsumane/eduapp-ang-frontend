@@ -51,7 +51,7 @@
             <div class="" style="text-align: center; font-size: small;"><i class="bi bi-lock"></i>end-to-end encrypted</div>
             <div #chatContainer class="w-100 h-100" style="overflow-y: auto;">
                 <div *ngFor="let message of filteredMessages" class="w-100 d-flex flex-column flex-nowrap" style="height: fit-content;">
-                    <div *ngIf="user[0].name +' '+ user[0].surname !== message.username" class="message w-100 d-flex mb-3" style="height: fit-content;">
+                    <div *ngIf="user[0].username !== message.username" class="message w-100 d-flex mb-3" style="height: fit-content;">
                         <div class="external-message w-50 bg-white rounded-4">
                             
                             <div class="d-flex flex-row w-100">
@@ -60,7 +60,7 @@
                                     <p class="fs-6 bg-white"><img src="jkspr.jpg" alt="chat profile" style="max-width: 95%; height: 80%;" class="rounded-5"></p>
                                 </div>
                                 <div class="message_body" style="width: 90%;">
-                                    <span><b class="ps-1" style="font-size: small;">{{message.username}}</b></span>
+                                    <span><b class="ps-1" style="font-size: small;">{{message.full_name}}</b></span>
                                     <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') === (todayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">{{message.createdAt | date: 'hh:mm' : 'SAST'}}</span>
                                     <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') === (yesterdayDate | date: 'dd/MM/yyyy')" class="text-muted me-1 float-end ps-1 me-2" style="font-size: small;">Yesterday</span>
                                     <span *ngIf="(message.createdAt | date: 'dd/MM/yyyy') !== (yesterdayDate | date: 'dd/MM/yyyy') 
@@ -83,7 +83,7 @@
                             <p class="p-2 bg-white rounded-4"></p>
                         </div>
                     </div>
-                    <div *ngIf="user[0].name +' '+ user[0].surname === message.username"  class="message w-100 d-flex mb-3" style="height: fit-content;">
+                    <div *ngIf="user[0].username === message.username"  class="message w-100 d-flex mb-3" style="height: fit-content;">
                         <div class="external-message w-50 p-2">
                             <p class="p-2 bg-white rounded-4"></p>
                         </div>

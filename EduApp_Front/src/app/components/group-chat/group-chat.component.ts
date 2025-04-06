@@ -183,12 +183,20 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
   async sendMessage() {  
     // console.log("blob: "+ this.audioBlobStore);
     
-    if (this.messageFieldValue !== "" || this.audioUrl !== "") {
+    if (this.messageFieldValue !== "" && this.audioUrl !== "") {
 
-      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:this.generateUniqueFileName() + ".mp3", filetype:"audio/mpeg", username: this.user[0].name + " " + this.user[0].surname, 
-        roomId: this.roomId, userId: this.user[0]._id, audioBlob:this.audioBlobStore
+      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:this.generateUniqueFileName() + ".mp3", filetype:"audio/mpeg", username: this.user[0].username, 
+        roomId: this.roomId, userId: this.user[0]._id, audioBlob:this.audioBlobStore, full_name:this.user[0].name + " " + this.user[0].surname
       });
-    } 
+    } else if (this.messageFieldValue !== "" && this.audioUrl === "") {
+      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename: "", filetype:"", username: this.user[0].username, 
+        roomId: this.roomId, userId: this.user[0]._id, audioBlob:null, full_name:this.user[0].name + " " + this.user[0].surname
+      });
+    } else {
+      this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename: "", filetype:"", username: this.user[0].username, 
+        roomId: this.roomId, userId: this.user[0]._id, audioBlob:this.audioBlobStore, full_name:this.user[0].name + " " + this.user[0].surname
+      });
+    }
  
     // clear field
     console.log("Clearing field value...");

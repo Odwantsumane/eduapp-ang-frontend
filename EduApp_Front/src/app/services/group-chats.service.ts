@@ -8,7 +8,7 @@ export class Group {
 
 export class Message {
   constructor(public id:string, public username:string, public message:string, public room_id:string, 
-  public createdAt:string, public __v: number, public audioUrl:string){}
+  public createdAt:string, public __v: number, public audioUrl:string, public full_name: string){}
 } 
 
 export class readMessage {
