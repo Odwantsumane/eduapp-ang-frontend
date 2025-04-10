@@ -16,7 +16,11 @@ export class readMessage {
 }
 
 export class finalResponse {
-  constructor(public result: Array<Message>, success: boolean, fatal: boolean, message: string){};
+  constructor(public result: Array<Message>, public success: boolean, public fatal: boolean, public message: string){};
+}
+
+export class singleMessageFinalResponse {
+  constructor(public result: Array<Message>, public success: boolean, public fatal: boolean, public message: string){};
 }
 
 

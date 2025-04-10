@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Group, Message, readMessage } from '../../services/group-chats.service';
+import { finalResponse, Group, Message, readMessage, singleMessageFinalResponse } from '../../services/group-chats.service';
 import { MiddlemanService } from '../../services/middleman.service';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { User } from '../../services/userrequest.service';
@@ -62,6 +62,10 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   scroll: boolean = true;
   newMessageInd : boolean = false;
+  newMessageIndicatorObj = {
+    newMessageInd: false,
+    roomId: ""
+  }
   scrollPosition: number = 0;
   chatTitle: string = "Home";
 
@@ -110,23 +114,26 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   receiveSenderMessage() { 
 
-    this.socketservice.onEvent<Message>('sender chat message').subscribe(data => {
+    this.socketservice.onEvent<singleMessageFinalResponse>('sender chat message').subscribe(data => {
        // some logic 
-       console.log(data);
-       this.filteredMessages.push(data);
-       this.scroll = true;
+       console.log(data.result[0].message);
+       if(data.success) {
+        this.filteredMessages.push(data.result[0]);
+        this.scroll = true;
+       } 
     });
   }
 
   receiveBroadcastMessage() { 
 
-    this.socketservice.onEvent<Message>('chat message').subscribe(data => {
+    this.socketservice.onEvent<singleMessageFinalResponse>('chat message').subscribe(data => {
        // some logic
-      if (data && data.room_id === this.roomId) {
-        this.filteredMessages.push(data);
+      if (data.success && data.result[0].room_id === `${this.roomId}`) {
+        this.filteredMessages.push(data.result[0]);
         this.newMessageInd = true;
+        this.newMessageIndicatorObj.newMessageInd = true;
+        this.newMessageIndicatorObj.roomId = this.roomId;
       }
-
     });
   }
 
@@ -138,7 +145,11 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
     this.socketservice.onEvent<readMessage>('read message').subscribe(data => {
        // some logic  
-       this.newMessageInd = !data.read;
+       if(data.roomId === `${this.roomId}`) {
+        this.newMessageInd = !data.read;
+        this.newMessageIndicatorObj.newMessageInd = !data.read;
+        this.newMessageIndicatorObj.roomId = this.roomId;
+      }
     });
   }
 
@@ -177,6 +188,11 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.chatTitle = chatTitle;
     this.enterUserInRoom();
     this.scroll = true;
+    if (this.newMessageIndicatorObj.newMessageInd && this.newMessageIndicatorObj.roomId === id) {
+      this.newMessageInd = false;
+      this.newMessageIndicatorObj.newMessageInd = false;
+      this.newMessageIndicatorObj.roomId = "";
+    }
   }
 
   async sendMessage() {  
@@ -281,7 +297,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
   }
 
   generateAudioUrl(audioUrl:string):string { 
-    console.log(audioUrl);
+    //console.log(audioUrl);
     return audioUrl;
   }
 
@@ -311,6 +327,8 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
   private scrollSpy(): void { 
     if(this.newMessageInd && this.chatContainer.nativeElement.scrollTop === this.chatContainer.nativeElement.scrollHeight) {
       this.newMessageInd = false;
+      this.newMessageIndicatorObj.newMessageInd = false;
+      this.newMessageIndicatorObj.roomId = this.roomId;
     }
   }
 
