@@ -1,5 +1,5 @@
-<div class="vertical-nav w-100 sticky-top border-end"> 
-    <div class="clearfix w-100">
+<div class="vertical-nav w-100 card p-2 h-100 border border-end border-1 border-light bg-light"> 
+    <div class="clearfix w-100 sticky-top" >
       <div class="float-start w-100">
         <ul class="nav flex-column w-100">
           <!-- <li class="nav-item ms-2 ">
@@ -7,26 +7,30 @@
               <a routerLink="/manager" class="fs-1" style="cursor: pointer;"><i class="bi bi-list text-dark"></i></a>
             </div> 
           </li> -->
-          <li class="nav-item pe-2 ps-2 pt-1">
-            <div style="text-align: center;" class="d-flex flex-column justify-content-center">
-              <a routerLink="/profile" style="cursor: pointer;"><i class="bi bi-person-circle fs-3"></i></a>
-              <p *ngIf="user" style="font-size: medium;font-weight: bold;">{{user.name + " " + user.surname}}</p>
-            </div>
+          <li class="nav-item pe-2 ps-2 pt-1 border-bottom">
+            <a routerLink="/profile" style="cursor: pointer; text-decoration: none;" class="d-flex flex-column justify-content-center">
+              <div style="text-align: center;" class="d-flex flex-column justify-content-center">
+                <i class="bi bi-person-circle fs-3"></i>
+                <p *ngIf="user" style="font-size: medium;font-weight: bold;">{{user.name + " " + user.surname}}</p>
+              </div>
+            </a>
           </li>
 
           <li *ngIf="isAdmin" class="nav-item p-2">
-            <div style="text-align: center;" class="d-flex flex-row justify-content-center">
-              <a routerLink="/manager" class="fs-1" style="cursor: pointer;"><i class="bi bi-person-lock"></i></a>
-            </div>
+            <a routerLink="/manager" class="fs-1 w-80" style="cursor: pointer;">
+              <div style="text-align: center;" class="d-flex flex-row justify-content-center">
+                <i class="bi bi-person-lock"></i>
+              </div>
+            </a>
           </li>
 
           <li class="nav-item mt-2 p-2">
-            <div style="text-align: center;" class="d-flex flex-row justify-content-start">
-              <a routerLink="" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
-                <i class="bi bi-house-door-fill fs-4"></i>
-                <p class="pt-2 ms-4" style="font-size: medium;">Home</p>
-              </a> 
-            </div>
+            <a routerLink="" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
+              <div style="text-align: center;" class="d-flex flex-row justify-content-start">
+                  <i class="bi bi-house-door-fill fs-4"></i>
+                  <p class="pt-2 ms-4" style="font-size: medium;">Home</p>
+              </div>
+            </a>
           </li> 
           
           <!-- <li class="nav-item mt-2 p-2">
@@ -38,22 +42,20 @@
             </div>
           </li> -->
           <li class="nav-item mt-2 p-2">
-            <div style="text-align: center;"> 
-              <a routerLink="/repository" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
-                <i class="bi bi-folder2 fs-4"></i>
-                <p class="pt-2 ms-4" style="font-size: medium;">Repository</p>
-              </a>
-            </div>
-            
+            <a routerLink="/repository" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
+              <div style="text-align: center;" class="d-flex flex-row justify-content-start text-dark"> 
+                  <i class="bi bi-folder2 fs-4"></i>
+                  <p class="pt-2 ms-4" style="font-size: medium;">Repository</p>
+              </div>
+            </a>
           </li> 
           <li class="nav-item mt-2 p-2">
-            <div style="text-align: center;" class="d-flex flex-row justify-content-start"> 
-              <a routerLink="/market" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
-                <i class="bi bi-shop fs-4"></i>
-                <p class="pt-2 ms-4" style="font-size: medium;">Market</p>
-              </a>
-            </div>
-            
+            <a routerLink="/market" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
+              <div style="text-align: center;" class="d-flex flex-row justify-content-start"> 
+                  <i class="bi bi-shop fs-4"></i>
+                  <p class="pt-2 ms-4" style="font-size: medium;">Market</p>
+              </div>
+            </a>
           </li>
 
           <!-- <li class="nav-item ms-2 mt-2">
@@ -64,29 +66,29 @@
             
           </li> -->
           <li class="nav-item mt-2 p-2">
-            <div style="text-align: center;">
-              <a routerLink="/help" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
-                <i class="bi bi-info-circle fs-4"></i>
-                <p class="pt-2 ms-4" style="font-size: medium;">Help</p>
-              </a>
-            </div>
-            
+            <a routerLink="/help" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
+              <div style="text-align: center;" class="d-flex flex-row justify-content-start text-dark">
+                  <i class="bi bi-info-circle fs-4"></i>
+                  <p class="pt-2 ms-4" style="font-size: medium;">Help</p>
+              </div>
+            </a>
           </li>
           <li class="nav-item mt-2 p-2">
-            <div *ngIf="isLoggedIn" style="text-align: center;"> 
-              <a routerLink="/logout" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
-                <i class="bi bi-box-arrow-in-left fs-4"></i>
-                <p class="pt-2 ms-4" style="font-size: medium;">Log out</p>
-              </a>
-            </div>
-            <div *ngIf="!isLoggedIn" style="text-align: center;"> 
-              <a routerLink="/login" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
-                <i class="bi bi-box-arrow-in-right fs-4"></i>
-                <p class="pt-2 ms-4" style="font-size: medium;">Log in</p>
-              </a>
-            </div>
+            <a *ngIf="isLoggedIn" routerLink="/logout" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
+              <div style="text-align: center;" class="d-flex flex-row justify-content-start text-dark"> 
+                  <i class="bi bi-box-arrow-in-left fs-4"></i>
+                  <p class="pt-2 ms-4" style="font-size: medium;">Log out</p>
+              </div>
+            </a>
+            <a *ngIf="!isLoggedIn" routerLink="/login" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
+              <div style="text-align: center;" class="d-flex flex-row justify-content-start text-dark"> 
+                  <i class="bi bi-box-arrow-in-right fs-4"></i>
+                  <p class="pt-2 ms-4" style="font-size: medium;">Log in</p>
+              </div>
+            </a>
           </li>
         </ul>
+        <p style="text-align: center;" class="text-dark">version 0.4.0</p>
       </div>
     </div>
   </div>

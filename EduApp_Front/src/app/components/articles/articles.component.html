@@ -1,11 +1,11 @@
-<h3 class="mt-2">Articles</h3>
+<h5 class="mt-2">Articles</h5>
 
 <div class="articles d-flex flex-column"> 
     <div class="card-body d-flex flex-row justify-content-end"> 
         <div class=""><a href="#" style="text-decoration: none;" class=" btn btn-success text-white"><i class="bi bi-pen fs-4 text-white"></i>  <b>Create Article</b></a></div>
     </div>   
 <ul *ngFor="let article of Articles" class="article-list">
-    <li id="{{article._id}}"  class="article-list-item bg-light container-fluid p-2 my-2 border-bottom">
+    <li id="{{article._id}}"  class="article-list-item container-fluid p-2 my-2 border rounded-4">
         <span class="text-muted float-end">{{article.createdAt | date: 'dd/MM/yyyy'}}</span>
         <div class="profile-name d-flex">
             <div><a href="#"><i class="bi bi-person-circle fs-2 me-1 text-dark"></i></a></div>

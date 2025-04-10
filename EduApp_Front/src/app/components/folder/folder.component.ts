@@ -30,7 +30,7 @@ export class FolderComponent {
     name:"",
     type: "",
     folderId: this.id ? this.id : "",
-    createdBy: this.user?._id ? this.user?._id : "",
+    createdBy: this.user?.id ? this.user?.id : "",
     group: "",
     createdAt:"",
     filepath:""

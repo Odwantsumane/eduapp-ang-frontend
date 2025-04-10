@@ -26,7 +26,7 @@
                 <td><div class="btn-group">
                     <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#remove">Remove</a>
                     <app-remove-users-modal ></app-remove-users-modal>  
-                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update" (click)="getUser(user._id)">Update</a>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update" (click)="getUser(user.id)">Update</a>
                     <app-update-users-modal [user_]="user_"></app-update-users-modal>
                 </div></td>
             </tr>

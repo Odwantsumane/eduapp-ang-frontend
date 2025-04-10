@@ -41,7 +41,7 @@ export class ManagerComponent implements OnInit{
   getUser(id:string) {
     if(this.users){
       
-      const index = this.users.findIndex(x => x._id === id); 
+      const index = this.users.findIndex(x => x.id === id); 
       if(index !== -1) {
         this.user_.name_ = this.users[index].name;
         this.user_.surname_ = this.users[index].surname;

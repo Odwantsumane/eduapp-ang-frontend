@@ -7,7 +7,7 @@ import { User, UserrequestService } from '../userrequest.service';
 export class ManagerService {
 
   PlaceHolderUser:User = {
-    _id:"", name:"", surname:"",username:"",password:"", createdAt:"", __v:"", unreadMsgs:[], selectedCountry:"", selectedDesignation:"", selectedInstitution:"",selectedSubject:[]
+    id:"", name:"", surname:"",username:"",password:"", createdAt:"", __v:"", unreadMsgs:[], selectedCountry:"", selectedDesignation:"", selectedInstitution:"",selectedSubject:[]
   }
   UserPHArray:Array<User> = [];
 

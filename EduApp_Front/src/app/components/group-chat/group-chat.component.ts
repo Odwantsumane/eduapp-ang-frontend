@@ -7,6 +7,7 @@ import { MiddlemanService } from '../../services/middleman.service';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { User } from '../../services/userrequest.service';
 import { SocketIoService } from '../../services/socket-io.service';
+import { CookieLocalService } from '../../services/cookie-local.service';
 // import * as Connection from '../../../common/connection';
 
 class user {
@@ -66,7 +67,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   constructor (private groupchatreqservice: MiddlemanService, 
     private authservice: AuthenticateService, 
-    private socketservice: SocketIoService)
+    private socketservice: SocketIoService, private cookieService: CookieLocalService)
   {
     this.yesterdayDate.setDate(this.todayDate.getDate() - 1); 
   }
@@ -79,8 +80,6 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     this.receiveSenderMessage();
     this.receiveBroadcastMessage();
     this.readMessageReceipt();
-
-    console.log("Hello")
     // console.log(this.generateUniqueFileName());
   }
 
@@ -98,7 +97,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   enterUserInRoom() {
     // send user details
-    this.socketservice.emitEvent("name", { name: this.user[0].name + " " + this.user[0].surname, userId: this.user[0]._id, roomId: this.roomId}); 
+    this.socketservice.emitEvent("name", { name: this.user[0].name + " " + this.user[0].surname, userId: this.user[0].id, roomId: this.roomId, token: this.cookieService.getCookie()}); 
   }
 
   // sendMessage() {
@@ -132,7 +131,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
   }
 
   readMessageEmit() : void {
-    this.socketservice.emitEvent('read message', {userId: this.user[0]._id, roomId: this.roomId, read: true});
+    this.socketservice.emitEvent('read message', {userId: this.user[0].id, roomId: this.roomId, read: true});
   }
 
   readMessageReceipt() { 
@@ -145,9 +144,9 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
 
   notifyWhenTyping() { 
     if(this.messageFieldValue !== "" && !this.isTextEmpty())
-      this.socketservice.emitEvent('user is typing', {name:this.user[0].name + " " + this.user[0].surname, id: this.user[0]._id, roomId: this.roomId});
+      this.socketservice.emitEvent('user is typing', {name:this.user[0].name + " " + this.user[0].surname, id: this.user[0].id, roomId: this.roomId});
     else 
-      this.socketservice.emitEvent('user is typing', {name:null, id: this.user[0]._id, roomId: this.roomId});
+      this.socketservice.emitEvent('user is typing', {name:null, id: this.user[0].id, roomId: this.roomId});
   }
 
   receivedTypingNotification() {
@@ -186,15 +185,15 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     if (this.messageFieldValue !== "" && this.audioUrl !== "") {
 
       this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename:this.generateUniqueFileName() + ".mp3", filetype:"audio/mpeg", username: this.user[0].username, 
-        roomId: this.roomId, userId: this.user[0]._id, audioBlob:this.audioBlobStore, full_name:this.user[0].name + " " + this.user[0].surname
+        roomId: this.roomId, userId: this.user[0].id, audioBlob:this.audioBlobStore, full_name:this.user[0].name + " " + this.user[0].surname, token: this.cookieService.getCookie()
       });
     } else if (this.messageFieldValue !== "" && this.audioUrl === "") {
       this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename: "", filetype:"", username: this.user[0].username, 
-        roomId: this.roomId, userId: this.user[0]._id, audioBlob:null, full_name:this.user[0].name + " " + this.user[0].surname
+        roomId: this.roomId, userId: this.user[0].id, audioBlob:null, full_name:this.user[0].name + " " + this.user[0].surname, token: this.cookieService.getCookie()
       });
     } else {
       this.socketservice.emitEvent('chat message', {input:this.messageFieldValue,path:"", filename: "", filetype:"", username: this.user[0].username, 
-        roomId: this.roomId, userId: this.user[0]._id, audioBlob:this.audioBlobStore, full_name:this.user[0].name + " " + this.user[0].surname
+        roomId: this.roomId, userId: this.user[0].id, audioBlob:this.audioBlobStore, full_name:this.user[0].name + " " + this.user[0].surname, token: this.cookieService.getCookie()
       });
     }
  
@@ -223,7 +222,7 @@ export class GroupChatComponent implements OnInit, OnDestroy, AfterViewChecked, 
     var getTime = date.getTime();
     var getHours = date.getHours();
     var type = "Audio";
-    var result = type + "_U_" + this.user[0]._id + "_R_" + this.roomId + "_D_" + getDay + "_T_" + getTime + "_H_"+ getHours;
+    var result = type + "_U_" + this.user[0].id + "_R_" + this.roomId + "_D_" + getDay + "_T_" + getTime + "_H_"+ getHours;
 
     return result;
   }
