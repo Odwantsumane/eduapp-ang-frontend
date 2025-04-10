@@ -6,7 +6,7 @@
         </div>
         <div class="d-flex flex-column" style="overflow-y: auto; height: 545px;">
             <div *ngFor="let chat of groupChats" class="w-100 p-1 border-bottom chat_group" >
-                <span class="float-end me-1">10 min</span>
+                <span class="float-end me-1">10 min <span *ngIf="newMessageInd && newMessageIndicatorObj.roomId === chat.id" class="spinner-grow spinner-grow-sm text-success" style="font-size: x-small;"></span></span>
                 <div class="d-flex" (click)="getMessages(chat.id, chat.title)">
                     <div class="border rounded-4 m-2" style="height: 40px;width: 40px;">
                         <img src="favicon.ico" alt="chat profile" style="max-width: 100%; height: auto;">
@@ -115,7 +115,7 @@
         <div style="height: 15%;">
             <div *ngIf="typing" style="text-align: center; font-size: small;" class="text-muted">{{typingData.name}} is typing..</div>
             <div *ngIf="!typing" style="text-align: center; font-size: small; visibility: hidden;" class="text-muted">{{typingData.name}} is typing..</div> 
-            <span *ngIf="newMessageInd" class="spinner-grow spinner-grow-sm text-success" style="font-size: x-small;"></span>
+            <!-- <span *ngIf="newMessageInd && newMessageIndicatorObj.roomId === roomId" class="spinner-grow spinner-grow-sm text-success" style="font-size: x-small;"></span> -->
              
             <audio *ngIf="audioUrl" class="ms-5 pt-2" [src]="audioUrl" style="width: 50%; height: 20px;" controls></audio> 
             <a href="chatgroups#" *ngIf="audioUrl" class="p-3" style="text-decoration: none;" (click)="sendMessage()">Send</a>
