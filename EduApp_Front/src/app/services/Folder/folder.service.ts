@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiService, folder } from './api.service';
+import { ApiService, folder, resultFolder } from './api.service';
 import { CookieLocalService } from '../cookie-local.service';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { CookieLocalService } from '../cookie-local.service';
 })
 export class FolderService {
 
-  placeholder_folder : folder = {_id:"",title: "", description:"", createdBy:"", course:""}
+  placeholder_folder : folder = {id:"",title: "", description:"", createdBy:"", course:""}
   placeholder_array : Array<folder> = [];
 
   constructor(private folderApi: ApiService, private cookieservice: CookieLocalService) { }
@@ -77,16 +77,16 @@ export class FolderService {
     }
   }
 
-  handleArrayFolderResp(response: Array<folder> | undefined): Array<folder> {
+  handleArrayFolderResp(response: resultFolder | undefined): Array<folder> {
 
     if(response === undefined) return this.placeholder_array;
-    return response;
+    return response.result;
   }
   
-  handleFolderResp(response: folder | undefined): folder {
+  handleFolderResp(response: resultFolder | undefined): folder {
 
-    if(response === undefined) return this.placeholder_folder;
-    return response;
+    if(response === undefined || !response.success) return this.placeholder_folder;
+    return response.result[0];
   }
    
   handleError(error: any) {

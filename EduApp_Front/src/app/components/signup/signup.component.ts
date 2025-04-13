@@ -36,7 +36,7 @@ export class SignupComponent {
     selectedInstitution: "None",
     selectedCountry: "South Africa",
 
-  }
+  } 
 
   constructor(private authMiddleware: AuthenticateService, private refreshService: RefreshService){}
 
@@ -51,7 +51,19 @@ export class SignupComponent {
     if(this.passwordMatch && this.emailValid && this.passwordAllowed) {
       // signup
       // this.SignUpAuth
-      this.isAuthenticated = await this.authMiddleware.SignUpAuth(this.signInDetails);
+
+      var finalSignDetails  = {
+        name: this.signInDetails.name,
+        surname: this.signInDetails.surname,
+        username: this.signInDetails.username, 
+        password: this.signInDetails.password1, 
+        selectedSubject: this.signInDetails.selectedSubject,
+        selectedDesignation: this.signInDetails.selectedDesignation,
+        selectedInstitution: this.signInDetails.selectedInstitution,
+        selectedCountry: this.signInDetails.selectedCountry,
+      }
+      
+      this.isAuthenticated = await this.authMiddleware.SignUpAuth(finalSignDetails);
 
       // clear the fields and verify
       if (this.isAuthenticated) this.refreshService.triggerRefresh();

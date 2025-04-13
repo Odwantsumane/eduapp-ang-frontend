@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, UserrequestService } from '../userrequest.service';
+import { getAllResult, User, UserrequestService } from '../userrequest.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,10 +26,10 @@ export class ManagerService {
     }
   }
 
-  handleUsersResponse(response:Array<User> | undefined) : Array<User> {
+  handleUsersResponse(response:getAllResult | undefined) : Array<User> {
 
-    if(response === undefined) return this.UserPHArray;
-    return response;
+    if(response === undefined || !response.success) return this.UserPHArray; // if fatal will send notifications to admins
+    return response.result;
   }
 
   handleError(error: any) {

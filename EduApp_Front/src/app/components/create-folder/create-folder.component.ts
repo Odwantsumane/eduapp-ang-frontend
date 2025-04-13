@@ -21,7 +21,7 @@ export class CreateFolderComponent implements OnInit{
   current_user : string = "";
 
   newFolder  = {
-    _id:"",
+    id:"",
     title: "",
     description: "",
     course: "",

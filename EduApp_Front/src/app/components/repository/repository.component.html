@@ -1,5 +1,5 @@
 <!-- <a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a> -->
-<h2>Repository</h2>
+<h5>Repository</h5>
 
 <div class="repo-nav d-flex w-100">
     <!-- <i class="bi bi-table"></i> -->
@@ -40,13 +40,13 @@
             </div>     
             <div *ngFor="let folder of science_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;">
-                    <a routerLink="folder/{{folder._id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
+                    <a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
                 </div>
-                <div class="p-1" id="{{folder._id}}"> 
+                <div class="p-1" id="{{folder.id}}"> 
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#scienceCat">Update</a></li>
-                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
                           </ul></span>
 
                     <h6>{{folder.title}}</h6>
@@ -77,13 +77,13 @@
             </div>  
             <div *ngFor="let folder of law_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;">
-                    <a routerLink="folder/{{folder._id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
+                    <a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
                 </div>
-                <div class="p-1" id="{{folder._id}}">
+                <div class="p-1" id="{{folder.id}}">
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#lawCat">Update</a></li>
-                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
                           </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
@@ -113,13 +113,13 @@
             </div>  
             <div *ngFor="let folder of it_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;">
-                    <a routerLink="folder/{{folder._id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
+                    <a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
                 </div>
-                <div class="p-1" id="{{folder._id}}">
+                <div class="p-1" id="{{folder.id}}">
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#itCat">Update</a></li>
-                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
                           </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
@@ -149,13 +149,13 @@
             </div>  
             <div *ngFor="let folder of humanities_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;">
-                    <a routerLink="folder/{{folder._id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
+                    <a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
                 </div>
-                <div class="p-1" id="{{folder._id}}">
+                <div class="p-1" id="{{folder.id}}">
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#humanitiesCat">Update</a></li>
-                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
                           </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>
@@ -185,13 +185,13 @@
             </div>  
             <div *ngFor="let folder of other_arr" class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;">
-                    <a routerLink="folder/{{folder._id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
+                    <a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
                 </div>
-                <div class="p-1" id="{{folder._id}}">
+                <div class="p-1" id="{{folder.id}}">
                     <span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
-                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder._id)">Delete</a></li> 
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
                           </ul></span>
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Updated today</p>

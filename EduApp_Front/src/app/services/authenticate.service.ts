@@ -5,7 +5,7 @@ import { CookieLocalService } from './cookie-local.service';
 import { Article, ArticlesService } from './articles.service';
 
 class LoginReq {
-  constructor(public username:string, public password1:string){};
+  constructor(public username:string, public password:string){};
 }
 
 @Injectable({
@@ -19,7 +19,7 @@ export class AuthenticateService {
   PlaceHolderArray: Article[] = [];
   PlaceholderIsLoggedIn: isLoggedIn[] = [];
   isLoggedIn: boolean = false;
-  loginReq: LoginReq = {username: "", password1: ""};
+  loginReq: LoginReq = {username: "", password: ""};
 
   PlaceHolderUser:User = {
     id:"", name:"", surname:"",username:"",password:"", createdAt:"", __v:"", unreadMsgs:[], selectedCountry:"", selectedDesignation:"", selectedInstitution:"",selectedSubject:[]
@@ -28,12 +28,12 @@ export class AuthenticateService {
   constructor(private userservice: UserrequestService, private cookieservice: CookieLocalService, private articleservice: ArticlesService) { }
 
   LoginAuth(username : string, password : string) : Promise<boolean>{  
-    this.loginReq.password1 = password;
+    this.loginReq.password = password;
     this.loginReq.username = username;
 
      
     return new Promise((resolve, reject) => {this.userservice.login(this.loginReq).subscribe(response => {
-      resolve(this.handleSuccess(response));
+      resolve(this.handleLogin(response));
     },error => {
       this.handleError(error);
       reject(false);
@@ -42,7 +42,7 @@ export class AuthenticateService {
 
   SignUpAuth(SignInBody: SignInUser): Promise<boolean> {
 
-    this.loginReq.password1 = SignInBody.password1;
+    this.loginReq.password = SignInBody.password;
     this.loginReq.username = SignInBody.username;
 
     return new Promise((resolve, reject) => {this.userservice.addUser(SignInBody).subscribe(response => {
@@ -75,20 +75,21 @@ export class AuthenticateService {
     })});
   }
 
-  handleSignIn(response: LoginResponse): boolean {  
-    return this.handleSuccess(response);
+  handleSignIn(response: LoginResponse): boolean {
+    // return this.handleSuccess(response)  
+    return response.success;
   }
 
-  handleSuccess(response: LoginResponse): boolean {    
+  handleLogin(response: LoginResponse): boolean {    
     // will need to decrypt password
-    if(this.loginReq.username === response.user.username) {
+    //if(this.loginReq.username === response.result.username) {
       // sessionStorage.setItem("qazedcthmiklop*___p{}pkllsEduAppUserLoggedIn", response.username);
 
-      if(response.token !== null) this.cookieservice.setCookie(response.token);
+    if(response.success) {
+      this.cookieservice.setCookie(response.token);
+    }
 
-      return true;}
-    return false;
-  }
+    return response.success;}  
 
   handleError(error: any) { 
 

@@ -30,8 +30,8 @@ export class SignInUser {
     public name: string,
     public surname: string,
     public username: string,
-    public password1: string, 
-    public password2: string,  
+    public password: string, 
+    //public password2: string,  
     public selectedSubject: Array<string>,
     public selectedDesignation: string,
     public selectedInstitution: string,
@@ -40,11 +40,12 @@ export class SignInUser {
 }
 
 export class LoginResponse {
-  constructor(public user: User, public code: number, public message: string, public token: string) {}
+  constructor(public result:User, public success:boolean, public message:string, public token: string
+  ) {}
 }
 
 class LoginReq {
-  constructor(public username:string, public password1:string){};
+  constructor(public username:string, public password:string){};
 }
 
 export class Logout {
@@ -53,6 +54,10 @@ export class Logout {
 
 export class isLoggedIn {
   constructor(public loggedIn: boolean, public user:User){};
+}
+
+export class getAllResult {
+  constructor(public result: Array<User>, public success: boolean, public fatal: boolean, public message: string){};
 }
 
 @Injectable({
@@ -70,7 +75,7 @@ export class UserrequestService {
 
   getAllUsers() { // will use token later to identify who is requesting
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
-    return this.http.get<Array<User>>(`${this.url}/AllUsers`,  {headers: this.Headers});
+    return this.http.get<getAllResult>(`${this.url}/getAll_mysql`,  {headers: this.Headers, withCredentials: true});
   }
 
   getUser(id: string) {
@@ -80,7 +85,7 @@ export class UserrequestService {
 
   addUser(user: SignInUser) {  
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders()});
-    return this.http.post<LoginResponse>(`${this.url}/signin`, user, {headers: this.Headers});
+    return this.http.post<LoginResponse>(`${this.url}/post_mysql/signin`, user, {headers: this.Headers});
   }
 
   login (loginReq: LoginReq) { 

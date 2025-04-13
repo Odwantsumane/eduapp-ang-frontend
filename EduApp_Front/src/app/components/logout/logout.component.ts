@@ -13,8 +13,8 @@ export class LogoutComponent implements OnInit{
 
   constructor(private authenticator: AuthenticateService, private refreshService: RefreshService){};
 
-  ngOnInit(): void { 
-    this.authenticator.loggout();  
+  async ngOnInit() { 
+    await this.authenticator.loggout();   
     this.refreshService.triggerRefresh();
   }
 
