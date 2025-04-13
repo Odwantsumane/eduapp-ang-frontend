@@ -1,13 +1,18 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { endpoints } from '../../../const/endpoints';
 
 export class file {
-    constructor(public _id:string, public name:string, public folderId:string, public createdBy:string, 
+    constructor(public id:string, public name:string, public folderId:string, public createdBy:string, 
         public group:string, public type:string, public createdAt:string, public filepath:string){}
 }
 
 export class uploadResp {
     constructor(public message:string, public path:string){}
+}
+
+export class resultFile {
+  constructor(public result:Array<file>,public success: boolean, public fatal: boolean, public message: string){}
 }
 
 @Injectable({
@@ -19,19 +24,19 @@ export class ApiFileService {
   
 
     Headers: HttpHeaders = new HttpHeaders(); //{Authorization: this.createBasicAuthHeaders()}, Cookie: `jwt=${this.createToken("myid")}`
-    url : string = "http://localhost:4001/folder/file";
+    url : string = endpoints.file;
     upload_url : string = "http://localhost:4001/upload";
 
     constructor(private http: HttpClient) { }
 
     getAll(token:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-        return this.http.get<Array<file>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true}); 
+        return this.http.get<resultFile>(`${this.url}/getAll_mysql`,  {headers: this.Headers, withCredentials: true}); 
     }
 
     getAllFiltered(token:string, id:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-        return this.http.get<Array<file>>(`${this.url}/all/filtered/${id}`,  {headers: this.Headers, withCredentials: true}); 
+        return this.http.get<resultFile>(`${this.url}/getAll_mysql/filtered/${id}`,  {headers: this.Headers, withCredentials: true}); 
     }
     
     getFile(id: string, token:string) {
@@ -48,7 +53,7 @@ export class ApiFileService {
     }
     createFile(file: file, token:string) {
         this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-        return this.http.post<file>(`${this.url}/create`, file, {headers: this.Headers, withCredentials: true});
+        return this.http.post<resultFile>(`${this.url}/post_mysql/create`, file, {headers: this.Headers, withCredentials: true});
     }
     
     //   updateFolder(id: string, folder: folder, token:string) {

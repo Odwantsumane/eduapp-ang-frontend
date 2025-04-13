@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService, folder } from '../api.service';
 import { CookieLocalService } from '../../cookie-local.service';
-import { ApiFileService, file, uploadResp } from './api.file.service'; ;
+import { ApiFileService, file, resultFile, uploadResp } from './api.file.service'; ;
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,8 @@ export class FileService {
         public group:string, public type:string, public createdAt:string, public filepath:string
   */
 
-  placeholder_file : file = {_id:"",name: "", folderId:"", createdBy:"", group:"", type:"", createdAt:"", filepath:""};
-  toReturn : file = {_id:"",name: "", folderId:"", createdBy:"", group:"", type:"", createdAt:"", filepath:""};
+  placeholder_file : file = {id:"",name: "", folderId:"", createdBy:"", group:"", type:"", createdAt:"", filepath:""};
+  toReturn : file = {id:"",name: "", folderId:"", createdBy:"", group:"", type:"", createdAt:"", filepath:""};
   placeholder_array : Array<file> = [];
 
   constructor(private folderApi: ApiService, private cookieservice: CookieLocalService, private fileApi: ApiFileService) { }
@@ -109,10 +109,10 @@ export class FileService {
 //     }
 //   }
 
-handleArrayFileResp(response: Array<file> | undefined): Array<file> {
+handleArrayFileResp(response: resultFile | undefined): Array<file> {
 
     if(response === undefined) return this.placeholder_array;
-    return response;
+    return response.result;
   }
   
   handleFileResp(response: uploadResp | undefined): uploadResp | null{
@@ -121,10 +121,10 @@ handleArrayFileResp(response: Array<file> | undefined): Array<file> {
     return response;
   }
 
-  handleFileResp2(response: file | undefined): file | null {
+  handleFileResp2(response: resultFile | undefined): file | null {
 
     if(response === undefined) return null;
-    return response;
+    return response.result[0];
   }
    
   handleError(error: any) {

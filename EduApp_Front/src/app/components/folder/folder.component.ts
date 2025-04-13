@@ -26,7 +26,7 @@ export class FolderComponent {
   today = new Date();
   yesterday = new Date();
   file_obj = {
-    _id: "",
+    id: "",
     name:"",
     type: "",
     folderId: this.id ? this.id : "",
