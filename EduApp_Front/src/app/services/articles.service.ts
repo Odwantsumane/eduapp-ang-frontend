@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export class Article {
-  constructor(public _id:string, public title:string,public description:string,public markdown:string,public likes:number,public dislikes:number,
+  constructor(public id:string, public title:string,public description:string,public markdown:string,public likes:number,public dislikes:number,
     public createdAt:string,public createdBy:string,public whoLiked:string[],public whoDisliked:string[],public mediaUrl:string,
     public mediaUrlName:string,public __v:number,public mediatype:string){}
 }
