@@ -55,7 +55,7 @@ export class GroupChatsService {
 
   createNewChat(token:string, newChat:Group) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.post<Group>(`${this.url_}/add-topic`, newChat, {headers: this.Headers, withCredentials: true});
+    return this.http.post<finalResponse>(`${this.url}/post_mysql/create`, newChat, {headers: this.Headers, withCredentials: true});
   }
 
   createNewMessage(token:string, newMessage:Message) {

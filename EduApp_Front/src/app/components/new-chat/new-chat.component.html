@@ -1,6 +1,9 @@
 <a routerLink="/" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
+<div *ngIf="!createSuccess && sent" class="alert alert-danger">
+    <strong>Oops! </strong> please try again.
+</div>
 <h2>New Chat</h2>
-<form >
+<div >
     <div class="mb-3 mt-3">
         <label for="title">Title:</label>
         <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" [(ngModel)]="title" value="{{title}}" (input)="verify()" required>
@@ -16,5 +19,5 @@
             <option *ngFor="let part of participants">{{part.username}}</option>  
         </select>  
     </div> 
-    <button class="btn btn-primary" type="button" (click)="handleCreateChat()" [disabled]="!submit_disabled">Create</button>
-</form>
+    <button class="btn btn-primary" type="button" (click)="handleCreateChat()" [disabled]="!createChat">Create</button>
+</div>

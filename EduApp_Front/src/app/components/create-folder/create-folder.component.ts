@@ -25,7 +25,8 @@ export class CreateFolderComponent implements OnInit{
     title: "",
     description: "",
     course: "",
-    createdBy: this.current_user
+    createdBy: this.current_user,
+    createdAt: ""
   }
 
   create_fail_message = "Please fill in all the fields, , also 'title' chars < 5";

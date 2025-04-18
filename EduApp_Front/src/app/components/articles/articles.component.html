@@ -5,7 +5,7 @@
         <div class=""><a href="#" style="text-decoration: none;" class=" btn btn-success text-white"><i class="bi bi-pen fs-4 text-white"></i>  <b>Create Article</b></a></div>
     </div>   
 <ul *ngFor="let article of Articles" class="article-list">
-    <li id="{{article._id}}"  class="article-list-item container-fluid p-2 my-2 border rounded-4">
+    <li id="{{article.id}}"  class="article-list-item container-fluid p-2 my-2 border rounded-4">
         <span class="text-muted float-end">{{article.createdAt | date: 'dd/MM/yyyy'}}</span>
         <div class="profile-name d-flex">
             <div><a href="#"><i class="bi bi-person-circle fs-2 me-1 text-dark"></i></a></div>
@@ -21,15 +21,15 @@
         <div class="likes d-flex justify-content-end">
             <a style="cursor: pointer;" class="me-3 text-dark" (click)="like()"><i class="bi bi-hand-thumbs-up fs-5"></i></a>
             <a style="cursor: pointer;" class="me-3 text-dark" (click)="dislike()"><i class="bi bi-hand-thumbs-down fs-5"></i></a>
-            <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;" (click)="replyFun(article._id)">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
+            <a class="text-primary me-3" style="cursor: pointer; text-decoration: none;" (click)="replyFun(article.id)">Reply</a> <!--<i class="bi bi-reply fs-4"></i-->
         </div>
     
     </li> 
     <!-- comments below -->
-     <div *ngIf="reply && (articleId === article._id)" class="ms-5">
+     <div *ngIf="reply && (articleId === article.id)" class="ms-5">
         <textarea class="form-control" name="new-comment" id="new-comment" rows="1" placeholder="Write comment"></textarea>
         <div class="">
-            <a href="#{{article._id}}" class="m-1 p-2" style="text-decoration: none;">Comment</a>
+            <a href="#{{article.id}}" class="m-1 p-2" style="text-decoration: none;">Comment</a>
             <a href="#" class="m-1 p-2" style="text-decoration: none;"><i class="bi bi-emoji-smile"></i></a>
         </div>
      </div>

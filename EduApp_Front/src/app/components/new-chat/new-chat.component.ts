@@ -6,6 +6,7 @@ import { GroupChatsService } from '../../services/group-chats.service';
 import { MiddlemanService } from '../../services/middleman.service';
 import { ManagerService } from '../../services/Aministration/manager.service';
 import { User } from '../../services/userrequest.service';
+import { AuthenticateService } from '../../services/authenticate.service';
 
 @Component({
   selector: 'app-new-chat',
@@ -18,30 +19,45 @@ export class NewChatComponent implements OnInit{
 
   title:string="";
   description:string="";
-  submit_disabled:boolean=false; 
+  createChat:boolean=false; 
   participants:Array<User> = [];
   selectedParticipants : Array<string> = [];
-
+  createSuccess: boolean = false;
+  sent:boolean = false;
 
   newChat = {
-    id:"",__v:0, title:"", description:"",messages:[],participants:[],groupPic:"",createdAt:""
+    id:"",__v:0, title:"", description:"",messages:[],participants:[""],groupPic:"",createdAt:"", createdBy:""
   }
-  constructor(private groupchatservice: MiddlemanService, private managerservice: ManagerService){}
+  constructor(private groupchatservice: MiddlemanService, private managerservice: ManagerService, private auth:AuthenticateService){}
 
   ngOnInit(): void {
     this.getUsers();
   }
 
-  handleCreateChat() {
-    this.groupchatservice.createNewChat(this.newChat)
+  async handleCreateChat() {
+    this.newChat.title = this.title;
+    this.newChat.description = this.description;
+    this.newChat.participants = this.selectedParticipants;
+    this.newChat.createdBy = (await this.auth.isLoggedInGetUser()).username;
+    this.createSuccess = await this.groupchatservice.createNewChat(this.newChat);
+    this.sent = true;
   }
 
   async getUsers() {
     this.participants = await this.managerservice.getAllUsers();
   }
 
-  verify() {
+  async verify() { 
+    if(!this.isTextEmpty(this.title) && !this.isTextEmpty(this.description) && this.selectedParticipants.length > 0) {
+      this.createChat = true;
+    } else {
+      this.createChat = false;
+    }
+  } 
 
+  isTextEmpty(value: string): boolean {
+    const messageRegex = /^\s*$/;
+    return messageRegex.test(value);
   }
 
 }

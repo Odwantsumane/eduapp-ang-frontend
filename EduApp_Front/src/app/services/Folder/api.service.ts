@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { endpoints } from '../../const/endpoints';
 
 export class folder {
-  constructor(public id:string, public title:string, public description:string, public createdBy:string, public course:string){}
+  constructor(public id:string, public title:string, public description:string, public createdBy:string, public course:string, public createdAt:string){}
 }
 
 export class resultFolder {

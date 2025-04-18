@@ -178,13 +178,13 @@ export class AuthenticateService {
 
   async GetArticles(): Promise<Array<Article>> {
     // Check if user is logged in
-    if (!(await this.isLoggedIn2())) {
-      return this.handleArticles(this.PlaceHolderArray);
-    }
+    // if (!(await this.isLoggedIn2())) {
+    //   return this.handleArticles(this.PlaceHolderArray);
+    // }
   
-    if (this.token === "notoken") {
-      return this.handleArticles(this.PlaceHolderArray);
-    }
+    // if (this.token === "notoken") {
+    //   return this.handleArticles(this.PlaceHolderArray);
+    // }
   
     try {
       const response = await this.articleservice

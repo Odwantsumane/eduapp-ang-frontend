@@ -52,7 +52,20 @@ export class MiddlemanService {
     }
   }
 
-  async createNewChat(newChat:Group): Promise<Group> {
+  // async createNewChat(newChat:Group): Promise<Group> {
+  
+  //   try {
+  //     const response = await this.groupchatservice
+  //       .createNewChat(this.cookieservice.getCookie() || "notoken", newChat)
+  //       .toPromise();
+  //     return this.handleCreateChatResp(response);
+  //   } catch (error) {
+  //     this.handleError(error);
+  //     return this.PlaceHolderGroup; // Return a placeholder array on error
+  //   }
+  // }
+
+  async createNewChat(newChat:Group): Promise<boolean> {
   
     try {
       const response = await this.groupchatservice
@@ -61,7 +74,7 @@ export class MiddlemanService {
       return this.handleCreateChatResp(response);
     } catch (error) {
       this.handleError(error);
-      return this.PlaceHolderGroup; // Return a placeholder array on error
+      return false;//this.PlaceHolderGroup; // Return a placeholder array on error
     }
   }
 
@@ -84,10 +97,10 @@ export class MiddlemanService {
     return response;
   }
 
-  handleCreateChatResp(response: Group | undefined): Group {
+  handleCreateChatResp(response: finalResponse | undefined): boolean {
 
-    if(response === undefined) return this.PlaceHolderGroup;
-    return response;
+    if(response === undefined || !response.success) return  false;
+    return response.success;
   }
 
   handleGroupChats(response: Array<Group> | undefined): Array<Group> {
