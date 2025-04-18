@@ -25,6 +25,9 @@ export class FolderComponent {
   failLoadingMessage:boolean = false;
   today = new Date();
   yesterday = new Date();
+  grid:boolean = false;
+  list:boolean = false;
+
   file_obj = {
     id: "",
     name:"",
@@ -83,5 +86,16 @@ export class FolderComponent {
 
   async getuserInfo() {
     await this.authservice.isLoggedInGetUser(); 
+  }
+
+  changeLayout(layout:string) {
+    if(layout === "grid"){
+      this.grid = true;
+      this.list = false;
+    } else {
+      this.grid = false;
+      this.list = true;
+    }
+      
   }
 }

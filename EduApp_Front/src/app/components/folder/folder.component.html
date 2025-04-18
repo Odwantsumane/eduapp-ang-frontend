@@ -1,7 +1,10 @@
 <a routerLink="/repository" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
 <div>
-    <a type="button" class="btn btn-rounded btn-primary float-end" data-bs-toggle="modal" data-bs-target="#fileuploadmodal">Add</a>
-
+    <div class="w-50 mt-5 d-flex flex-row-reverse">
+        <div class="rounded-3 border w-25 m-1"><a class="btn w-100" (click)="changeLayout('grid')"><i class="bi bi-table fs-5"></i></a></div>
+        <div class="rounded-3 border w-25 m-1"><a class="btn w-100" (click)="changeLayout('list')"><i class="bi bi-card-list fs-5"></i></a></div>
+    </div>
+    <div style="text-align: end;"><a type="button" class="btn btn-rounded btn-primary" data-bs-toggle="modal" data-bs-target="#fileuploadmodal">Add</a></div>
     <!-- The Modal -->
     <div class="modal fade" id="fileuploadmodal">
         <div class="modal-dialog">
@@ -28,7 +31,7 @@
         <div *ngIf="failLoadingMessage" class="alert alert-danger w-50"> 
             <strong>Failed!</strong> we were unable to upload your file. Please try again
         </div>
-        <table class="table table-hover">
+        <table *ngIf="!grid" class="table table-hover">
             <thead>
               <tr>
                 <th>Title</th>
@@ -38,13 +41,25 @@
             </thead>
             <tbody>
               <tr *ngFor="let file of filteredFiles">
-                <td><a href="http://localhost:4001{{file.filepath}}" style="text-decoration: none;" class="text-dark" download><img src="pdf.ico" alt="icon" width="20px" height="20px"> {{file.name}}</a></td>
+                <td><a href="http://localhost:4001{{file.filepath}}" style="text-decoration: none;" class="text-dark" download><img src="{{file.name.split('.')[file.name.split('.').length-1]}}.ico" width="20px" height="20px"> {{file.name}}</a></td>
                 <td>{{file.name.split(".")[1]}}</td>
                 <td>{{file.createdAt  | date: 'dd/MM/YYYY HH:mm:ss'}}</td> 
               </tr>
             </tbody>
-          </table>
-
+        </table>
+        <div *ngIf="grid" class="d-flex flex-row flex-wrap">
+            <div *ngFor="let file of filteredFiles">
+                <div class="card m-1 p-1" style="width:200px; height: 225px;">
+                    <img class="card-img-top" src="{{file.name.split('.')[file.name.split('.').length-1]}}.ico" alt="Card image" style="width:45%">
+                    <div class="card-body">
+                      <p class="card-title"><b>{{file.name.length > 15 ? file.name.substring(0, 15)+"...":file.name}}</b></p>
+                      <p class="card-text">{{file.createdAt  | date: 'dd/MM/YYYY HH:mm:ss'}}</p>
+                      <a href="http://localhost:4001{{file.filepath}}" class="btn btn-outline-primary btn-sm">Download/View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- <li *ngFor="let file of filteredFiles">
             <a href="http://localhost:4001{{file.filepath}}" style="text-decoration: none;" class="text-dark" download><img src="pdf.ico" alt="icon" width="20px" height="20px"> {{file.name}}</a>
         </li> -->
