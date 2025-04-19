@@ -45,4 +45,16 @@ export class ArticlesComponent implements OnInit{
     this.articleId = article_id;
     
   }
+
+  delete(id:string) {
+
+  }
+
+  update(id:string, article: Article) {
+
+  }
+
+  create() {
+    
+  }
 }

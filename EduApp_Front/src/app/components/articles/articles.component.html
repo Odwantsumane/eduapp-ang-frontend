@@ -2,8 +2,44 @@
 
 <div class="articles d-flex flex-column"> 
     <div class="card-body d-flex flex-row justify-content-end"> 
-        <div class=""><a href="#" style="text-decoration: none;" class=" btn btn-success text-white"><i class="bi bi-pen fs-4 text-white"></i>  <b>Create Article</b></a></div>
+        <div class=""><a href="#" style="text-decoration: none;" class=" btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#createArticleModel"><b>Create Article</b></a></div> <!--<i class="bi bi-pen fs-4 text-white"></i>  -->
     </div>   
+
+<!-- The Modal -->
+<div class="modal fade" id="createArticleModel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">New Article</h4> 
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="mb-3 mt-3">
+                <label for="header" class="form-label">Header:</label>
+                <input type="text" class="form-control" id="header" placeholder="Enter header" name="header">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Article:</label>
+                <textarea class="form-control" name="content" id="content" cols="20" rows="3" placeholder="Write something.."></textarea>
+            </div>
+            <div class="form-check mb-3">
+                <label class="form-check-label"><input class="form-check-input" type="checkbox" name="remember"> Remember me</label>
+            </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Create</button>
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
 <ul *ngFor="let article of Articles" class="article-list">
     <li id="{{article.id}}"  class="article-list-item container-fluid p-2 my-2 border rounded-4">
         <span class="text-muted float-end">{{article.createdAt | date: 'dd/MM/yyyy'}}</span>
