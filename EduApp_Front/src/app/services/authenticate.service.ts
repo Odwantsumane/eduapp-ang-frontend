@@ -22,7 +22,8 @@ export class AuthenticateService {
   loginReq: LoginReq = {username: "", password: ""};
 
   PlaceHolderUser:User = {
-    id:"", name:"", surname:"",username:"",password:"", createdAt:"", __v:"", unreadMsgs:[], selectedCountry:"", selectedDesignation:"", selectedInstitution:"",selectedSubject:[]
+    id:"", name:"", surname:"",username:"",password:"", createdAt:"", __v:"", unreadMsgs:[], selectedCountry:"", selectedDesignation:"", selectedInstitution:"",selectedSubject:[],
+    SuperUser:0, profilePicture:"",ManagerUser:0,NormalUser:0,RequestedSignUp:0,active:0
   }
 
   constructor(private userservice: UserrequestService, private cookieservice: CookieLocalService, private articleservice: ArticlesService) { }
@@ -131,8 +132,8 @@ export class AuthenticateService {
 
     const user = await this.isLoggedInGetUser();
 
-    if(user) {
-      if(user.username === "admin@studyo.co.za") return true;
+    if(user.SuperUser || user.ManagerUser) {
+      return true;
     }
 
     return response; 

@@ -22,7 +22,13 @@ export class User {
     public selectedInstitution:string,
     public selectedDesignation:string,
     public selectedCountry:string,
-    public selectedSubject: Array<string>){};
+    public selectedSubject: Array<string>,
+    public profilePicture: string,
+    public SuperUser: number,  // Convert 0 to Boolean for clarity
+    public ManagerUser: number,
+    public NormalUser: number,
+    public RequestedSignUp: number, // Convert 1 to Boolean for clarity
+    public active: number){};
 }
 
 export class SignInUser {

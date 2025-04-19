@@ -26,20 +26,20 @@
                     </div> 
                     <div class="mb-3">
                         <label for="createdat_" class="form-label">CreatedAt:</label>
-                        <input type="text" class="form-control" id="createdat_" placeholder="Enter username" name="createdat_" readonly>
+                        <input type="text" class="form-control" id="createdat_" placeholder="Enter username" name="createdat_" value="{{user_.createdAt_}}" readonly>
                     </div> 
                     <div class="d-flex justify-content-around">
                         <div class="mb-3">
                             <label for="superuser_" class="form-label">SuperUser:</label> 
-                            <input class="form-check-input mt-1 ms-2" type="checkbox" id="superuser_" name="superuser_" [checked]="true">
+                            <input class="form-check-input mt-1 ms-2" type="checkbox" id="superuser_" name="superuser_" [checked]="user_.superuser_">
                         </div> 
                         <div class="mb-3">
                             <label for="manageruser_" class="form-label">ManagerUser:</label> 
-                            <input class="form-check-input mt-1 ms-2" type="checkbox" id="manageruser_" name="manageruser_" [checked]="true">
+                            <input class="form-check-input mt-1 ms-2" type="checkbox" id="manageruser_" name="manageruser_" [checked]="user_.manageruser_">
                         </div> 
                         <div class="mb-3">
                             <label for="normaluser_" class="form-label">NormalUser:</label> 
-                            <input class="form-check-input mt-1 ms-2" type="checkbox" id="normaluser_" name="normaluser_" [checked]="true">
+                            <input class="form-check-input mt-1 ms-2" type="checkbox" id="normaluser_" name="normaluser_" [checked]="user_.normaluser_">
                         </div>
                     </div>
                   </form>

@@ -46,12 +46,23 @@ export class ManagerComponent implements OnInit{
         this.user_.name_ = this.users[index].name;
         this.user_.surname_ = this.users[index].surname;
         this.user_.username_ = this.users[index].username;
-        this.user_.createdAt_ = ''; //this.users[index].createdAt;
-        // this.user.normaluser = this.users[index].name; 
+        this.user_.createdAt_ = this.users[index].createdAt;
+        this.user_.normaluser_ = this.users[index].NormalUser ? true:false; 
+        this.user_.superuser_ = this.users[index].SuperUser ? true:false; 
+        this.user_.manageruser_ = this.users[index].ManagerUser ? true:false; 
       }
       else console.log("user was not found");
     }
     else console.log("array has no data");
+  }
+
+  accept(id:string) {
+    // accept user request
+  }
+
+  decline(id:string) {
+    // decline user request
+
   }
 
 

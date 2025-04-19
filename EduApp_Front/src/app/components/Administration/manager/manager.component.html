@@ -19,11 +19,11 @@
                 <td>{{user.surname}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.username==='admin@studyo.co.za' ? 'Admin' : user.selectedDesignation}}</td> 
-                <td><div class="btn-group">
+                <td *ngIf="!user.SuperUser && user.RequestedSignUp"><div class="btn-group">
                     <a href="#" class="btn btn-secondary">Decline</a>
                     <a href="#" class="btn btn-success">Accept</a>
                 </div></td>
-                <td><div class="btn-group">
+                <td *ngIf="!user.SuperUser && user.RequestedSignUp"><div class="btn-group">
                     <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#remove">Remove</a>
                     <app-remove-users-modal ></app-remove-users-modal>  
                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update" (click)="getUser(user.id)">Update</a>
