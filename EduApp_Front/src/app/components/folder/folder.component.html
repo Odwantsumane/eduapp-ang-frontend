@@ -1,10 +1,11 @@
-<a routerLink="/repository" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a>
+<!-- <a routerLink="/repository" class="text-dark" data-bs-toggle="tooltip" title="Home"><i class="bi bi-arrow-left-short fs-2"></i></a> -->
 <div>
-    <div class="w-50 mt-5 d-flex flex-row-reverse">
+    <h5>{{current_folder !== null ? current_folder.title : "No name"}}</h5>
+    <div class="w-50 mt-1 d-flex flex-row-reverse">
         <div class="rounded-3 border w-25 m-1"><a class="btn w-100" (click)="changeLayout('grid')"><i class="bi bi-table fs-5"></i></a></div>
         <div class="rounded-3 border w-25 m-1"><a class="btn w-100" (click)="changeLayout('list')"><i class="bi bi-card-list fs-5"></i></a></div>
     </div>
-    <div style="text-align: end;"><a type="button" class="btn btn-rounded btn-primary" data-bs-toggle="modal" data-bs-target="#fileuploadmodal">Add</a></div>
+    <div style="text-align: end;"><a type="button" class="btn btn-rounded btn-primary" data-bs-toggle="modal" data-bs-target="#fileuploadmodal">Upload</a></div>
     <!-- The Modal -->
     <div class="modal fade" id="fileuploadmodal">
         <div class="modal-dialog">
@@ -52,7 +53,7 @@
                 <div class="card m-1 p-1" style="width:200px; height: 225px;">
                     <img class="card-img-top" src="{{file.name.split('.')[file.name.split('.').length-1]}}.ico" alt="Card image" style="width:45%">
                     <div class="card-body">
-                      <p class="card-title"><b>{{file.name.length > 15 ? file.name.substring(0, 15)+"...":file.name}}</b></p>
+                      <p class="card-title" data-bs-toggle="tooltip" data-bs-placement="top" title="{{file.name}}"><b>{{file.name.length > 15 ? file.name.substring(0, 15)+"...":file.name}}</b></p>
                       <p class="card-text">{{file.createdAt  | date: 'dd/MM/YYYY HH:mm:ss'}}</p>
                       <a href="http://localhost:4001{{file.filepath}}" class="btn btn-outline-primary btn-sm">Download/View</a>
                     </div>

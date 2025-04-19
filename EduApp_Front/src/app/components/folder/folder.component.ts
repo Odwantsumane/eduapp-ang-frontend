@@ -6,6 +6,8 @@ import { file } from '../../services/Folder/File/api.file.service';
 import { FileService } from '../../services/Folder/File/file.service';
 import { AuthenticateService } from '../../services/authenticate.service';
 import { User } from '../../services/userrequest.service';
+import { FolderService } from '../../services/Folder/folder.service';
+import { folder } from '../../services/Folder/api.service';
 
 @Component({
   selector: 'app-folder',
@@ -16,7 +18,7 @@ import { User } from '../../services/userrequest.service';
 })
 export class FolderComponent {
 
-  id: string | null = null;
+  id: string =  "";
   file : File | null = null;
   user: User | null = null;
   allFiles: Array<file> = [];
@@ -27,6 +29,7 @@ export class FolderComponent {
   yesterday = new Date();
   grid:boolean = false;
   list:boolean = false;
+  current_folder:folder | null = null;
 
   file_obj = {
     id: "",
@@ -39,13 +42,17 @@ export class FolderComponent {
     filepath:""
   }
 
-  constructor(private route: ActivatedRoute, private FileMiddleManService: FileService, private authservice: AuthenticateService) {}
+  constructor(private route: ActivatedRoute, private FileMiddleManService: FileService, private authservice: AuthenticateService,
+    private folders: FolderService
+  ) {}
 
-  ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id'); // Get the 'id' from the URL 
+  async ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id') || ""; // Get the 'id' from the URL 
     this.getuserInfo();
     this.getAllFiles();
     this.getAllFilesFiltered(this.id);
+    this.current_folder = await this.folders.getFolder(this.id);
+    console.log(this.current_folder);
   }
 
   onFileSelected(event: Event): void {

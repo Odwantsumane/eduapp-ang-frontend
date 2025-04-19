@@ -84,7 +84,7 @@ export class FolderService {
   }
   
   handleFolderResp(response: resultFolder | undefined): folder {
-
+    console.log(response);
     if(response === undefined || !response.success) return this.placeholder_folder;
     return response.result[0];
   }

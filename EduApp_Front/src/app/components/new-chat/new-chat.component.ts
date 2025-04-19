@@ -7,6 +7,7 @@ import { MiddlemanService } from '../../services/middleman.service';
 import { ManagerService } from '../../services/Aministration/manager.service';
 import { User } from '../../services/userrequest.service';
 import { AuthenticateService } from '../../services/authenticate.service';
+import { RefreshService } from '../../services/refresh.service';
 
 @Component({
   selector: 'app-new-chat',
@@ -28,7 +29,8 @@ export class NewChatComponent implements OnInit{
   newChat = {
     id:"",__v:0, title:"", description:"",messages:[],participants:[""],groupPic:"",createdAt:"", createdBy:""
   }
-  constructor(private groupchatservice: MiddlemanService, private managerservice: ManagerService, private auth:AuthenticateService){}
+  constructor(private groupchatservice: MiddlemanService, private managerservice: ManagerService, private auth:AuthenticateService, 
+    private refresh: RefreshService){}
 
   ngOnInit(): void {
     this.getUsers();
@@ -41,6 +43,7 @@ export class NewChatComponent implements OnInit{
     this.newChat.createdBy = (await this.auth.isLoggedInGetUser()).username;
     this.createSuccess = await this.groupchatservice.createNewChat(this.newChat);
     this.sent = true;
+    if(this.createSuccess) this.refresh.triggerRefresh();
   }
 
   async getUsers() {

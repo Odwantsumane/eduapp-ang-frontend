@@ -30,7 +30,7 @@ export class ApiService {
 
   getFolder(id: string, token:string) {
     this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-    return this.http.get<resultFolder>(`${this.url}/${id}`,  {headers: this.Headers, withCredentials: true});
+    return this.http.get<resultFolder>(`${this.url}/get_mysql/${id}`,  {headers: this.Headers, withCredentials: true});
   }
 
   createFolder(folder: folder, token:string) {
