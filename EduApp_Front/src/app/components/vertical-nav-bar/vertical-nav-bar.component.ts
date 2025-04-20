@@ -6,6 +6,7 @@ import { AuthenticateService } from '../../services/authenticate.service';
 import { RefreshService } from '../../services/refresh.service';
 import { Subscription } from 'rxjs';
 import { User } from '../../services/userrequest.service';
+import { app_version } from '../../const/utilities';
 
 @Component({
   selector: 'app-vertical-nav-bar',
@@ -19,6 +20,7 @@ export class VerticalNavBarComponent implements OnInit {
   isLoggedIn : boolean = false;//Promise<boolean>;
   isAdmin:boolean = false;
   user : User | null = null;
+  app_version : string = app_version;
 
   constructor(private authenticator: AuthenticateService) { 
     //this.isLoggedIn = new Promise((resolve, reject) => {});

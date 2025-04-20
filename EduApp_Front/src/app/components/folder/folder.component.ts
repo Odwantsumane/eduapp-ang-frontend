@@ -51,8 +51,7 @@ export class FolderComponent {
     this.getuserInfo();
     this.getAllFiles();
     this.getAllFilesFiltered(this.id);
-    this.current_folder = await this.folders.getFolder(this.id);
-    console.log(this.current_folder);
+    this.current_folder = await this.folders.getFolder(this.id); 
   }
 
   onFileSelected(event: Event): void {

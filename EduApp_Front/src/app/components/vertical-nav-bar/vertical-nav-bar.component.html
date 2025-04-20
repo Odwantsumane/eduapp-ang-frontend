@@ -1,4 +1,4 @@
-<div class="vertical-nav w-100 card p-2 h-100 border border-end border-1 border-light bg-light"> 
+<div class="vertical-nav w-100 card p-2 h-100 border border-end border-1 border-light border-end "> 
     <div class="clearfix w-100 sticky-top" >
       <div class="float-start w-100">
         <ul class="nav flex-column w-100">
@@ -73,6 +73,7 @@
               </div>
             </a>
           </li>
+          <hr>
           <li class="nav-item mt-2 p-2">
             <a *ngIf="isLoggedIn" routerLink="/logout" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
               <div style="text-align: center;" class="d-flex flex-row justify-content-start text-dark"> 
@@ -88,7 +89,7 @@
             </a>
           </li>
         </ul>
-        <p style="text-align: center;" class="text-dark">version 0.4.0</p>
+        <p style="text-align: center;" class="text-dark">version {{app_version}}</p>
       </div>
     </div>
   </div>
