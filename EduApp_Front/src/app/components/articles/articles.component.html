@@ -44,10 +44,11 @@
     <li id="{{article.id}}"  class="article-list-item container-fluid p-2 my-2 border rounded-4">
         <span class="text-muted float-end">{{article.createdAt | date: 'dd/MM/yyyy'}}</span>
         <div class="profile-name d-flex">
-            <div><a href="#"><i class="bi bi-person-circle fs-2 me-1 text-dark"></i></a></div>
+            <div><a href="#"><i class="bi bi-person-circle fs-3 me-1 text-dark"></i></a></div>
             <div class="ps-1 pe-1">
-                <a href="#" style="text-decoration: none;" class="fs-6">{{article.createdBy}}</a>
-                <p class="fs-6 text-muted">Student at Rhodes University</p>
+                <a style="text-decoration: none; font-size: medium;" class="text-dark"><b>{{article.createdBy}}</b> <br>
+                    <span class="text-muted" style="font-size: small;">Student at Rhodes University</span>
+                </a> 
             </div>
         </div> 
         <div class="ms-5">
