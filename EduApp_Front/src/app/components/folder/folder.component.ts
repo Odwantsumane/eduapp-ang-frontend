@@ -27,7 +27,7 @@ export class FolderComponent {
   failLoadingMessage:boolean = false;
   today = new Date();
   yesterday = new Date();
-  grid:boolean = false;
+  grid:boolean = window.sessionStorage.getItem("grid_studyo") === "true" ? true:false;
   list:boolean = false;
   current_folder:folder | null = null;
 
@@ -98,9 +98,11 @@ export class FolderComponent {
     if(layout === "grid"){
       this.grid = true;
       this.list = false;
+      window.sessionStorage.setItem(layout+"_studyo", "true"); 
     } else {
       this.grid = false;
-      this.list = true;
+      this.list = true; 
+      window.sessionStorage.setItem("grid_studyo", "false");
     }
       
   }
