@@ -20,7 +20,7 @@
         <!--  -->
         <li class="nav-item m-3">
           <div style="text-align: center;" class="d-flex flex-column"> 
-            <a style="cursor: pointer;" data-bs-toggle="tooltip" title="Add friends">
+            <a style="cursor: pointer;" data-bs-toggle="tooltip" title="Add friends" data-bs-toggle="modal" data-bs-target="#follow_users">
               <i class="bi bi-person-plus fs-4 text-dark"></i></a>
           </div>
         </li>
@@ -55,4 +55,30 @@
       </ul>
     </nav>
   </div>
+
+  <!-- The Users  to follow -->
+<div class="modal fade" id="follow_users">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Follow +</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div *ngFor="let user of list_users" class="card pe-2 ps-2 pt-2 d-flex flex-row justify-content-between mt-1">
+          <div class="d-flex flex-row">
+            <div><i class="bi bi-person-circle fs-2"></i></div>
+            <div class="ms-2 mt-2"><p style="text-decoration: none; font-size: small;"><b>{{user.name + " " + user.surname}}</b> <br> {{user.selectedInstitution !== "None" ? user.selectedInstitution : user.selectedDesignation}}</p></div>
+          </div>
+          <div><a href="#" class="btn btn-outline-primary">Follow +</a></div>
+        </div> 
+      </div>
+
+    </div>
+  </div>
+</div>
   <app-calendar></app-calendar>
