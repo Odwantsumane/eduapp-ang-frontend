@@ -1,8 +1,8 @@
  
 <!-- <h3 class="mt-2">Chats</h3> -->
 <div class="mb-2">
-    <a href="#hidechats" *ngIf="!hide_chats" (click)="hideChats()" data-bs-toggle="tooltip" title="hide chats" style="text-decoration: none;" class="text-dark"><span class="fs-5 me-1 pt-2" style="font-weight: 500;">Chats</span><i class="bi bi-chevron-compact-down fs-6 text-dark"></i></a>
-    <a href="#showchats" *ngIf="hide_chats" (click)="hideChats()" data-bs-toggle="tooltip" title="show chats" style="text-decoration: none;" class="text-dark"><span class="fs-5 me-1 pt-2" style="font-weight: 500;">Chats</span><i class="bi bi-chevron-compact-up fs-6 text-dark"></i></a>
+    <a href="#hidechats" *ngIf="hide_chats" (click)="hideChats()" data-bs-toggle="tooltip" title="show chats" style="text-decoration: none;" class="text-dark"><span class="fs-5 me-1 pt-2" style="font-weight: 500;">Chats</span><i class="bi bi-chevron-compact-down fs-6 text-dark"></i></a>
+    <a href="#showchats" *ngIf="!hide_chats" (click)="hideChats()" data-bs-toggle="tooltip" title="hide chats" style="text-decoration: none;" class="text-dark"><span class="fs-5 me-1 pt-2" style="font-weight: 500;">Chats</span><i class="bi bi-chevron-compact-up fs-6 text-dark"></i></a>
 </div>
 <app-chats-view *ngIf="!hide_chats" [allchats]="3"></app-chats-view>
 <app-articles></app-articles>
