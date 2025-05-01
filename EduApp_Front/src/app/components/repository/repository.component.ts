@@ -54,6 +54,19 @@ export class RepositoryComponent implements OnInit {
   
   async ngOnInit() {
 
+
+    if (window.sessionStorage.getItem("repo_filter_studyo")) {
+      this.science = window.sessionStorage.getItem("repo_filter_studyo") === "science" ? true : false;
+      this.humanities = window.sessionStorage.getItem("repo_filter_studyo") === "humanities" ? true : false;
+      this.law = window.sessionStorage.getItem("repo_filter_studyo") === "law" ? true : false;
+      this.it = window.sessionStorage.getItem("repo_filter_studyo") === "it" ? true : false;
+      this.other = window.sessionStorage.getItem("repo_filter_studyo") === "other" ? true : false;
+
+      if (window.sessionStorage.getItem("repo_filter_studyo") === "all") {
+        this.humanities = true; this.law = true; this.it = true; this.other = true; this.science = true;
+      }
+    }
+
     this.current_user = (await this.autheservice.isLoggedInGetUser()).username || "unknown";
 
     this.getAllFolders();
@@ -130,6 +143,8 @@ export class RepositoryComponent implements OnInit {
 
   OnFilter(filter: string) {
     this.humanities = false; this.law = false; this.it = false; this.other = false; this.science = false;
+
+    window.sessionStorage.setItem("repo_filter_studyo", filter);
 
     switch (filter) {
       case "science":
