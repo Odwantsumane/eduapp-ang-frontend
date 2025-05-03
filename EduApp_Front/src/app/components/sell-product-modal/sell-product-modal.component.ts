@@ -17,7 +17,8 @@ export class SellProductModalComponent implements OnInit{
   failed_to_post:boolean = false;
   current_user = "";
   picture : File | null = null;
-  formValid:boolean = false;
+  formValid:boolean = false; 
+  counter: number = 0;
 
   product_obj = {
     _id: "",
@@ -36,7 +37,7 @@ export class SellProductModalComponent implements OnInit{
   constructor(private autheservice: AuthenticateService) {};
 
   async ngOnInit() {
-
+    this.product_obj.specs.pop(); 
     this.current_user = (await this.autheservice.isLoggedInGetUser()).username || "unknown";
   }
 
@@ -45,7 +46,14 @@ export class SellProductModalComponent implements OnInit{
   }
 
   monitorSpecs() { 
-    if(this.spec.endsWith(';') && this.spec.length > 1) {this.product_obj.specs.push(this.spec); console.log(this.product_obj.specs); this.spec = ""}
+    if(this.spec.endsWith(';')) {  
+      this.product_obj.specs.push(this.spec.replace(";",""));  
+      this.spec = ""; 
+    }
+  }
+
+  removeSpec(spec:string) {
+    this.product_obj.specs.splice(this.product_obj.specs.findIndex(x => x === spec),1);
   }
 
   onFileSelected(event: Event): void {
@@ -60,7 +68,7 @@ export class SellProductModalComponent implements OnInit{
 
   handlePost() {
     // check for missing fields
-    if(this.product_obj.name !== "" && this.product_obj.specs.length > 1
+    if(this.product_obj.name !== "" && this.product_obj.specs.length > 0
       && this.product_obj.category !== "" && this.product_obj.location !== "" && this.product_obj.price > 0) {
         this.product_obj.createdBy = this.current_user; 
         this.product_obj.file = this.picture;
@@ -84,7 +92,7 @@ export class SellProductModalComponent implements OnInit{
     }
   }
 
-  submit() {
+  submit() { 
     this.sendDataToParent(this.product_obj);
   }
   submitFailed() {

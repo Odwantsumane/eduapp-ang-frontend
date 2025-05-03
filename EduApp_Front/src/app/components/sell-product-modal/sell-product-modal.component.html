@@ -21,6 +21,11 @@
                 <div class="mb-3 mt-3">
                     <label for="specs" class="form-label">Specs:</label>
                     <input type="text" class="form-control" id="specs" placeholder="List specs separate by ';'" name="specs" [(ngModel)]="spec" (input)="monitorSpecs()" (input)="monitorFields();">
+                    <div class="mt-1 d-flex flex-wrap">
+                      <div *ngFor="let item of product_obj.specs">  
+                        <li class="border rounded-3 p-2 m-1" style="list-style: none;">{{item}} <a class="btn btn-close" style="width: 1px;" (click)="removeSpec(item)"></a></li> 
+                      </div> 
+                    </div>
                   </div> 
                 <div class="mb-3 mt-3">
                     <label for="price_" class="form-label">Price:</label>

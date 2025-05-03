@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService, product } from './api.service';
 import { CookieLocalService } from '../cookie-local.service';
-import { uploadResp } from './api.service';
+import { uploadResp, result } from './api.service';
 import { file } from '../Folder/File/api.file.service';
 
 @Injectable({
@@ -89,10 +89,10 @@ export class ProductService {
       }
     }
     
-    handleProductResp(response: product | undefined): product {
+    handleProductResp(response: result | undefined): product {
   
       if(response === undefined) return this.placeholder_product;
-      return response;
+      return response.result[0];
     }
 
     handleProductRespAll(response: Array<product> | undefined): Array<product> {

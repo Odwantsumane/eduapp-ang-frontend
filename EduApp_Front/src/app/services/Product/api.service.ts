@@ -10,6 +10,10 @@ export class uploadResp {
   constructor(public message:string, public path:string){}
 }
 
+export class result {
+  constructor(public result: Array<product>, public success: boolean, public fatal: boolean, public message: string){};
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,12 +30,12 @@ export class ApiService {
 
     getAll(token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-      return this.http.get<Array<product>>(`${this.url}/all`,  {headers: this.Headers, withCredentials: true});
+      return this.http.get<Array<product>>(`${this.url}/getAll_mysql`,  {headers: this.Headers, withCredentials: true});
     }
 
     getProduct(id: string, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-      return this.http.get<product>(`${this.url}/getProduct/${id}`,  {headers: this.Headers, withCredentials: true});
+      return this.http.get<result>(`${this.url}/get_mysql/${id}`,  {headers: this.Headers, withCredentials: true});
     }
 
     uploadPicture(file: File, token:string) {
@@ -44,17 +48,17 @@ export class ApiService {
   
     createProduct(product: product, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-      return this.http.post<product>(`${this.url}/create`, product, {headers: this.Headers, withCredentials: true});
+      return this.http.post<result>(`${this.url}/post_mysql/create`, product, {headers: this.Headers, withCredentials: true});
     }
   
     updateProduct(id: string, product: product, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-      return this.http.post<product>(`${this.url}/update/${id}`, product, {headers: this.Headers, withCredentials: true});
+      return this.http.post<result>(`${this.url}/put_mysql/${id}`, product, {headers: this.Headers, withCredentials: true});
     }
   
     removeProduct(id: string, token:string) {
       this.Headers = new HttpHeaders ({Authorization: this.createBasicAuthHeaders(), Cookie: `jwt=${token}`});
-      return this.http.post<product>(`${this.url}/remove/${id}`, {headers: this.Headers, withCredentials: true});
+      return this.http.post<result>(`${this.url}/remove_mysql/${id}`, {headers: this.Headers, withCredentials: true});
     }
   
     createBasicAuthHeaders() { ;

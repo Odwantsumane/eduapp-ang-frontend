@@ -26,11 +26,10 @@ export class MarketPlaceComponent implements OnInit{
     this.getAll();
   }
 
-  addProduct(newProduct: any) { 
+  async addProduct(newProduct: any) { 
     this.product_obj = newProduct;
-    this.uploadedFile = newProduct.file;
-    console.log(newProduct);
-    this.createProduct();
+    this.uploadedFile = newProduct.file; 
+    await this.createProduct();
   }
 
   async getAll() {
