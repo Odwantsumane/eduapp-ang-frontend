@@ -21,6 +21,7 @@ export class VerticalNavBarComponent implements OnInit {
   isAdmin:boolean = false;
   user : User | null = null;
   app_version : string = app_version;
+  collapse:boolean = false;
 
   constructor(private authenticator: AuthenticateService) { 
     //this.isLoggedIn = new Promise((resolve, reject) => {});
@@ -32,4 +33,8 @@ export class VerticalNavBarComponent implements OnInit {
 
     this.isAdmin = await this.authenticator.isAdmin();
   }  
+
+  changeCollapse() {
+    this.collapse = !this.collapse;
+  }
 }

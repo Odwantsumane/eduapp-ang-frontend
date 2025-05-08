@@ -42,12 +42,24 @@
             </div>
           </li> -->
           <li class="nav-item mt-2 p-2">
-            <a routerLink="/repository" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
+            <div  style="text-align: center; " class="d-flex flex-row justify-content-start text-dark">
               <div style="text-align: center;" class="d-flex flex-row justify-content-start text-dark"> 
                   <i class="bi bi-folder2 fs-4"></i>
-                  <p class="pt-2 ms-4" style="font-size: medium;">Repository</p>
+                  <div>
+                    <a routerLink="/repository" style="text-decoration: none;" class="text-dark">
+                      <p *ngIf="!collapse" class="pt-2 ms-4" style="font-size: medium;">Repository <span data-bs-toggle="collapse" data-bs-target="#courses_list"><i class="bi bi-plus" (click)="changeCollapse()"></i></span></p>
+                      <p *ngIf="collapse" class="pt-2 ms-4" style="font-size: medium;">Repository <span data-bs-toggle="collapse" data-bs-target="#courses_list"><i class="bi bi-dash" (click)="changeCollapse()"></i></span></p> 
+                    </a>
+                    <ul style="list-style: none; text-align: left;" id="courses_list" class="collapse hidden">
+                      <li class="course_list">Science</li>
+                      <li class="course_list">Humanities</li>
+                      <li class="course_list">Law</li>
+                      <li class="course_list">IT</li>
+                      <li class="course_list">Others</li>
+                    </ul> 
+                  </div>
               </div>
-            </a>
+            </div>
           </li> 
           <li class="nav-item mt-2 p-2">
             <a routerLink="/market" style="text-align: center; text-decoration: none;" class="d-flex flex-row justify-content-start text-dark">
