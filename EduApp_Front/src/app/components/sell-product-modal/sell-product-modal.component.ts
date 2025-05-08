@@ -47,7 +47,8 @@ export class SellProductModalComponent implements OnInit{
 
   monitorSpecs() { 
     if(this.spec.endsWith(';')) {  
-      this.product_obj.specs.push(this.spec.replace(";",""));  
+      this.spec = this.spec.replaceAll(";","");
+      if(this.spec.length > 0) this.product_obj.specs.push(this.spec.replaceAll(";",""));
       this.spec = ""; 
     }
   }
