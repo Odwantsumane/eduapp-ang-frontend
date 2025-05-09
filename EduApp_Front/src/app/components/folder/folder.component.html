@@ -43,11 +43,12 @@
             <tbody>
               <tr *ngFor="let file of filteredFiles">
                 <td><a href="http://localhost:4001{{file.filepath}}" style="text-decoration: none;" class="text-dark" download><img src="{{file.name.split('.')[file.name.split('.').length-1]}}.ico" width="20px" height="20px"> {{file.name}}</a></td>
-                <td>{{file.name.split(".")[1]}}</td>
+                <td>{{file.name.split('.')[file.name.split('.').length-1]}}</td>
                 <td>{{file.createdAt  | date: 'dd/MM/YYYY HH:mm:ss'}}</td> 
               </tr>
             </tbody>
         </table>
+        <div *ngIf="loading && !grid" class="spinner-border ms-4" style="width: 20px; height: 20px;"></div>
         <div *ngIf="grid" class="d-flex flex-row flex-wrap">
             <div *ngFor="let file of filteredFiles">
                 <div style="width:200px; height: 225px;"> <!-- was card-->
@@ -59,12 +60,13 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="loading && grid" class="spinner-border ms-4" style="width: 20px; height: 20px;"></div>
         </div>
         
         <!-- <li *ngFor="let file of filteredFiles">
             <a href="http://localhost:4001{{file.filepath}}" style="text-decoration: none;" class="text-dark" download><img src="pdf.ico" alt="icon" width="20px" height="20px"> {{file.name}}</a>
         </li> -->
-        <div *ngIf="loading" class="spinner-border ms-4" style="width: 20px; height: 20px;"></div>
+        
         
     </ul>
 </div>
