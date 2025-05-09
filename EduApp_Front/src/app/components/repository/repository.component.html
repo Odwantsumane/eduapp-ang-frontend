@@ -56,8 +56,8 @@
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Created : {{folder.createdAt | date: 'dd/MM/YYYY'}}</p>
                     <div class="d-flex justify-content-around"> 
-                        <p style="font-size: small;">Rhodes University</p>
-                        <p style="font-size: small;">2019</p>
+                        <p style="font-size: small;">{{ folder.university == null ? "Rhodes University" : folder.university}}</p>
+                        <p style="font-size: small;">{{ folder.year== null ? "2019" : folder.year}}</p>
                      </div>
                 </div>
             </div>  
@@ -84,9 +84,9 @@
                   <tr *ngFor="let folder of science_arr">
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
-                    <td>Rhodes University</td>
+                    <td>{{ folder.university == null ? "Rhodes University" : folder.university}}</td>
                     <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
-                    <th>2019</th>
+                    <th>{{ folder.year== null ? "2019" : folder.year}}</th>
                     <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
@@ -137,8 +137,8 @@
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Created : {{folder.createdAt | date: 'dd/MM/YYYY'}}</p>
                     <div class="d-flex justify-content-around"> 
-                        <p style="font-size: small;">Rhodes University</p>
-                        <p style="font-size: small;">2019</p>
+                        <p style="font-size: small;">{{ folder.university == null ? "Rhodes University" : folder.university}}</p>
+                        <p style="font-size: small;">{{ folder.year== null ? "2019" : folder.year}}</p>
                      </div>
                 </div>
             </div>
@@ -165,9 +165,9 @@
                   <tr *ngFor="let folder of law_arr">
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
-                    <td>Rhodes University</td>
+                    <td>{{ folder.university == null ? "Rhodes University" : folder.university}}</td>
                     <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
-                    <th>2019</th>
+                    <th>{{ folder.year== null ? "2019" : folder.year}}</th>
                     <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
@@ -216,8 +216,8 @@
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Created : {{folder.createdAt | date: 'dd/MM/YYYY'}}</p>
                     <div class="d-flex justify-content-around"> 
-                        <p style="font-size: small;">Rhodes University</p>
-                        <p style="font-size: small;">2019</p>
+                        <p style="font-size: small;">{{ folder.university == null ? "Rhodes University" : folder.university}}</p>
+                        <p style="font-size: small;">{{ folder.year== null ? "2019" : folder.year}}</p>
                      </div>
                 </div>
             </div> 
@@ -244,9 +244,9 @@
                   <tr *ngFor="let folder of it_arr">
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
-                    <td>Rhodes University</td>
+                    <td>{{ folder.university == null ? "Rhodes University" : folder.university}}</td>
                     <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
-                    <th>2019</th>
+                    <th>{{ folder.year== null ? "2019" : folder.year}}</th>
                     <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
@@ -295,8 +295,8 @@
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Created : {{folder.createdAt | date: 'dd/MM/YYYY'}}</p>
                     <div class="d-flex justify-content-around"> 
-                        <p style="font-size: small;">Rhodes University</p>
-                        <p style="font-size: small;">2019</p>
+                        <p style="font-size: small;">{{ folder.university == null ? "Rhodes University" : folder.university}}</p>
+                        <p style="font-size: small;">{{ folder.year== null ? "2019" : folder.year}}</p>
                      </div>
                 </div>
             </div>  
@@ -323,9 +323,9 @@
                   <tr *ngFor="let folder of humanities_arr">
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
-                    <td>Rhodes University</td>
+                    <td>{{ folder.university == null ? "Rhodes University" : folder.university}}</td>
                     <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
-                    <th>2019</th>
+                    <th>{{ folder.year== null ? "2019" : folder.year}}</th>
                     <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
@@ -374,8 +374,8 @@
                     <h6>{{folder.title}}</h6>
                     <p class="text-muted" style="font-size: small;">Created : {{folder.createdAt | date: 'dd/MM/YYYY'}}</p>
                     <div class="d-flex justify-content-around"> 
-                        <p style="font-size: small;">Rhodes University</p>
-                        <p style="font-size: small;">2019</p>
+                        <p style="font-size: small;">{{ folder.university == null ? "Rhodes University" : folder.university}}</p>
+                        <p style="font-size: small;">{{ folder.year== null ? "2019" : folder.year}}</p>
                      </div>
                 </div>
             </div> 
@@ -402,9 +402,9 @@
                   <tr *ngFor="let folder of other_arr">
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
                     <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
-                    <td>Rhodes University</td>
+                    <td>{{ folder.university == null ? "Rhodes University" : folder.university}}</td>
                     <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
-                    <th>2019</th>
+                    <th>{{ folder.year== null ? "2019" : folder.year}}</th>
                     <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>

@@ -107,6 +107,8 @@ export class RepositoryComponent implements OnInit {
       this.folder_list = await this.folderservice.getAllFolders();  
       this.distribute_folders();
       this.foldersLoading = false;
+
+      console.log(this.folder_list);
     } catch (e) {
       console.log(`${new Date()}: `+ "Failed to get folders, " + `${e}`);
       this.foldersLoading = false;
