@@ -12,8 +12,8 @@
         <div class="rounded-3 border w-25 m-1" style="height: fit-content;"><a href="repository#otherCat" class="btn w-100" (click)="OnFilter('other')">Other</a></div>
     </div>
     <div class="w-50 mt-5">
-        <div class="rounded-3 border w-25 m-1 float-end"><a href="repository#displaylist" class="btn w-100" (click)="OnFilter('all')"><i class="bi bi-table fs-5"></i></a></div>
-        <div class="rounded-3 border w-25 m-1 float-end"><a href="repository#displayGrid" class="btn w-100" (click)="OnFilter('all')"><i class="bi bi-card-list fs-5"></i></a></div>
+        <div class="rounded-3 border w-25 m-1 float-end"><a class="btn w-100" (click)="change_folder_grid('grid')"><i class="bi bi-table fs-5"></i></a></div>
+        <div class="rounded-3 border w-25 m-1 float-end"><a class="btn w-100" (click)="change_folder_grid('list')"><i class="bi bi-card-list fs-5"></i></a></div>
     </div>
 </div>
 
@@ -27,7 +27,7 @@
 <div class="repo mt-3 d-flex flex-column">
     <div *ngIf="science" class="science w-100 mt-4" id="scienceCat">
         <h4>Science</h4>
-        <div class="w-100 d-flex flex-wrap mt-3">
+        <div *ngIf="folder_grid" class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;">
                     <a routerLink="folder/1" class="text-dark"><i class="bi bi-folder-fill fs-1"></i></a>
@@ -60,21 +60,57 @@
                         <p style="font-size: small;">2019</p>
                      </div>
                 </div>
-            </div> 
+            </div>  
             <div *ngIf="folderLoading.scienceFolderLoading" class="pt-5"><div class="spinner-border text-primary"></div></div>
             <div class="pt-5"><i *ngIf="folderLoading.scienceFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
             <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div> 
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
             <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder>
         </div>
+
+        <div *ngIf="!folder_grid">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Folder Name</th>
+                    <th>University</th>
+                    <th>Created</th>
+                    <th>Year</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let folder of science_arr">
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
+                    <td>Rhodes University</td>
+                    <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
+                    <th>2019</th>
+                    <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
+                          </ul></span></td>
+                  </tr> 
+                </tbody>
+              </table> 
+            <div *ngIf="folderLoading.scienceFolderLoading" class="pt-1"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-1"><i *ngIf="folderLoading.scienceFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div> 
+            <div class="ms-1 mt-1"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder>
+        </div>
+
         <hr class="fs-1 text-secondary w-25">
         <a routerLink="videos/scienceVids" class="text-muted fs-5" style="text-decoration: none;">Lectures</a>
     </div>
 
+
     <!--  -->
     <div *ngIf="law" class="law w-100 mt-4" id="lawCat">
         <h4>Law</h4>
-        <div class="w-100 d-flex flex-wrap mt-3">
+        <div *ngIf="folder_grid" class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
                 <div class="p-1">
@@ -112,6 +148,41 @@
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
             <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder>
         </div>
+
+        <div *ngIf="!folder_grid">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Folder Name</th>
+                    <th>University</th>
+                    <th>Created</th>
+                    <th>Year</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let folder of law_arr">
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
+                    <td>Rhodes University</td>
+                    <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
+                    <th>2019</th>
+                    <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
+                          </ul></span></td>
+                  </tr> 
+                </tbody>
+              </table> 
+            <div *ngIf="folderLoading.otherFolderLoading" class="pt-1"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-1"><i *ngIf="folderLoading.otherFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div> 
+            <div class="ms-1 mt-1"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder> 
+        </div>
+
         <hr class="fs-1 text-secondary w-25">
         <a routerLink="videos/lawVids" class="text-muted fs-5" style="text-decoration: none;">Lectures</a>
     </div>
@@ -119,7 +190,7 @@
 
     <div *ngIf="it" class="it w-100 mt-4" id="itCat">
         <h4>IT</h4>
-        <div class="w-100 d-flex flex-wrap mt-3">
+        <div *ngIf="folder_grid" class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
                 <div class="p-1">
@@ -156,6 +227,41 @@
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
             <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder> 
         </div>
+
+        <div *ngIf="!folder_grid">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Folder Name</th>
+                    <th>University</th>
+                    <th>Created</th>
+                    <th>Year</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let folder of it_arr">
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
+                    <td>Rhodes University</td>
+                    <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
+                    <th>2019</th>
+                    <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
+                          </ul></span></td>
+                  </tr> 
+                </tbody>
+              </table> 
+            <div *ngIf="folderLoading.itFolderLoading" class="pt-1"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-1"><i *ngIf="folderLoading.itFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div> 
+            <div class="ms-1 mt-1"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder>         
+        </div>
+
         <hr class="fs-1 text-secondary w-25">
         <a routerLink="videos/itVids" class="text-muted fs-5" style="text-decoration: none;">Lectures</a>
     </div>
@@ -163,7 +269,7 @@
     <!--  -->
     <div *ngIf="humanities" class="humanities w-100 mt-4" id="humanitiesCat">
         <h4>Humanities</h4>
-        <div class="w-100 d-flex flex-wrap mt-3">
+        <div *ngIf="folder_grid" class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
                 <div class="p-1">
@@ -200,6 +306,41 @@
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
             <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder> 
         </div>
+
+        <div *ngIf="!folder_grid">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Folder Name</th>
+                    <th>University</th>
+                    <th>Created</th>
+                    <th>Year</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let folder of humanities_arr">
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
+                    <td>Rhodes University</td>
+                    <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
+                    <th>2019</th>
+                    <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
+                          </ul></span></td>
+                  </tr> 
+                </tbody>
+              </table> 
+            <div *ngIf="folderLoading.humanitiesFolderLoading" class="pt-1"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-1"><i *ngIf="folderLoading.humanitiesFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div>
+            <div class="ms-1 mt-1"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder> 
+        </div>
+
         <hr class="fs-1 text-secondary w-25">
         <a routerLink="videos/humanitiesVids" class="text-muted fs-5" style="text-decoration: none;">Lectures</a>
     </div>
@@ -207,7 +348,7 @@
 
     <div *ngIf="other" class="other w-100 mt-4" id="otherCat">
         <h4>Other</h4>
-        <div class="w-100 d-flex flex-wrap mt-3">
+        <div *ngIf="folder_grid" class="w-100 d-flex flex-wrap mt-3">
             <div class="m-1 border-bottom rounded-4 border-secondary border-2" style="width: 24%;">
                 <div class=" w-100" style="text-align: center;"><i class="bi bi-folder-fill fs-1"></i></div>
                 <div class="p-1">
@@ -244,6 +385,41 @@
             <div class="ms-5 mt-5"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
             <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder> 
         </div>
+
+        <div *ngIf="!folder_grid">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Folder Name</th>
+                    <th>University</th>
+                    <th>Created</th>
+                    <th>Year</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let folder of other_arr">
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark"><i class="bi bi-folder-fill fs-5"></i></a></td>
+                    <td><a routerLink="folder/{{folder.id}}" class="text-dark" style="text-decoration: none;">{{folder.title}}</a></td>
+                    <td>Rhodes University</td>
+                    <td>{{folder.createdAt | date: 'dd/MM/YYYY'}}</td>
+                    <th>2019</th>
+                    <td><span class="float-end dropdown dropend" ><a href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots-vertical text-dark"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item text-success" href="repository#otherCat">Update</a></li>
+                            <li><a class="dropdown-item text-danger" style="cursor: pointer;" (click)="removeFolder(folder.id)">Delete</a></li> 
+                          </ul></span></td>
+                  </tr> 
+                </tbody>
+              </table>
+            <div *ngIf="folderLoading.otherFolderLoading" class="pt-1"><div class="spinner-border text-primary"></div></div>
+            <div class="pt-1"><i *ngIf="folderLoading.otherFolderFailLoading" class="bi bi-info-circle text-danger" data-bs-toggle="tooltip" title="Something went wrong!, try again"></i></div>
+            <div *ngIf="foldersLoading" class="repoLoading w-100" style="text-align: center;"><div class="spinner-border"></div></div> 
+            <div class="ms-1 mt-1"  data-bs-toggle="tooltip" title="New Folder"><a href="" data-bs-toggle="modal" data-bs-target="#newfoldermodal"><i class="bi bi-folder-plus fs-1"></i></a></div>
+            <app-create-folder (dataEmitter)="addFolder($event)"></app-create-folder>  
+        </div>
+
         <hr class="fs-1 text-secondary w-25">
         <a routerLink="videos/otherVids" class="text-muted fs-5" style="text-decoration: none;">Lectures</a>
     </div>

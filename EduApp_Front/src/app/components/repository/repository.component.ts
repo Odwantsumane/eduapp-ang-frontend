@@ -35,6 +35,7 @@ export class RepositoryComponent implements OnInit {
   foldersLoading : boolean = false;
   loadFoldersErr : boolean = false;
   scienceFolderLoading : boolean = false;
+  folder_grid: boolean = sessionStorage.getItem("folder_grid_filter_studyo") === "grid" ? true : false;
 
   folderLoading = {
     lawFolderLoading: false,
@@ -70,6 +71,11 @@ export class RepositoryComponent implements OnInit {
     this.current_user = (await this.autheservice.isLoggedInGetUser()).username || "unknown";
 
     this.getAllFolders();
+  }
+
+  change_folder_grid(grid_type:string) {
+    if(grid_type === "grid") {this.folder_grid = true; sessionStorage.setItem("folder_grid_filter_studyo", "grid")}
+    else {this.folder_grid = false; sessionStorage.setItem("folder_grid_filter_studyo", "list")};
   }
 
   async addFolder(newFolder:folder) { 
