@@ -24,7 +24,9 @@ export class CreateFolderComponent implements OnInit{
     id:"",
     title: "",
     description: "",
-    course: "",
+    course: "none",
+    year:"0000",
+    university:"none",
     createdBy: this.current_user,
     createdAt: ""
   }
@@ -63,7 +65,7 @@ export class CreateFolderComponent implements OnInit{
   }
 
  verify() {
-  if (this.newFolder.title !== "" && this.newFolder.title.length > 5 && this.newFolder.course !== "") this.filled_fill_ind = true;  
+  if (this.newFolder.title !== "" && this.newFolder.title.length > 5 && this.newFolder.course !== "none" && this.newFolder.year !== "0000" && this.newFolder.university !== "none") this.filled_fill_ind = true;  
   else this.filled_fill_ind = false;
 
   return this.filled_fill_ind;

@@ -21,8 +21,8 @@
                   <input type="text" class="form-control" id="description" placeholder="Write a description" name="description" (change)="verify()" [(ngModel)]="newFolder.description">
                 </div> 
                 <div class="mb-3 mt-3">
-                    <label for="title_" class="form-label">Course:</label>
-                    <select class="form-select" id="designation" name="designations" (change)="verify()" [(ngModel)]="newFolder.course">
+                    <label for="designation" class="form-label">Course:</label>
+                    <select class="form-select" id="designations" name="designations1" (change)="verify()" [(ngModel)]="newFolder.course">
                         <option>Law</option>
                         <option>Science</option>
                         <option>Humanities</option>
@@ -30,6 +30,52 @@
                         <option>Other</option> 
                     </select>
                 </div> 
+                <div class="mb-3 mt-3">
+                  <label for="years" class="form-label">Academic year:</label>
+                  <select [(ngModel)]="newFolder.year" class="form-select" id="years" name="years1" (change)="verify()">
+                      <option>2015</option>
+                      <option>2016</option>
+                      <option>2017</option>
+                      <option>2018</option> 
+                      <option>2019</option>
+                      <option>2020</option>
+                      <option>2021</option>
+                      <option>2022</option>
+                      <option>2023</option>
+                      <option>2024</option>
+                      <option>2025</option> 
+                  </select>
+              </div> 
+              <div class="mb-3 mt-3">
+                <label for="universities" class="form-label">University:</label>
+                <select [(ngModel)]="newFolder.university" class="form-select" id="universities" name="universities1" (change)="verify()">
+                  <option>Rhodes University</option>
+                  <option>University of Johannesburg</option>
+                  <option>University of Pretoria</option>
+                  <option>University of Free State</option>
+                  <option>Cape Peninsula University of Technology</option>
+                  <option>Central University of Technology</option>
+                  <option>Durban University of Technology</option> 
+                  <option>Mangosuthu University of Technology</option>
+                  <option>Nelson Mandela University</option>
+                  <option>North-West University</option>
+                  <option>University of Cape Town</option>
+                  <option>University of Fort Hare</option>
+                  <option>University of KwaZulu-Natal</option>
+                  <option>University of Limpopo</option>
+                  <option>University of Mpumalanga</option>
+                  <option>University of the Western Cape</option>
+                  <option>University of the Witwatersrand</option>
+                  <option>University of Venda</option>
+                  <option>University of Zululand</option>
+                  <option>Vaal University of Technology</option>
+                  <option>Walter Sisulu University</option>
+                  <option>Tshwane University of Technology</option>
+                  <option>Sol Plaatje University</option>
+                  <option>Sefako Makgatho Health Sciences University</option>
+                  <option>Other</option>
+                </select>
+            </div> 
               </form>
         </div>
   
