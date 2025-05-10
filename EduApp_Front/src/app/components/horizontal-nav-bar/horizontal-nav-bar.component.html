@@ -6,9 +6,65 @@
       
       <ul class="navbar-nav justify-content-end"> 
         <li class="nav-item m-3">
-          <div style="text-align: center;" class="d-flex flex-column"> 
-            <a style="cursor: pointer;" data-bs-toggle="tooltip" title="Add friends">
-              <i class="bi bi-bell fs-4 text-dark"><span class="text-dark bg-danger rounded-4 fs-6 p-1">10</span></i></a>
+          <div style="text-align: center;" class="dropdown"> 
+            <a style="cursor: pointer;" data-bs-toggle="dropdown">
+              <i class="bi bi-bell fs-4 text-dark"><span class="text-dark rounded-5 fs-6 p-1">{{list_notifications_unread.length}}</span></i></a>
+              <ul class="dropdown-menu p-2">
+                <li><h5 class="dropdown-header">Unread</h5></li>
+
+                <li *ngFor="let notification of list_notifications_unread" class="p-1 d-flex border border-light">
+                  <!-- <div><i class="bi bi-person-circle"></i></div> -->
+                  <div *ngIf="notification.category === 'market'"><i class="bi bi-shop"></i></div>
+                  <div *ngIf="notification.category === 'chat'"><i class="bi bi-messenger"></i></div>
+                  <div *ngIf="notification.category === 'article'"><i class="bi bi-book"></i></div>
+                  <div *ngIf="notification.category === 'general'"><i class="bi bi-bell"></i></div>
+                  <div>
+                    <span class="ps-2" style="font-size: small;">{{notification.sentBy}}</span>
+                    <div class="d-flex">
+                      <div><a class="dropdown-item text-primary" href="#" style="font-size: x-small;">Message</a></div>
+                      <div><a (click)="readNotification(notification.id)" style="cursor: pointer;"><i class="bi bi-bell-fill"></i></a></div>
+                    </div> 
+                  </div> 
+                </li>
+                <!-- <li class="p-1 d-flex border border-light">
+                  <div><i class="bi bi-person-circle"></i></div>
+                   <div><i class="bi bi-bell"></i></div>
+                  <div>
+                    <span class="ps-2" style="font-size: small;">Steve Jobs</span>
+                    <div class="d-flex">
+                      <div><a class="dropdown-item text-primary" href="#" style="font-size: x-small;">Message</a></div>
+                      <div><i class="bi bi-bell-fill" style="cursor: pointer;"></i></div>
+                    </div> 
+                  </div> 
+                </li> 
+                <li class="p-1 d-flex border border-light">
+                  <div><i class="bi bi-person-circle"></i></div>
+                   <div><i class="bi bi-book"></i></div>
+                  <div>
+                    <span class="ps-2" style="font-size: small;">Evelyn Sunders</span>
+                    <div class="d-flex">
+                      <div><a class="dropdown-item text-primary" href="#" style="font-size: x-small;">Message</a></div>
+                      <div><i class="bi bi-bell-fill" style="cursor: pointer;"></i></div>
+                    </div> 
+                  </div> 
+                </li>  -->
+
+                <li><h5 class="dropdown-header">Read</h5></li>
+                <li *ngFor="let notification of list_notifications_read" class="p-1 d-flex border border-light">
+                  <!-- <div><i class="bi bi-person-circle"></i></div> -->
+                  <div *ngIf="notification.category === 'market'"><i class="bi bi-shop"></i></div>
+                  <div *ngIf="notification.category === 'chat'"><i class="bi bi-messenger"></i></div>
+                  <div *ngIf="notification.category === 'article'"><i class="bi bi-book"></i></div>
+                  <div *ngIf="notification.category === 'general'"><i class="bi bi-bell"></i></div>
+                  <div>
+                    <span class="ps-2" style="font-size: small;">{{notification.sentBy}}</span>
+                    <div class="d-flex">
+                      <div><a class="dropdown-item text-primary" href="#" style="font-size: x-small;">Message</a></div>
+                      <div><a (click)="readNotification(notification.id)" style="cursor: pointer;"><i class="bi bi-bell-fill"></i></a></div>
+                    </div> 
+                  </div> 
+                </li>
+              </ul>
           </div>
         </li>
         <li class="nav-item m-3">
